@@ -1,0 +1,6 @@
+<template name="foot">
+  <navigator class="page-foot" openType="switchTab" url="/page/index/index" hover-class="none">
+    <text></text>
+    <image class="icon-foot" src="../../../images/zrh.png"></image>提供技术支持
+  </navigator>
+</template>

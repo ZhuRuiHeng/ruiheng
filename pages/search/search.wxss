@@ -1,0 +1,27 @@
+/* pages/search/search.wxss */
+/* 搜索 */
+.search{
+  width: 80%; 
+  margin:20rpx 0rpx 20rpx 20rpx;
+  display: flex;
+  justify-content: flex-start;
+  border:1px solid #ddd;
+  padding: 5rpx 10rpx;
+  border-radius: 5px;
+  background: #fff;
+}
+.search .icon-search image{
+    width: 42rpx;
+    height:42rpx;
+    vertical-align: middle;
+}
+.weui-cells.weui-cells.after-title{
+  width: 90%;
+}
+.sousuo{
+  display: flex;
+}
+.sousuo .quxiao{
+  color:#007aff;
+  margin:20rpx 0rpx 20rpx 20rpx;
+}

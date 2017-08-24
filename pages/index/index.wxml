@@ -1,0 +1,68 @@
+<!--index.wxml-->
+<view class="container">
+    <!--轮播图 -->
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item.img}}" class="slide-image" width="355" height="150" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--搜索  -->
+    <view class="search" bindtap="search">
+        <view class="icon-search"><image src="../images/search.png"></image></view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <input class="weui-input"  placeholder="搜索商品" readonly="readonly"/>
+            </view>
+        </view>
+    </view>
+    <!--内容  -->
+    <!--切换  -->
+    <view class="main">
+        <view class="nav bc_white">
+            <view class="{{selected?'red':'default'}}" bindtap="selected"><span>最热</span></view>
+            <view class="{{selected1?'red':'default'}}" bindtap="selected1"><span>最新</span></view>
+        </view>
+        <!--最热  -->
+        <view class="{{selected?'show':'hidden'}}">
+            <view class="service-list">
+              <navigator class="service-item" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../logs/logs?id={{item.id}}">
+                    <view class="service-img">
+                        <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="service-text">
+                        <view class="service-tite">{{item.name}}</view>
+                        <view class="caozuo">
+                            <text class="service-price">￥{{item.price}}</text>
+                            <view class="service-gouwu"><image src="{{item.img}}" ></image></view>
+                        </view>
+                        <view id="gouwu{{item.id}}" class="buy-response" catchtap="addCar"></view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <!--最新  -->
+        <view class="{{selected1?'show':'hidden'}}">
+            <view class="service-list">
+              <navigator class="service-item" wx:for="{{newlist}}" wx:key="{{item.id}}" url="../logs/logs?id={{item.id}}">
+                    <view class="service-img">
+                        <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="service-text">
+                        <view class="service-tite">{{item.name}}</view>
+                        <view class="caozuo">
+                            <text class="service-price">￥{{item.price}}</text>
+                            <view class="service-gouwu"><image src="{{item.img}}" ></image></view>
+                        </view>
+                        <view id="gouwu{{item.id}}" class="buy-response" catchtap="addCar"></view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <!--购物车弹窗  -->
+    <view class="carBox">
+        <text>购物车弹窗</text>
+    </view>
+</view>
