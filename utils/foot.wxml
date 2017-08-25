@@ -1,6 +1,6 @@
 <template name="foot">
   <navigator class="page-foot" openType="switchTab" url="/page/index/index" hover-class="none">
-    <text></text>
-    <image class="icon-foot" src="../../../images/zrh.png"></image>提供技术支持
+    <view><text class="name">朱瑞恒</text></view>
+    <view><text class="padding">提供技术支持</text></view>
   </navigator>
 </template>

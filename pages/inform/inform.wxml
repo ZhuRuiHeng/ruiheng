@@ -1,0 +1,94 @@
+<!--pages/inform/inform.wxml-->
+<view class="container">
+    <!--轮播图 -->
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item.img}}" class="slide-image" width="355" height="150" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--简介  -->
+    <view class="jianjie">
+        <view class="padding">
+            <view class="title">
+                <text>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</text>
+            </view>
+            <view class="price">
+                <text>￥222.00</text>
+            </view>
+            <view class="yunfei">
+                <view class="">运费：免运费</view>
+                <view class="now">剩余：422</view>
+            </view>
+            <!--规格  -->
+            <view class="xuanze" bindtap="addCar">
+                <view class="classname">选择：规格</view>
+                <view class="nextImg"><image src="../images/next.png" mode="widthFix"/></view>
+            </view>
+        </view>
+         <view class="padding margin">
+            <view class="baozhang">
+                <view class="dianpu"><image src="../images/renzheng.png" mode="widthFix"/>店铺认证</view>
+                <view class="dianpu"><image src="../images/renzheng.png" mode="widthFix"/>担保交易</view>
+            </view>
+        </view>
+        <!--商品详情图片广告-->
+         <view class="padding">
+            <view class="allImg">
+                <view class="title"><text>商品详情</text></view>
+                <view class="imgs">
+                    <image src="../images/output1.jpg" mode="widthFix"></image>
+                    <image src="../images/output3.jpg" mode="widthFix"></image>
+                    <image src="../images/output2.jpg" mode="widthFix"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--foot  -->
+    <view class="fixed">
+        
+    </view>
+    <!--型号弹窗  -->
+    <view class="bg {{addCar?'show':'hidden'}}"></view>
+    <view class="carBox {{addCar?'show':'hidden'}} carBox{{sum}}">
+        <view class="padding">
+            <view class="top">
+                <view class="left">
+                    <image src="//img12.360buyimg.com/n1/s200x200_g10/M00/17/11/rBEQWVFzR4kIAAAAAAN3GPh71qEAAEmawMY-q4AA3cw300.jpg" mode="widthFix"></image>
+                </view>
+                <view class="right">
+                    <text class="shuoming">车弹窗购物车弹窗购物车弹窗车弹窗购物车弹窗购物车弹窗</text>
+                    <text class="price">￥22</text>
+                </view>
+                <view class="del" bindtap="closeCar">
+                    <image src="../images/icon_close.png" mode="widthFix"></image>
+                </view>
+            </view>
+            <view class="kuanshi">
+                <view class="title">款式：</view>
+                <view class="leibie">
+                    <text data-num="1"  class="white {{_num==1 ? 'red':''}}" bindtap="xuanze">分类1</text>
+                    <text data-num="2"  class="white {{_num==2 ? 'red':''}}" bindtap="xuanze">分类2</text>
+                    <text data-num="3"  class="white {{_num==3 ? 'red':''}}" bindtap="xuanze">分类3</text>
+                    <text data-num="4"  class="white {{_num==4 ? 'red':''}}" bindtap="xuanze">分类4</text>
+                </view>
+            </view>
+            <view class="mid">
+                <view class="buy">
+                    <text>购买数量：</text>
+                    <text class="gray">剩余222件</text>
+                </view>
+                <view class="num">
+                    <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
+                    <input type="number"  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
+                    <button class="add normal" bindtap="bindPlus">+</button>
+                </view>
+            </view>
+        </view>
+        <view class="btn">
+            <button class="ok">下一步</button>
+        </view>
+    </view>
+    <!--弹窗结束  -->
+</view>

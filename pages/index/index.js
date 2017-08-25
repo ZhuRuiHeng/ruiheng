@@ -21,7 +21,13 @@ Page({
     selected1: false,
     hotlist: [], //最热列表
     newlist: [], //最新列表
-    page: 0  //分页
+    page: 0,  //分页
+    addCar: false,//打开购物车
+    closeCar: true,//关闭购物车
+    price: 1,//购物车数量
+    minusStatus: 'disabled',//数量为1禁用
+    sum:'',//购物车id
+    _num:1 //类型
 },
   //搜索跳转
 search: function() {
@@ -42,29 +48,82 @@ selected1: function (e) {
     selected1: true
   })
 },
-  //事件处理函数
-  bindViewTap: function() {
+ //事件处理函数
+bindViewTap: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+        url: '../logs/logs'
     })
-  },
-  //购物车
-  addCar: function (obj) {
+},
+//购物车
+addCar: function (obj) {
     wx.showToast({
-      title: '加载中',
-      icon: 'loading'
+        title: '加载中',
+        icon: 'loading'
     });
-    console.log(obj.target.id);
-    wx.showActionSheet({
-      itemList: ['item1', 'item2', 'item3', 'item4'],
-      success: function (e) {
-        console.log(e.tapIndex);
-      }
+    var sum = obj.target.id;
+    console.log('sum'+sum);
+    var that = this;
+    that.setData({
+        addCar: true,
+        sum: sum
+    })
+},
+closeCar: function (obj) {
+      var id = obj.target.id;
+      console.log(id);
+      var that = this;
+      that.setData({
+          addCar: false
+      })
+ },
+ //选择型号
+xuanze: function (e) {
+    console.log(e.target.dataset.num)
+    this.setData({
+        _num: e.target.dataset.num
+    })
+},
+/* 点击减号 */
+bindMinus: function () {
+    console.log('-');
+    var price = this.data.price;
+    // 如果大于1时，才可以减 
+    if (price > 1) {
+        price--;
+    }
+    // 只有大于一件的时候，才能normal状态，否则disable状态 
+    var minusStatus = price <= 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回 
+    this.setData({
+        price: price,
+        minusStatus: minusStatus
     });
-  },
+},
+/* 点击加号 */
+bindPlus: function () {
+    console.log('+');
+    var price = this.data.price;
+    // 不作过多考虑自增1 
+    price++;
+    // 只有大于一件的时候，才能normal状态，否则disable状态 
+    var minusStatus = price < 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回 
+    this.setData({
+        price: price,
+        minusStatus: minusStatus
+    });
+},
+/* 输入框事件 */
+bindManual: function (e) {
+    var price = e.detail.value;
+    // 将数值与状态写回 
+    this.setData({
+        price: price
+    });
+},
   onLoad: function () { //加载数据渲染页面
-    this.fetchHotData();
-    this.fetchNewData();
+    this.fetchHotData(); //最热
+    this.fetchNewData(); //最新
   },
   // 最热
   fetchHotData: function () {  //获取最热列表
@@ -132,5 +191,9 @@ selected1: function (e) {
   submitSearch: function () {  //提交搜索
     console.log(this.data.searchtext);
     this.fetchHotData();
+  },
+  //设置分享
+  onShareAppMessage: function () {
+
   }
 })

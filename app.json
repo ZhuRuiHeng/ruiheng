@@ -1,10 +1,13 @@
 {
   "pages":[
+   
     "pages/index/index",
     "pages/logs/logs",
     "pages/my/my",
     "pages/images/images",
-    "pages/search/search"
+    "pages/inform/inform",
+    "pages/search/search",
+    "pages/more/more"
   ],
   "window":{
     "backgroundTextStyle":"light",
