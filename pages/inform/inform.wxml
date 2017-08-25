@@ -46,9 +46,18 @@
         </view>
     </view>
     <!--foot  -->
-    <view class="fixed">
-        
-    </view>
+    <!-- <view class="fixed">
+        <view class="shouye" bindtap="backHome">
+            <image src="../images/next" mode="widthFix"/>
+            <text>首页</text>
+        </view>
+        <view class="gouwu">
+            <image src="../images/next" mode="widthFix"/>
+            <text>购物车</text>
+        </view>
+        <view class="">加入购物车</view>
+        <view class="">立即购买</view>
+    </view> -->
     <!--型号弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view>
     <view class="carBox {{addCar?'show':'hidden'}} carBox{{sum}}">
