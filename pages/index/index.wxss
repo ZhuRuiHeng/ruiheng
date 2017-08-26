@@ -33,10 +33,13 @@
   margin: 20rpx auto;
   display: flex;
   justify-content: flex-start;
-  border:1px solid #ddd;
+  border:1px solid #e5e5e5;
   padding: 5rpx 10rpx;
   border-radius: 5px;
   background: #fff;
+}
+.search input{
+    font-size: 24rpx;
 }
 .search .icon-search image{
     width: 42rpx;
@@ -47,8 +50,8 @@
   width: 90%;
 }
 /*最新最热切换  */
-.main{width:100%;border-top:1rpx solid #ddd;background: #fff;}
-.nav{width:100%;height:68rpx;display:flex;flex-direction:row;border-bottom:1rpx solid #ddd;}
+.main{width:100%;border-top:1rpx solid #e5e5e5;background: #fff;}
+.nav{width:100%;height:68rpx;display:flex;flex-direction:row;border-bottom:1rpx solid #e5e5e5;}
 .default{line-height:68rpx;text-align:center;flex:1;color:#000;font-size:28rpx;}
 .red{line-height:68rpx;text-align:center;color:#fc5558;flex:1;font-size:28rpx;}
 .red span{display:inline-block;padding:0 20rpx;border-bottom:2px solid #ff4444;}
@@ -67,8 +70,9 @@
 	height: 180rpx;
 }
 .service-item image{
-	width: 180rpx;
-	height: 180rpx;
+	width: 160rpx;
+	height: 160rpx;
+    margin:10rpx 0 0 0;
 }
 .service-text{
 	flex: 1;
@@ -78,8 +82,8 @@
 .service-text .service-tite{
 	color: #000000;
 	width: 100%;
-	font-size: 28rpx;
-    padding-top:6rpx;
+	font-size: 24rpx;
+    padding-top:20rpx;
     height: 76rpx;
     display: -webkit-box;  
     display: -moz-box;  
@@ -107,7 +111,7 @@
 	color: #666;
 }
 .caozuo{
-  padding-top: 40rpx;
+  padding-top: 20rpx;
   display: flex;
   justify-content:space-between;
   height: 63rpx;
@@ -115,7 +119,7 @@
 }
 .caozuo .service-price{
     color:#ff4444;
-    font-size:30rpx;
+    font-size:26rpx;
 }
 .caozuo .service-gouwu image{
     width: 56rpx;
@@ -142,13 +146,16 @@
     padding: 30rpx 0;
     justify-content:center;
 }
+.nextUrl .medit .title{
+    font-size: 30rpx;
+}
 .medit .center .all{
-    border:1px solid #ddd;
+    border:1px solid #e5e5e5;
     padding: 2rpx 10rpx;
     font-size: 22rpx;
     color:#8a8a8a;
     height: 30rpx;
-    margin: 6rpx 0 0 10rpx;
+    margin: 4rpx 0 0 10rpx;
 }
 .medit .center .all image{
     width: 30rpx;
@@ -198,11 +205,13 @@
 }
 .carBox .top .right{
     flex: 1;
+    padding:20rpx 0 0 0;
 }
 .carBox .top .right text,.carBox .mid .buy text{
     display: block;
     font-weight: normal;
-    font-size: 30rpx;
+    font-size:24rpx;
+    line-height:40rpx;
 }
 .carBox .top .del{
     width: 40rpx;
@@ -224,10 +233,12 @@
     display: flex;
     justify-content:space-between;
     padding: 20rpx 0;
-    border-top: 1rpx solid #ddd;
+    border-top: 1rpx solid #e5e5e5;
 }
 .carBox .mid .num{
-    display: flex
+    display: flex;
+    position:relative;
+    top:10rpx;
 }
 .carBox .mid .num button,.carBox .mid .num input{
     display: inline-block;
@@ -238,15 +249,16 @@
     text-align: center;
 }
 .carBox .mid .num input{
-    font-size: 28rpx;
-    border:1rpx solid #ddd;
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5;
     border-left: 0;
     border-right:0;
     box-sizing: border-box;
 }
 .carBox .mid button{
     border-radius:none;
-     border:1rpx solid #ddd; 
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5; 
 }
 .carBox .mid button::after{
     content:none;
@@ -263,7 +275,6 @@
     box-sizing:border-box;
     border-radius:10px;
 }
-
  .carBox .mid button.reduce{
     border-radius: 5rpx 0 0 5rpx;
     border-top-right-radius: 0;
@@ -289,6 +300,7 @@
 .btn button{
     flex: 1;
     width:100%;
+    font-size:30rpx;
 }
 .btn .addcar{
     background: #ff8855;
@@ -311,8 +323,8 @@
     margin:0 0 30rpx 0;
 }
 .kuanshi .leibie text{
-    font-size: 28rpx;
-    border:1px solid #ddd;
+    font-size: 24rpx;
+    border:1px solid #e5e5e5;
     border-radius: 6rpx;
     padding: 10rpx; 
     box-sizing: border-box;

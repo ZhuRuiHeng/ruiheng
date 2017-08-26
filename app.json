@@ -1,13 +1,15 @@
 {
   "pages":[
-   
+    "pages/my/my",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/my/my",
+    
     "pages/images/images",
     "pages/inform/inform",
     "pages/search/search",
-    "pages/more/more"
+    "pages/more/more",
+    "pages/car/car"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -27,7 +29,7 @@
         "selectedIconPath": "pages/images/shouyeb.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/car/car",
         "text": "购物车",
         "iconPath": "pages/images/gouwu.png",
         "selectedIconPath": "pages/images/gouwub.png"

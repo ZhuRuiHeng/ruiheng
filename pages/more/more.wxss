@@ -1,19 +1,41 @@
 /* pages/more/more.wxss */
-/*扫一扫demo  */
-.saoma{  
-  height: 40px;  
-  width:110px;  
-  line-height: 40px;  
-  margin-left: auto;  
-  margin-right: auto;  
-  color: #fff;  
-  background-color: #999;  
-  text-align: center;  
-}  
-.show{  
-  width: 100%;  
-  color: #666;  
-  background-color: #fff;  
-  height: auto;  
-  
-}  
+.container{
+    padding:20rpx;
+    box-sizing: border-box;
+}
+.chose-list{
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    text-align: center;
+}
+.chose-list .chose-item{
+    width: 48%;
+}
+.chose-list .chose-item .chose-img{
+    width: 100%;
+}
+.chose-list .chose-item .chose-img image{
+    width: 100%;
+    vertical-align: middle;
+}
+.chose-list .chose-item .chose-text .chose-title{
+    color: #000000;
+	width: 100%;
+	font-size: 24rpx;
+    line-height: 36rpx;
+    padding-top:20rpx;
+    height: 70rpx;
+    display: -webkit-box;  
+    display: -moz-box;  
+    overflow: hidden;  
+    text-overflow: ellipsis;  
+    word-break: break-all;  
+    -webkit-box-orient: vertical;  
+    -webkit-line-clamp:2;  
+}
+.chose-list .chose-item .chose-text .price{
+    color:#ff4444;
+    font-size: 24rpx;
+    line-height: 58rpx;
+}

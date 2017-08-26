@@ -1,10 +1,10 @@
 <!--index.wxml-->
 <view class="container">
     <!--轮播图 -->
-    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
+    <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
       <block wx:for="{{imgUrls}}">
         <swiper-item>
-          <image src="{{item.img}}" class="slide-image" width="355" height="150" />
+          <image src="{{item}}" class="slide-image" width="355" height="150"/>
         </swiper-item>
       </block>
     </swiper>
@@ -71,37 +71,37 @@
         </view>
     </navigator>
     <!--轮播图 -->
-    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
+    <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
       <block wx:for="{{imgUrls}}">
         <swiper-item>
-          <image src="{{item.img}}" class="slide-image" width="355" height="150" />
+          <image src="{{item}}" class="slide-image" width="355" height="150" />
         </swiper-item>
       </block>
     </swiper>
     <view class="">
-            <view class="service-list">
-              <navigator class="service-item" wx:for="{{newlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
-                    <view class="service-img">
-                        <image src="{{item.imgurl}}" mode="aspectFill"></image>
+        <view class="service-list">
+            <navigator class="service-item" wx:for="{{newlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+                <view class="service-img">
+                    <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                </view>
+                <view class="service-text">
+                    <view class="service-tite">{{item.name}}</view>
+                    <view class="caozuo">
+                        <text class="service-price">￥{{item.price}}</text>
+                        <view class="service-gouwu"><image src="{{item.img}}" ></image></view>
                     </view>
-                    <view class="service-text">
-                        <view class="service-tite">{{item.name}}</view>
-                        <view class="caozuo">
-                            <text class="service-price">￥{{item.price}}</text>
-                            <view class="service-gouwu"><image src="{{item.img}}" ></image></view>
-                        </view>
-                        <view id="gouwu{{item.id}}" class="buy-response" catchtap="addCar"></view>
-                    </view>
-                </navigator>
-            </view>
+                    <view id="gouwu{{item.id}}" class="buy-response" catchtap="addCar"></view>
+                </view>
+            </navigator>
         </view>
+    </view>
     <!--购物车弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view> 
     <view class="carBox {{addCar?'show':'hidden'}} carBox{{sum}}">
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="//img12.360buyimg.com/n1/s200x200_g10/M00/17/11/rBEQWVFzR4kIAAAAAAN3GPh71qEAAEmawMY-q4AA3cw300.jpg" mode="widthFix"></image>
+                    <image src="../images/out2.jpg" mode="widthFix"></image>
                 </view>
                 <view class="right">
                     <text class="shuoming">车弹窗购物车弹窗购物车弹窗车弹窗购物车弹窗购物车弹窗</text>

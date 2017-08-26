@@ -1,6 +1,6 @@
 <template name="foot">
   <navigator class="page-foot" openType="switchTab" url="/pages/more/more" hover-class="none">
-    <view><text class="name">朱瑞恒</text></view>
+     <!-- <view><text class="name">朱瑞恒</text></view>  -->
     <view><text class="padding">提供技术支持</text></view>
   </navigator>
 </template>

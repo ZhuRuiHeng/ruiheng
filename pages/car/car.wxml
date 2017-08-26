@@ -1,0 +1,41 @@
+<!--pages/car/car.wxml-->
+<view class="container">
+    <!--店铺  -->
+    <view class="shop">
+        <view class="checkbox">
+            <label class="radio">
+                <text bindtap="selectAreaOk" data-areaId="{{item.id}}">{{area.name}}</text> 
+                <icon wx:if="{{item.isSelect}}" type="success" size="20"/> 
+                <icon wx:else type="circle" size="20"/>
+                <image src="../images/shop.png" mode="widthFix"></image>店铺
+            </label>
+        </view>
+        <view class="seting"><button> 编辑</button></view>
+    </view>
+    <!--商品  -->
+    <view class="">
+        <view class="service-list">
+            <view class="service-item" wx:for="{{newlist}}" wx:key="{{item.id}}">
+                <view class="radio-group" >
+                    <label bindtap="selectAreaOk" data-areaId="{{item.id}}" areaid="{{item.id}}">
+                        <icon wx:if="{{area.isSelect}}" type="success" size="20"/> 
+                        <icon wx:else type="circle" size="20"/>
+                    </label>
+                </view>
+                <view class="service-img">
+                    <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                </view>
+                <view class="service-text">
+                    <view class="service-tite">{{item.name}}</view>
+                    <view class="caozuo">
+                        <text class="service-price">￥{{item.price}}</text>
+                        <view class="service-gouwu">x{{item.num}}</view>
+                    </view>
+                    <view id="gouwu{{item.id}}" class="buy-response" catchtap="addCar"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--foot  -->
+    
+</view>

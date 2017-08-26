@@ -1,13 +1,36 @@
 <!--pages/my/my.wxml-->
 <!--引用摸版  -->
 <import src="../../utils/foot.wxml" />
-<view class="container">
+<!--用户信息  -->
+<view class="container" style="padding:200rpx;">
   <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+</view>
+<!--订单  -->
+<view class="xuanze" bindtap="addCar">
+    <view class="classname">我的订单</view>
+    <view class="nextImg">查看全部订单<image src="../images/next.png" mode="widthFix"/></view>
+</view>
+<view class="listAll">
+    <view class="list">
+        <view class="flex">
+            <image src="../images/shouye.png" mode="widthFix"></image>
+            <text>代付款</text>
+        </view>
+        <view class="flex">
+            <image src="../images/shouye.png" mode="widthFix"></image>
+            <text>代发货</text>
+        </view>
+        <view class="flex">
+            <image src="../images/shouye.png" mode="widthFix"></image>
+            <text>代收货</text>
+        </view>
+        <view class="flex">
+            <image src="../images/shouye.png" mode="widthFix"></image>
+            <text>已完成</text>
+        </view>
+    </view>
 </view>
 <template is="foot" />

@@ -34,6 +34,7 @@
 .jianjie .title{
     font-weight: normal;
     font-size: 28rpx;
+    padding:20rpx 0 0 0;
     height: 76rpx;
     display: -webkit-box;  
     display: -moz-box;  
@@ -57,23 +58,23 @@
 }
 .jianjie .yunfei{
     color: #626262;
-    font-size:30rpx;
+    font-size:24rpx;
     display: flex;
     justify-content:space-between;
-    border-top:1px solid #ddd;
+    border-top:1px solid #e5e5e5;
     padding: 20rpx 0;
 }
 .jianjie .xuanze{
     color: #626262;
-    font-size:30rpx;
+    font-size:26rpx;
     display: flex;
     justify-content:space-between;
-    border-top:1px solid #ddd;
+    border-top:1px solid #e5e5e5;
     padding: 20rpx 0 10rpx 0;
     color:#000;
 }
 .jianjie .xuanze .nextImg{
-    width: 46rpx;
+    width: 40rpx;
     vertical-align: middle;
 }
 .jianjie .xuanze .nextImg image{
@@ -81,7 +82,7 @@
 }
 .jianjie .baozhang{
     display: flex;
-    font-size:30rpx;
+    font-size:24rpx;
     padding:20rpx 0;
 }
 .jianjie .baozhang image{
@@ -94,6 +95,8 @@
 }
 .allImg .title{
     padding:20rpx 0;
+    font-size: 26rpx;
+    height:36rpx;
 }
 .allImg .imgs{
     text-align: center;
@@ -148,11 +151,13 @@
 }
 .carBox .top .right{
     flex: 1;
+    padding:20rpx 0 0 0;
 }
 .carBox .top .right text,.carBox .mid .buy text{
     display: block;
     font-weight: normal;
-    font-size: 30rpx;
+    font-size:24rpx;
+    line-height:40rpx;
 }
 .carBox .top .del{
     width: 40rpx;
@@ -174,10 +179,12 @@
     display: flex;
     justify-content:space-between;
     padding: 20rpx 0;
-    border-top: 1rpx solid #ddd;
+    border-top: 1rpx solid #e5e5e5;
 }
 .carBox .mid .num{
-    display: flex
+    display: flex;
+    position:relative;
+    top:10rpx;
 }
 .carBox .mid .num button,.carBox .mid .num input{
     display: inline-block;
@@ -188,15 +195,16 @@
     text-align: center;
 }
 .carBox .mid .num input{
-    font-size: 28rpx;
-    border:1rpx solid #ddd;
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5;
     border-left: 0;
     border-right:0;
     box-sizing: border-box;
 }
 .carBox .mid button{
     border-radius:none;
-     border:1rpx solid #ddd; 
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5; 
 }
 .carBox .mid button::after{
     content:none;
@@ -236,6 +244,7 @@
     background: #ff4444;
     color:#fff;
     border-radius: 0;
+    font-size: 30rpx;
 }
 .kuanshi .title{
     font-size: 28rpx;
@@ -245,12 +254,12 @@
     margin:0 0 30rpx 0;
 }
 .kuanshi .leibie text{
-    font-size: 28rpx;
-    border:1px solid #ddd;
+    font-size: 24rpx;
+    border:1px solid #e5e5e5;
     border-radius: 6rpx;
     padding: 10rpx; 
     box-sizing: border-box;
-    margin-right:10rpx;  
+    margin-right:20rpx;  
 }
 .kuanshi .leibie text.white{
     background: #fff;
@@ -259,5 +268,68 @@
 .kuanshi .leibie text.red{
     background: #ff4444;
     border-color:#ff4444;
+    color:#fff;
+}
+/*foot  */
+.fixed{
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    font-size: 30rpx;
+    text-align: center;
+}
+.fixed .shouye .imgLogo{
+    width: 50rpx;
+    height: 50rpx;
+    margin:0 auto;
+}  
+.fixed .gouwu .imgLogo{
+    width: 60rpx;
+    height: 50rpx;
+    margin:0 auto;
+}  
+.fixed .gouwu{
+    position: relative;
+    color:#848484;
+}
+.fixed .gouwu .imgLogo .buyNum{
+    display: inline-block;
+    position: absolute;
+    top:5rpx;
+    right:15rpx;
+    width: 20rpx;
+    height: 20rpx;
+    line-height: 20rpx;
+    text-align: center;
+    border-radius: 50%;
+    background: #ff4444;
+    color: #fff;
+}
+.fixed .imgLogo image{
+    width: 100%;
+    vertical-align: middle;
+}
+.fixed .shouye,.fixed .gouwu{
+    font-size: 24rpx;
+    width: 110rpx;
+    vertical-align: middle;
+}
+.fixed .shouye{
+    border-right:1px solid #e5e5e5;
+    color:#848484;
+}
+.fixed .style{
+    flex:1;
+    line-height:80rpx;
+}
+.fixed .addCars{
+    background: #ff8855;
+    color:#fff;
+}
+.fixed .buyNow{
+    background: #ff4444;
     color:#fff;
 }

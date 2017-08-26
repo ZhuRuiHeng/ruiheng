@@ -1,37 +1,72 @@
 //获取应用实例  
-var app = getApp()
+// pages/inform/inform.js
+var common = require('../../common.js');
+var app = getApp();
+var p = 1
+var url = "";
+var GetList = function (that) {
+    that.setData({
+        hidden: false
+    });
+    wx.request({
+        url: url,
+        data: {
+            pageSize: 5,
+            pageNo: p
+        },
+        header: {
+            'content-type': 'application/json'
+        },
+        success: function (res) {
+            console.log(res.data);
+            var l = res.data.data;
+            console.log(l);
+            for (var i = 0; i < res.data.data.length; i++) {
+                l.push(res.data[i])
+            }
+            that.setData({
+                list: l
+            });
+            console.log('list'+list);
+            p++;
+            that.setData({
+                hidden: true
+            });
+        }
+    });
+}  
 Page({
     data: {
-        show: "",
+        list: []  
     },
 
-    onLoad: function () {
-        console.log('onLoad')
+    onLoad: function (options) {
+        wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+        // 页面初始化 options为页面跳转所带来的参数  
+        var that = this
+        GetList(that)
     },
-    click: function () {
-        var that = this;
-        var show;
-        wx.scanCode({
-            success: (res) => {
-                this.show = "--result:" + res.result + "--scanType:" + res.scanType + "--charSet:" + res.charSet + "--path:" + res.path;
-                that.setData({
-                    show: this.show
-                })
-                wx.showToast({
-                    title: '成功',
-                    icon: 'success',
-                    duration: 2000
-                })
-            },
-            fail: (res) => {
-                wx.showToast({
-                    title: '失败',
-                    icon: 'success',
-                    duration: 2000
-                })
-            },
-            complete: (res) => {
-            }  
-        })
-    }
+    onPullDownRefresh: function () {
+        //下拉  
+        console.log("下拉");
+        p = 1;
+        this.setData({
+            list: [],
+        });
+        var that = this
+        GetList(that)
+    },
+    onReachBottom: function () {
+        //上拉  
+        console.log("上拉")
+        var that = this
+        GetList(that)
+    },
+      // 返回首页
+    backHome: function () {
+        common.backHome();
+    },
 })

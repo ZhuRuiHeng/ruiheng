@@ -4,15 +4,11 @@ var common = require('../../common.js');
 var app = getApp()
 Page({
   data: {
-    imgUrls: [{
-        img: 'http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
-    }, {
-        img: 'http://yanxuan.nosdn.127.net/90f6c228c71cb9aba926de824e71e78d.jpg'
-    }, {
-        img: 'http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
-    },{
-        img:'https://img.yzcdn.cn/upload_files/2017/08/15/Flm3ribz-z6d2bzBZyWSt0jFUC07.gif?imageView2/2/w/730/h/0/q/75/format/gif'
-    }],
+    imgUrls: ['http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
+    ,  'http://yanxuan.nosdn.127.net/90f6c228c71cb9aba926de824e71e78d.jpg'
+    , 'http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
+     ,'https://img.yzcdn.cn/upload_files/2017/08/15/Flm3ribz-z6d2bzBZyWSt0jFUC07.gif?imageView2/2/w/730/h/0/q/75/format/gif'
+    ],
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -29,6 +25,15 @@ Page({
     sum:'',//购物车id
     _num:1 //类型
 },
+//轮播图预览
+  imgPreview: function () { //图片预览
+      const imgs = this.data.imgUrls;
+      console.log("const");
+      wx.previewImage({
+          current: imgs[this.data.currentIndex], // 当前显示图片的http链接
+          urls: imgs // 需要预览的图片http链接列表
+      })
+  },
   //搜索跳转
 search: function() {
   wx.navigateTo({
@@ -144,7 +149,7 @@ bindManual: function (e) {
         "name": "上海拜特信息技术有限公司上海拜特信息上海拜特信息技术有限公司" + (i + 1),
         "price": "122",
         "img": "../images/car.png",
-        "imgurl": "http://yanxuan.nosdn.127.net/1859e09f7e7457d919aaf6d4dba89563.png?imageView&quality=85&thumbnail=330x330"
+        "imgurl": "../images/out3.jpg"
       })
     }
     setTimeout(() => {
@@ -172,7 +177,7 @@ bindManual: function (e) {
         "name": "深圳龙岗深圳宝安信息技术有限公司信息技术有限公司" + (i + 1),
         "price": "222.00",
         "img": "../images/car.png",
-        "imgurl": "http://yanxuan.nosdn.127.net/e56c6239ee4a641ce2a4565c6babb43e.png?imageView&quality=85&thumbnail=330x330"
+        "imgurl": "../images/out2.jpg"
       })
     }
     setTimeout(() => {

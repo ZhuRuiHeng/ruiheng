@@ -1,25 +1,60 @@
 <!--pages/more/more.wxml-->
 <view class="container">
     <!--商品 列表  -->
-    <!-- <view class="service-list">
-        <navigator class="service-item" wx:for="{{newlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
-            <view class="service-img">
-                <image src="{{item.imgurl}}" mode="aspectFill"></image>
-            </view>
-            <view class="service-text">
-                <view class="service-tite">{{item.name}}</view>
-                <view class="caozuo">
-                    <text class="service-price">￥{{item.price}}</text>
-                    <view class="service-gouwu"><image src="{{item.img}}" ></image></view>
+    <view class="boxList">
+        <view class="chose-list"> 
+            <navigator class="chose-item" wx:for="{{list}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+                <view class="chose-img">
+                    <image src="{{item.imgurl}}" mode="aspectFill"></image>
                 </view>
-                <view id="gouwu{{item.id}}" class="buy-response" catchtap="addCar"></view>
-            </view>
-        </navigator>
-    </view> -->
-    <view class="more-list">
-        <navigator class="service-item"  url="../inform/inform?id={{item.id}}">
-        </navigator>
+                <view class="chose-text">
+                    <view class="chose-title">{{item.title}}</view>
+                    <view class="price">￥{{item.price}}</view>
+                </view>
+            </navigator> 
+        </view>
     </view>
-    <view class="saoma" bindtap="click">点我扫一扫</view>  
-    <view class="show">{{show}}</view> 
+    <!--静态  -->
+    <view class="boxList">
+        <view class="chose-list">
+            <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
+                <view class="chose-img">
+                    <image src="../images/out4.jpg" mode="widthFix"></image>
+                </view>
+                <view class="chose-text">
+                    <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
+                    <view class="price">￥222</view>
+                </view>
+            </navigator>
+            <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
+                <view class="chose-img">
+                    <image src="../images/out5.jpg" mode="widthFix"></image>
+                </view>
+                <view class="chose-text">
+                    <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
+                    <view class="price">￥222</view>
+                </view>
+            </navigator>
+        </view> 
+        <view class="chose-list">
+            <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
+                <view class="chose-img">
+                    <image src="../images/out4.jpg" mode="widthFix"></image>
+                </view>
+                <view class="chose-text">
+                    <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
+                    <view class="price">￥222</view>
+                </view>
+            </navigator>
+            <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
+                <view class="chose-img">
+                    <image src="../images/out5.jpg" mode="widthFix"></image>
+                </view>
+                <view class="chose-text">
+                    <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
+                    <view class="price">￥222</view>
+                </view>
+            </navigator>
+        </view> 
+    </view>
 </view>

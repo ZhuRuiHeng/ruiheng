@@ -11,15 +11,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-      imgUrls: [{
-          img: 'http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
-      }, {
-          img: 'http://yanxuan.nosdn.127.net/90f6c228c71cb9aba926de824e71e78d.jpg'
-      }, {
-          img: 'http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
-      }, {
-          img: 'https://img.yzcdn.cn/upload_files/2017/08/15/Flm3ribz-z6d2bzBZyWSt0jFUC07.gif?imageView2/2/w/730/h/0/q/75/format/gif'
-      }],
+      imgUrls: [ 'http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
+      ,  'http://yanxuan.nosdn.127.net/90f6c228c71cb9aba926de824e71e78d.jpg'
+      ,  'http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
+      ,  'https://img.yzcdn.cn/upload_files/2017/08/15/Flm3ribz-z6d2bzBZyWSt0jFUC07.gif?imageView2/2/w/730/h/0/q/75/format/gif'
+      ],
       indicatorDots: true,
       autoplay: true,
       interval: 3000,
@@ -30,6 +26,15 @@ Page({
       minusStatus: 'disabled',//数量为1禁用
       sum: '',//购物车id
       _num: 1 //类型
+  },
+  //轮播图预览
+  imgPreview: function () { //图片预览
+      const imgs = this.data.imgUrls;
+      console.log("const");
+      wx.previewImage({
+          current: imgs[this.data.currentIndex], // 当前显示图片的http链接
+          urls: imgs // 需要预览的图片http链接列表
+      })
   },
   //购物车
   addCar: function (obj) {
