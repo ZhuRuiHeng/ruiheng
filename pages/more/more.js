@@ -2,8 +2,8 @@
 // pages/inform/inform.js
 var common = require('../../common.js');
 var app = getApp();
-var p = 1
-var url = "";
+var pageNum = 1
+var url = "http://my.ganjiangps.com/send/moremoneyclk.action?";
 var GetList = function (that) {
     that.setData({
         hidden: false
@@ -12,7 +12,7 @@ var GetList = function (that) {
         url: url,
         data: {
             pageSize: 5,
-            pageNo: p
+            pageNo: pageNum
         },
         header: {
             'content-type': 'application/json'
@@ -28,7 +28,7 @@ var GetList = function (that) {
                 list: l
             });
             console.log('list'+list);
-            p++;
+            pageNum++;
             that.setData({
                 hidden: true
             });
@@ -42,9 +42,9 @@ Page({
 
     onLoad: function (options) {
         wx.showToast({
-      title: '加载中',
-      icon: 'loading'
-    })
+            title: '加载中',
+            icon: 'loading'
+        })
         // 页面初始化 options为页面跳转所带来的参数  
         var that = this
         GetList(that)
@@ -52,7 +52,7 @@ Page({
     onPullDownRefresh: function () {
         //下拉  
         console.log("下拉");
-        p = 1;
+        pageNum = 1;
         this.setData({
             list: [],
         });

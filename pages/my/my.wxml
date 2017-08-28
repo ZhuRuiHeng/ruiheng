@@ -2,35 +2,34 @@
 <!--引用摸版  -->
 <import src="../../utils/foot.wxml" />
 <!--用户信息  -->
-<view class="container" style="padding:200rpx;">
+<view class="container" style="padding:100rpx;background:#fff;">
   <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
 </view>
 <!--订单  -->
-<view class="xuanze" bindtap="addCar">
+<view class="xuanze borerNone" bindtap="dingdan">
     <view class="classname">我的订单</view>
     <view class="nextImg">查看全部订单<image src="../images/next.png" mode="widthFix"/></view>
-</view>
-<view class="listAll">
-    <view class="list">
-        <view class="flex">
-            <image src="../images/shouye.png" mode="widthFix"></image>
-            <text>代付款</text>
-        </view>
-        <view class="flex">
-            <image src="../images/shouye.png" mode="widthFix"></image>
-            <text>代发货</text>
-        </view>
-        <view class="flex">
-            <image src="../images/shouye.png" mode="widthFix"></image>
-            <text>代收货</text>
-        </view>
-        <view class="flex">
-            <image src="../images/shouye.png" mode="widthFix"></image>
-            <text>已完成</text>
-        </view>
+</view>   
+<view class="listAll" >
+    <view class="list" >
+        <navigator class="flex"  url="{{item.url}}" wx:for="{{list}}">
+            <view class="" data-id="{{index}}">
+                <text class="num">{{item.num}}</text>
+                <image class="image{{index}}" src="{{item.pic}}" mode="widthFix"></image>
+                <text>{{item.title}}</text>
+            </view>
+        </navigator>
     </view>
+</view>
+<view class="xuanze" bindtap="payCar">
+    <view class="classname">购物车</view>
+    <view class="carNum"><text>2</text></view>
+</view>
+<view class="xuanze bottom"  bindtap="makePhoneCall">
+    <view class="classname">联系客服</view>
+    <view class="nextImg"><image src="../images/next.png" mode="widthFix"/></view>
 </view>
 <template is="foot" />

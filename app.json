@@ -1,13 +1,14 @@
 {
   "pages":[
-    "pages/my/my",
+    "pages/more/more",
     "pages/index/index",
     "pages/logs/logs",
-    
+    "pages/my/my",
     "pages/images/images",
     "pages/inform/inform",
     "pages/search/search",
-    "pages/more/more",
+    
+    "pages/dingdan/dingdan",
     "pages/car/car"
     
   ],

@@ -52,7 +52,7 @@
             <text>首页</text>
         </view>
         <view class="gouwu">
-            <view class="imgLogo">
+            <view class="imgLogo" style="width:48rpx;">
                 <text class="buyNum"></text>
                 <image src="../images/gouwu.png" mode="widthFix"/>
             </view>
