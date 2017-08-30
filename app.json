@@ -1,13 +1,15 @@
 {
   "pages":[
-    "pages/more/more",
+    "pages/myAddress/myAddress",
+    "pages/dingdanInform/dingdanInform",
+    "pages/use/use",
     "pages/index/index",
     "pages/logs/logs",
     "pages/my/my",
     "pages/images/images",
     "pages/inform/inform",
     "pages/search/search",
-    
+    "pages/more/more",
     "pages/dingdan/dingdan",
     "pages/car/car"
     

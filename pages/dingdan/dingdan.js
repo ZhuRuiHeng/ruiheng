@@ -9,6 +9,9 @@ Page({
   data: {
       selected: true,
       selected1: false,
+      selected2: false,
+      selected3: false,
+      selected4: false,
       hotlist: [], //最热列表
       newlist: [], //最新列表
       page: 0  //分页
@@ -17,21 +20,48 @@ Page({
   selected: function (e) {
       this.setData({
           selected1: false,
+          selected2: false,
+          selected3: false,
+          selected4: false,
           selected: true
       })
   },
   selected1: function (e) {
     this.setData({
         selected: false,
+        selected2: false,
+        selected3: false,
+        selected4: false,
         selected1: true
     })
   },
-  selected1: function (e) {
+  selected2: function (e) {
     this.setData({
         selected: false,
-        selected1: true
+        selected1: false,
+        selected3: false,
+        selected4: false,
+        selected2: true
     })
-    }, 
+  }, 
+  selected3: function (e) {
+    this.setData({
+      selected: false,
+      selected1: false,
+      selected2: false,
+      selected4: false,
+      selected3: true
+    })
+  }, 
+  selected4: function (e) {
+    this.setData({
+      selected: false,
+      selected1: false,
+      selected2: false,
+      selected3: false,
+      selected4: true
+    })
+  }, 
 onLoad: function () { //加载数据渲染页面
 console.log('onload');
     this.fetchHotData(); //最热

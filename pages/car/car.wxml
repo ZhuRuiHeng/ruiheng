@@ -4,7 +4,7 @@
     <view class="shop">
         <view class="checkbox">
             <label class="radio">
-                <text bindtap="selectAreaOk" data-areaId="{{item.id}}">{{area.name}}</text> 
+                <text bindtap="selectAreaOk" areaId="all" id="all">{{area.name}}</text> 
                 <icon wx:if="{{item.isSelect}}" type="success" size="20"/> 
                 <icon wx:else type="circle" size="20"/>
                 <image src="../images/shop.png" mode="widthFix"></image>店铺
@@ -17,7 +17,7 @@
         <view class="service-list">
             <view class="service-item" wx:for="{{newlist}}" wx:key="{{item.id}}">
                 <view class="radio-group" >
-                    <label bindtap="selectAreaOk" data-areaId="{{item.id}}" areaid="{{item.id}}">
+                    <label bindtap="selectAreaOk" areaId="{{item.id}}" id="{{item.id}}">
                         <icon wx:if="{{area.isSelect}}" type="success" size="20"/> 
                         <icon wx:else type="circle" size="20"/>
                     </label>

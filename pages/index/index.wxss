@@ -162,6 +162,10 @@
     height: 30rpx;
     vertical-align: middle;
 }
+.caozuo .service-gouwu{
+    position:relative;
+    bottom:20rpx;
+}
 /*购物车弹窗  */
 .bg{
     width: 100%;
@@ -260,20 +264,8 @@
     font-size: 24rpx;
     border:1rpx solid #e5e5e5; 
 }
-.carBox .mid button::after{
+.carBox button::after{
     content:none;
-    width:200%;
-    height:200%;
-    position:absolute;
-    top:0;
-    left:0;
-    border:1px solid rgba(0, 0, 0, 0.2);
-    -webkit-transform:scale(0.5);
-    transform:scale(0.5);
-    -webkit-transform-origin:0 0;
-    transform-origin:0 0;
-    box-sizing:border-box;
-    border-radius:10px;
 }
  .carBox .mid button.reduce{
     border-radius: 5rpx 0 0 5rpx;

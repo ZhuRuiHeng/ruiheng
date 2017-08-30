@@ -3,11 +3,11 @@
         <view class="nav bc_white">
             <view class="{{selected?'red':'default'}}" bindtap="selected"><span>全部</span></view>
             <view class="{{selected1?'red':'default'}}" bindtap="selected1"><span>代付款</span></view>
-            <view class="{{selected1?'red':'default'}}" bindtap="selected1"><span>代发货</span></view>
-            <view class="{{selected1?'red':'default'}}" bindtap="selected1"><span>待收货</span></view>
-            <view class="{{selected1?'red':'default'}}" bindtap="selected1"><span>已完成</span></view>
+            <view class="{{selected2?'red':'default'}}" bindtap="selected2"><span>代发货</span></view>
+            <view class="{{selected3?'red':'default'}}" bindtap="selected3"><span>待收货</span></view>
+            <view class="{{selected4?'red':'default'}}" bindtap="selected4"><span>已完成</span></view>
         </view>
-        <!--最热  -->
+        <!--全部  -->
         <view class="{{selected?'show':'hidden'}}">
             <view class="service-list">
               <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
@@ -41,7 +41,7 @@
                 </navigator>
             </view>
         </view>
-        <!--最新  -->
+        <!--代付款  -->
         <view class="{{selected1?'show':'hidden'}}">
            <view class="service-list">
               <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
@@ -75,6 +75,112 @@
                     <view class="button">
                         <button catchtap="quxiao">取消订单</button>
                         <button catchtap="requestPayment">确认付款</button>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <!--代发货  -->
+        <view class="{{selected2?'show':'hidden'}}">
+            <view class="service-list">
+              <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+                    <view class="diangdanNum">
+                        <view class="left">
+                            <view class="shop">店铺：时尚</view>
+                            <view class="bianhao">订单编号：<text>53465879867</text></view>
+                        </view>
+                        <view class="right">
+                            交易关闭
+                        </view>
+                    </view>
+                    <view class="service-item">
+                        <view class="service-img">
+                            <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                        </view>
+                        <view class="service-text">
+                            <view class="service-tite">{{item.name}}</view>
+                             <view class="fenlei">灰色M号</view>
+                        </view>
+                        <view class="jiage">
+                            <view class="price">￥11.00</view>
+                            <view class="sum">x1</view>
+                        </view>
+                    </view>
+                    <view class="heji">
+                        <view class="money">
+                            合计:<text>￥22.00</text>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <!--待收货  -->
+        <view class="{{selected3?'show':'hidden'}}">
+           <view class="service-list">
+              <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+                    <view class="diangdanNum">
+                        <view class="left">
+                            <view class="shop">店铺：时尚</view>
+                            <view class="bianhao">订单编号：<text>53465879867</text></view>
+                        </view>
+                        <view class="right">
+                            等待买家付款
+                        </view>
+                    </view>
+                    <view class="service-item">
+                        <view class="service-img">
+                            <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                        </view>
+                        <view class="service-text">
+                            <view class="service-tite">{{item.name}}</view>
+                            <view class="fenlei">灰色M号</view>
+                        </view>
+                        <view class="jiage">
+                            <view class="price">￥11.00</view>
+                            <view class="sum">x1</view>
+                        </view>
+                    </view>
+                    <view class="heji">
+                        <view class="money">
+                            合计:<text>￥22.00</text>
+                        </view>
+                    </view>
+                    <view class="button">
+                        <button catchtap="quxiao">取消订单</button>
+                        <button catchtap="requestPayment">确认付款</button>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <!--已完成  -->
+        <view class="{{selected4?'show':'hidden'}}">
+            <view class="service-list">
+              <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+                    <view class="diangdanNum">
+                        <view class="left">
+                            <view class="shop">店铺：时尚</view>
+                            <view class="bianhao">订单编号：<text>53465879867</text></view>
+                        </view>
+                        <view class="right">
+                            交易关闭
+                        </view>
+                    </view>
+                    <view class="service-item">
+                        <view class="service-img">
+                            <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                        </view>
+                        <view class="service-text">
+                            <view class="service-tite">{{item.name}}</view>
+                             <view class="fenlei">灰色M号</view>
+                        </view>
+                        <view class="jiage">
+                            <view class="price">￥11.00</view>
+                            <view class="sum">x1</view>
+                        </view>
+                    </view>
+                    <view class="heji">
+                        <view class="money">
+                            合计:<text>￥22.00</text>
+                        </view>
                     </view>
                 </navigator>
             </view>

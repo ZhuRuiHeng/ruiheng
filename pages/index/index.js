@@ -81,6 +81,16 @@ closeCar: function (obj) {
           addCar: false
       })
  },
+addCars:function(){
+  wx.showToast({
+    title: '加入购物车成功',
+  });
+},
+buy:function(){
+  wx.navigateTo({
+    url: '../dingdanInform/dingdanInform'
+  })
+},
  //选择型号
 xuanze: function (e) {
     console.log(e.target.dataset.num)
@@ -117,6 +127,13 @@ bindPlus: function () {
         price: price,
         minusStatus: minusStatus
     });
+},
+// 加入购物车
+addCars: function(){
+  wx.showToast({
+    title: '添加购物车成功 ~',
+    duration: 2000
+  })
 },
 /* 输入框事件 */
 bindManual: function (e) {
