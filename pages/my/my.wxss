@@ -94,3 +94,6 @@
 .borerNone{
     border-bottom:none;
 }
+.navigator-hover{
+  opacity: 1;
+}

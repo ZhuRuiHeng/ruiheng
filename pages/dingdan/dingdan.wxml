@@ -153,36 +153,6 @@
         </view>
         <!--已完成  -->
         <view class="{{selected4?'show':'hidden'}}">
-            <view class="service-list">
-              <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
-                    <view class="diangdanNum">
-                        <view class="left">
-                            <view class="shop">店铺：时尚</view>
-                            <view class="bianhao">订单编号：<text>53465879867</text></view>
-                        </view>
-                        <view class="right">
-                            交易关闭
-                        </view>
-                    </view>
-                    <view class="service-item">
-                        <view class="service-img">
-                            <image src="{{item.imgurl}}" mode="aspectFill"></image>
-                        </view>
-                        <view class="service-text">
-                            <view class="service-tite">{{item.name}}</view>
-                             <view class="fenlei">灰色M号</view>
-                        </view>
-                        <view class="jiage">
-                            <view class="price">￥11.00</view>
-                            <view class="sum">x1</view>
-                        </view>
-                    </view>
-                    <view class="heji">
-                        <view class="money">
-                            合计:<text>￥22.00</text>
-                        </view>
-                    </view>
-                </navigator>
-            </view>
+            <view class="kong"></view>
         </view>
     </view>
