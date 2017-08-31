@@ -17,7 +17,54 @@ Page({
       set1: true,
       set2: false,
       wenzi:'编辑',
-      ids : 1
+      ids : 1,
+      // carts: [{
+      //   imgurl: '../images/5.jpg',
+      //   name: "榴莲香雪蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
+      //   num:1,
+      //   selected: true
+
+      // }, {
+      //   imgurl: '../images/6.jpg',
+      //   name: "榴莲香雪蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
+      //   num: 2,
+      //   selected: true
+      // }, {
+      //   imgurl: '../images/7.jpg',
+      //   name: "榴莲香雪蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
+      //   num: 1,
+      //   selected: true
+      // }
+      //   , {
+      //   imgurl: '../images/8.jpg',
+      //   name: "榴莲香雪蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
+      //   num: 1,
+      //   selected: true
+      // }
+      //   , {
+      //   imgurl: '../images/9.jpg',
+      //   name: "榴莲香雪蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
+      //   num: 6,
+      //   selected: true
+      // }
+      //   , {
+      //   imgurl: '../images/5.jpg',
+      //   name: "榴莲香雪蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
+      //   num: 3,
+      //   selected: true
+      // }],
   },
   // 最新
   fetchNewData: function () {  //获取最新列表
@@ -36,10 +83,10 @@ Page({
           console.log('carts');
           carts.push({
               "id": i + 1,
-              "name": "深圳龙岗深圳宝安信息技术有限公司信息技术有限公司" + (i + 1),
+              "name": "提拉米苏蛋糕" + (i + 1),
               "price": "222.0" + (i + 1),
               "num": i + 1,
-              "imgurl": "https://qncdn.playonwechat.com/shangcheng/out2.jpg",
+              "imgurl": "../images/6.jpg",
               "selected": true
           })
       }

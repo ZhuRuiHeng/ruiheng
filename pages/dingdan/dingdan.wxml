@@ -10,7 +10,7 @@
         <!--全部  -->
         <view class="{{selected?'show':'hidden'}}">
             <view class="service-list">
-              <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+              <navigator class="" wx:for="{{newlistsa}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
                     <view class="diangdanNum">
                         <view class="left">
                             <view class="shop">店铺：时尚</view>
@@ -44,7 +44,7 @@
         <!--代付款  -->
         <view class="{{selected1?'show':'hidden'}}">
            <view class="service-list">
-              <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+              <navigator class="" wx:for="{{newlists}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
                     <view class="diangdanNum">
                         <view class="left">
                             <view class="shop">店铺：时尚</view>
@@ -82,7 +82,7 @@
         <!--代发货  -->
         <view class="{{selected2?'show':'hidden'}}">
             <view class="service-list">
-              <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+              <navigator class="" wx:for="{{newlistsa}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
                     <view class="diangdanNum">
                         <view class="left">
                             <view class="shop">店铺：时尚</view>
@@ -116,7 +116,7 @@
         <!--待收货  -->
         <view class="{{selected3?'show':'hidden'}}">
            <view class="service-list">
-              <navigator class="" wx:for="{{hotlist}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+              <navigator class="" wx:for="{{newlists}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
                     <view class="diangdanNum">
                         <view class="left">
                             <view class="shop">店铺：时尚</view>
@@ -153,6 +153,8 @@
         </view>
         <!--已完成  -->
         <view class="{{selected4?'show':'hidden'}}">
-            <view class="kong"></view>
+            <view class="kong" style="font-size:24rpx;color:$626262;text-align:center;padding:60rpx 0;">
+              暂时没有已完成订单哦！
+            </view>
         </view>
     </view>

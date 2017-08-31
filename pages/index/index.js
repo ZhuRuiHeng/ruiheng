@@ -4,11 +4,116 @@ var common = require('../../common.js');
 var app = getApp()
 Page({
   data: {
-    imgUrls: ['http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
-    ,  'http://yanxuan.nosdn.127.net/90f6c228c71cb9aba926de824e71e78d.jpg'
-    , 'http://yanxuan.nosdn.127.net/e5891a68df93c5ee57ddb5b256068dac.jpg'
-     ,'https://img.yzcdn.cn/upload_files/2017/08/15/Flm3ribz-z6d2bzBZyWSt0jFUC07.gif?imageView2/2/w/730/h/0/q/75/format/gif'
+    imgUrls: ['../images/1.jpg'
+      ,'../images/2.jpg'
+      , '../images/3.jpg'
+      ,'../images/4.jpg'
     ],
+    newlists:[{
+      imgurl: '../images/5.jpg',
+      name: "榴莲香雪蛋糕",
+      price:'126',
+      img:'https://qncdn.playonwechat.com/shangcheng/car.png'
+
+    }, {
+        imgurl: '../images/6.jpg',
+        name: "四重奏蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }, {
+        imgurl: '../images/7.jpg',
+        name: "榴莲香雪蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }
+      , {
+      imgurl: '../images/8.jpg',
+      name: "芒果沙滩蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }
+      , {
+        imgurl: '../images/9.jpg',
+        name: "蛋糕提拉米苏蛋糕 ",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }
+      , {
+        imgurl: '../images/6.jpg',
+        name: "步步高升蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }],
+    newlistsa: [{
+      imgurl: '../images/7.jpg',
+      name: "芒果茫茫蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+
+    }, {
+      imgurl: '../images/9.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }, {
+      imgurl: '../images/8.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }
+      , {
+      imgurl: '../images/7.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }
+      , {
+      imgurl: '../images/6.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }
+      , {
+      imgurl: '../images/5.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }],
+    newlistsb: [{
+      imgurl: '../images/9.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+
+    }, {
+      imgurl: '../images/8.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }, {
+      imgurl: '../images/9.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }
+      , {
+      imgurl: '../images/8.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }
+      , {
+      imgurl: '../images/7.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }
+      , {
+      imgurl: '../images/6.jpg',
+      name: "榴莲香雪蛋糕",
+      price: '126',
+      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+    }],
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -172,7 +277,7 @@ bindManual: function (e) {
         "name": "上海拜特信息技术有限公司上海拜特信息上海拜特信息技术有限公司" + (i + 1),
         "price": "122",
         "img": "https://qncdn.playonwechat.com/shangcheng/car.png",
-        "imgurl": "https://qncdn.playonwechat.com/shangcheng/out3.jpg"
+        "imgurl": "https://gd2.alicdn.com/imgextra/i2/1747771701/TB2Imq3XnZKL1JjSZFIXXX_DFXa_!!1747771701.jpg_400x400.jpg_.webp"
       })
     }
     setTimeout(() => {
@@ -199,8 +304,8 @@ bindManual: function (e) {
         "id": i + 1,
         "name": "深圳龙岗深圳宝安信息技术有限公司信息技术有限公司" + (i + 1),
         "price": "222.00",
-        "img": "https://qncdn.playonwechat.com/shangcheng/car.png",
-        "imgurl": "https://qncdn.playonwechat.com/shangcheng/out2.jpg"
+        "img": "http://p1.meituan.net/320.0.a/deal/7788d06d1051890780b9076e495ed260334638.jpg@7_0_626_380a%7C388h_640w_2e_100Q",
+        "imgurl": "../images/1.jpg"
       })
     }
     setTimeout(() => {

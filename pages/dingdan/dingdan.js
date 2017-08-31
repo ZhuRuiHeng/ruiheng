@@ -14,7 +14,77 @@ Page({
       selected4: false,
       hotlist: [], //最热列表
       newlist: [], //最新列表
-      page: 0  //分页
+      page: 0,  //分页
+      newlists: [{
+        imgurl: '../images/5.jpg',
+        name: "榴莲香雪蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+
+      }, {
+        imgurl: '../images/6.jpg',
+        name: "芒果雪沙蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }, {
+        imgurl: '../images/7.jpg',
+        name: "四重奏蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }
+        , {
+        imgurl: '../images/8.jpg',
+        name: "芒果沙滩蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }
+        , {
+        imgurl: '../images/9.jpg',
+        name: "提拉米苏蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }
+        , {
+        imgurl: '../images/5.jpg',
+        name: "步步高升蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }],
+      newlistsa: [{
+        imgurl: '../images/5.jpg',
+        name: "草莓白天使蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+
+      }, {
+        imgurl: '../images/9.jpg',
+        name: "榴莲香雪蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }, {
+        imgurl: '../images/8.jpg',
+        name: "盛夏爱琴海蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }
+        , {
+        imgurl: '../images/7.jpg',
+        name: "加州阳光蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }
+        , {
+        imgurl: '../images/6.jpg',
+        name: "步步高升蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }
+        , {
+        imgurl: '../images/5.jpg',
+        name: "芒果茫茫蛋糕",
+        price: '126',
+        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      }],
   },
   //最新最热
   selected: function (e) {

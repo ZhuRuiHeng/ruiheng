@@ -6,7 +6,7 @@
             <view class="chose-list" wx:for="{{list}}" wx:key="{{item.id}}"> 
                 <navigator class="chose-item"  url="../inform/inform?id={{item.id}}">
                     <view class="chose-img">
-                        <image src="https://qncdn.playonwechat.com/shangcheng/out5.jpg" mode="widthFix"></image>
+                        <image src="../images/5.jpg" mode="widthFix"></image>
                     </view>
                     <view class="chose-text">
                         <view class="chose-title">{{item.title}}</view>
@@ -15,7 +15,7 @@
                 </navigator> 
                 <navigator class="chose-item"  url="../inform/inform?id={{item.id}}">
                     <view class="chose-img">
-                        <image src="https://qncdn.playonwechat.com/shangcheng/out5.jpg" mode="widthFix"></image>
+                        <image src="../images/6.jpg" mode="widthFix"></image>
                     </view>
                     <view class="chose-text">
                         <view class="chose-title">{{item.title}}</view>

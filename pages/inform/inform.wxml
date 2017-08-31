@@ -67,7 +67,7 @@
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="https://qncdn.playonwechat.com/shangcheng/out1.jpg" mode="widthFix"></image>
+                    <image src="../images/7.jpg" mode="widthFix"></image>
                 </view>
                 <view class="right">
                     <text class="shuoming">车弹窗购物车弹窗购物车弹窗车弹窗购物车弹窗购物车弹窗</text>
