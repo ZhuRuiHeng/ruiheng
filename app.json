@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/car/car",
+    "pages/cars/cars",
     "pages/index/index",
-    "pages/myAddress/myAddress",
-    "pages/newAddress/newAddress",
     "pages/use/use",    
     "pages/dingdanInform/dingdanInform",
     "pages/logs/logs",
@@ -10,8 +10,7 @@
     "pages/inform/inform",
     "pages/search/search",
     "pages/more/more",
-    "pages/dingdan/dingdan",
-    "pages/car/car"
+    "pages/dingdan/dingdan"
     
   ],
   "window":{

@@ -9,40 +9,45 @@ radio{
     display: flex;
     justify-content:space-between;
     font-size: 24rpx;
-    padding:0 20rpx;
+    padding:20rpx;
     box-sizing: border-box;
     vertical-align: middle;
+    position: relative;
 }
-.shop .seting button{
-    font-size: 24rpx;
-    color:#626262;
-    background: #fff;
-}
- .shop .seting button::after{
-    content:none;
+.shop:after{
+    content:" ";
+    display: inline-block;
     width:200%;
-    height:200%;
     position:absolute;
     top:0;
     left:0;
-    border:1px solid rgba(0, 0, 0, 0.2);
+    border:1px solid #e5e5e5;
     -webkit-transform:scale(0.5);
     transform:scale(0.5);
     -webkit-transform-origin:0 0;
     transform-origin:0 0;
     box-sizing:border-box;
-    border-radius:10px;
 }
-.shop .radio icon{
+.shop .seting{
+    display: inline-block;
+    font-size: 24rpx;
+    color:#626262;
+    background: #fff;
+    line-height: inherit;
     position: relative;
     top:13rpx;
 }
-.shop .checkbox .radio radio{
+.radio icon{
+    position: relative;
+    top:13rpx;
+}
+.checkbox .radio radio{
     width: 30rpx;
 }
 .shop .checkbox .radio image{
     width:42rpx;
     vertical-align: middle;
+    margin:0 10rpx 0 10rpx;
 }
 .radio-group{
     font-size: 26rpx;
@@ -59,11 +64,11 @@ radio{
 .show{display:block;}
 .hidden{display:none;}
 .service-list{
-	padding: 20rpx 0;
+	padding: 0 0 20rpx 0;
     background: #fff;
 }
 .service-item{
-	display: flex;
+	  display: flex;
     position: relative;
     background: #f6f6f6;
     padding:0 20rpx;
@@ -90,8 +95,7 @@ radio{
 	font-size: 24rpx;
     padding-top:20rpx;
     height: 76rpx;
-    display: -webkit-box;  
-    display: -moz-box;  
+    display: box;  
     overflow: hidden;  
     text-overflow: ellipsis;  
     word-break: break-all;  
@@ -141,4 +145,101 @@ radio{
     height: 120rpx;
     width: 120rpx;
     opacity: 0;
+}
+.del{
+  display: inline-block;
+  position: absolute;
+  top:0;
+  right:0;
+  background: #ff4444;
+  color:#fff;
+  padding: 0 30rpx;
+  height: 180rpx;
+  line-height: 180rpx;
+  font-size: 26rpx;
+}
+/*加减  */
+.service-tite2 .num{
+    display: flex;
+    position:relative;
+    top:10rpx;
+    width:180rpx;
+}
+.service-tite2 .num button,.service-tite2 .num input{
+    display: inline-block;
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding:0;
+    text-align: center;
+}
+.service-tite2 .num input{
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5;
+    border-left: 0;
+    border-right:0;
+    box-sizing: border-box;
+}
+.service-tite2 button{
+    border-radius:none;
+    font-size: 24rpx;
+    border:1rpx solid #e5e5e5; 
+}
+.service-tite2 button:after{
+    content:none;
+}
+.service-tite2 button.reduce{
+    border-radius: 5rpx 0 0 5rpx;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.service-tite2 button.add{
+    border-radius: 0 5rpx 5rpx 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+} 
+.normal{ 
+   color: black; 
+} 
+.disabled{ 
+   color: #ccc; 
+} 
+.service-tite2 .gray{
+   color:#949292;
+}
+.show{display:block;}
+.hidden{display:none;}
+.spAll{
+  width: 100%;
+}
+.foot{
+  border-top:1px solid #e5e5e5;
+  background: #fff;
+  width: 100%;
+  position: fixed;
+  bottom:0;
+  left: 0;
+  display: flex;
+  font-size: 24rpx;
+}
+.foot .flex{
+  flex: 1;
+  padding:10rpx 0;
+}
+.foot .one .radio{
+  margin:0 10rpx;
+}
+.foot .two{
+  text-align: right;
+  padding-right:10rpx;
+}
+.foot .three{
+  text-align: center;
+  font-size: 28rpx;
+  background: #ff4444;
+  color:#fff;
+  line-height:70rpx;
+}
+.container{
+  margin-bottom: 100rpx;
 }

@@ -34,6 +34,12 @@ Page({
           urls: imgs // 需要预览的图片http链接列表
       })
   },
+  //轮播图点击跳转
+  swipclick: function (e) {
+    wx.navigateTo({
+      url: '../inform/inform'
+    })
+  },
   //搜索跳转
 search: function() {
   wx.navigateTo({
@@ -165,8 +171,8 @@ bindManual: function (e) {
         "id": i + 1,
         "name": "上海拜特信息技术有限公司上海拜特信息上海拜特信息技术有限公司" + (i + 1),
         "price": "122",
-        "img": "../images/car.png",
-        "imgurl": "../images/out3.jpg"
+        "img": "https://qncdn.playonwechat.com/shangcheng/car.png",
+        "imgurl": "https://qncdn.playonwechat.com/shangcheng/out3.jpg"
       })
     }
     setTimeout(() => {
@@ -193,8 +199,8 @@ bindManual: function (e) {
         "id": i + 1,
         "name": "深圳龙岗深圳宝安信息技术有限公司信息技术有限公司" + (i + 1),
         "price": "222.00",
-        "img": "../images/car.png",
-        "imgurl": "../images/out2.jpg"
+        "img": "https://qncdn.playonwechat.com/shangcheng/car.png",
+        "imgurl": "https://qncdn.playonwechat.com/shangcheng/out2.jpg"
       })
     }
     setTimeout(() => {

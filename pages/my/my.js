@@ -7,25 +7,25 @@ Page({
         userInfo: {},
         list:[
            {
-               pic:'../images/fu.png',
+               pic:'https://qncdn.playonwechat.com/shangcheng/fu.png',
                title:'代付款',
                url:'../index/index',
                num:'1'
            },
            {
-               pic: '../images/fa.png',
+               pic: 'https://qncdn.playonwechat.com/shangcheng/fa.png',
                title: '代发货',
                url: '../index/index',
                num: '2'
            },
            {
-               pic: '../images/shou.png',
+               pic: 'https://qncdn.playonwechat.com/shangcheng/shou.png',
                title: '代收款',
                url: '../index/index',
                num: '13'
            },
            {
-               pic: '../images/finish.png',
+               pic: 'https://qncdn.playonwechat.com/shangcheng/finish.png',
                title: '已完成',
                url: '../index/index',
                num: '4'

@@ -4,13 +4,13 @@
     <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
       <block wx:for="{{imgUrls}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" width="355" height="150"/>
+          <image src="{{item}}" class="slide-image" width="355" height="150" id="{{index}}" catchtap="swipclick"/>
         </swiper-item>
       </block>
     </swiper>
     <!--搜索  -->
     <view class="search" bindtap="search">
-        <view class="icon-search"><image src="../images/search.png"></image></view>
+        <view class="icon-search"><image src="https://qncdn.playonwechat.com/shangcheng/search.png"></image></view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <input class="weui-input"  placeholder="搜索商品" readonly="readonly"/>
@@ -66,7 +66,7 @@
         <view class="medit">
             <view class="center">
                 <text class="title">热销榜单</text>
-                <view class="all">查看全部书籍<image src="../images/next.png"></image></view>
+                <view class="all">查看全部书籍<image src="https://qncdn.playonwechat.com/shangcheng/next.png"></image></view>
             </view>
         </view>
     </navigator>
@@ -74,7 +74,7 @@
     <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
       <block wx:for="{{imgUrls}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" width="355" height="150" />
+          <image src="{{item}}" class="slide-image" width="355" height="150" id="{{index}}" catchtap="swipclick"/>
         </swiper-item>
       </block>
     </swiper>
@@ -101,14 +101,14 @@
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="../images/out2.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/out2.jpg" mode="widthFix"></image>
                 </view>
                 <view class="right">
                     <text class="shuoming">车弹窗购物车弹窗购物车弹窗车弹窗购物车弹窗购物车弹窗</text>
                     <text class="price">￥22</text>
                 </view>
                 <view class="del" bindtap="closeCar">
-                    <image src="../images/icon_close.png" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
                 </view>
             </view>
             <view class="kuanshi">

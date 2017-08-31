@@ -6,7 +6,7 @@
             <view class="chose-list" wx:for="{{list}}" wx:key="{{item.id}}"> 
                 <navigator class="chose-item"  url="../inform/inform?id={{item.id}}">
                     <view class="chose-img">
-                        <image src="../images/out5.jpg" mode="widthFix"></image>
+                        <image src="https://qncdn.playonwechat.com/shangcheng/out5.jpg" mode="widthFix"></image>
                     </view>
                     <view class="chose-text">
                         <view class="chose-title">{{item.title}}</view>
@@ -15,7 +15,7 @@
                 </navigator> 
                 <navigator class="chose-item"  url="../inform/inform?id={{item.id}}">
                     <view class="chose-img">
-                        <image src="../images/out5.jpg" mode="widthFix"></image>
+                        <image src="https://qncdn.playonwechat.com/shangcheng/out5.jpg" mode="widthFix"></image>
                     </view>
                     <view class="chose-text">
                         <view class="chose-title">{{item.title}}</view>
@@ -30,7 +30,7 @@
         <view class="chose-list">
             <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
                 <view class="chose-img">
-                    <image src="../images/out4.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/out4.jpg" mode="widthFix"></image>
                 </view>
                 <view class="chose-text">
                     <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
@@ -39,7 +39,7 @@
             </navigator>
             <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
                 <view class="chose-img">
-                    <image src="../images/out5.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/out5.jpg" mode="widthFix"></image>
                 </view>
                 <view class="chose-text">
                     <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
@@ -50,7 +50,7 @@
         <view class="chose-list">
             <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
                 <view class="chose-img">
-                    <image src="../images/out4.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/out4.jpg" mode="widthFix"></image>
                 </view>
                 <view class="chose-text">
                     <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
@@ -59,7 +59,7 @@
             </navigator>
             <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
                 <view class="chose-img">
-                    <image src="../images/out5.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/out5.jpg" mode="widthFix"></image>
                 </view>
                 <view class="chose-text">
                     <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>

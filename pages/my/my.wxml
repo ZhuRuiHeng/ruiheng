@@ -11,7 +11,7 @@
 <!--订单  -->
 <view class="xuanze borerNone" bindtap="dingdan">
     <view class="classname">我的订单</view>
-    <view class="nextImg">查看全部订单<image src="../images/next.png" mode="widthFix"/></view>
+    <view class="nextImg">查看全部订单<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
 </view>   
 <view class="listAll" >
     <view class="list" >
@@ -30,6 +30,6 @@
 </view>
 <view class="xuanze bottom"  bindtap="makePhoneCall">
     <view class="classname">联系客服</view>
-    <view class="nextImg"><image src="../images/next.png" mode="widthFix"/></view>
+    <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
 </view>
 <template is="foot" />

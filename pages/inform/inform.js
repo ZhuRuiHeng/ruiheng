@@ -97,6 +97,12 @@ Page({
           minusStatus: minusStatus
       });
   },
+  //下一步
+  xiayibu: function (){
+   wx.navigateTo({
+     url: '../dingdanInform/dingdanInform'
+    })
+  },
   // 返回首页
   backHome: function () {
       common.backHome();

@@ -38,6 +38,8 @@
   border-radius: 5px;
   background: #fff;
 }
+
+
 .search input{
     font-size: 24rpx;
 }
@@ -50,11 +52,28 @@
   width: 90%;
 }
 /*最新最热切换  */
-.main{width:100%;border-top:1rpx solid #e5e5e5;background: #fff;}
-.nav{width:100%;height:68rpx;display:flex;flex-direction:row;border-bottom:1rpx solid #e5e5e5;}
+.main{width:100%;background: #fff;position: relative;}
+.main:after {
+  content:" ";
+  display: inline-block;
+  width:200%;
+  position:absolute;
+  top:0;
+  left:0;
+  border:1px solid #e8e8e8;
+  -webkit-transform:scale(0.5);
+  transform:scale(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing:border-box;
+}
+.nav{width:100%;height:68rpx;display:flex;flex-direction:row;}
 .default{line-height:68rpx;text-align:center;flex:1;color:#000;font-size:28rpx;}
 .red{line-height:68rpx;text-align:center;color:#fc5558;flex:1;font-size:28rpx;}
-.red span{display:inline-block;padding:0 20rpx;border-bottom:2px solid #ff4444;}
+.red span{display:inline-block;padding:0 20rpx;
+ /* border-bottom:2px solid #ff4444;  */
+}
+
 .show{display:block;}
 .hidden{display:none;}
 .service-list{
@@ -62,8 +81,21 @@
 }
 .service-item{
 	display: flex;
-	border-bottom: 1rpx solid #e8e8e8;
     position: relative;
+}
+.service-item:after{
+  content:" ";
+  display: inline-block;
+  width:200%;
+  position:absolute;
+  top:0;
+  left:0;
+  border:1px solid #e8e8e8;
+  -webkit-transform:scale(0.5);
+  transform:scale(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing:border-box;
 }
 .service-img{
 	width: 180rpx;
@@ -151,7 +183,7 @@
 }
 .medit .center .all{
     border:1px solid #e5e5e5;
-    padding: 2rpx 10rpx;
+    padding:2rpx 0rpx 2rpx 10rpx;
     font-size: 22rpx;
     color:#8a8a8a;
     height: 30rpx;
@@ -159,7 +191,7 @@
 }
 .medit .center .all image{
     width: 30rpx;
-    height: 30rpx;
+    height: 32rpx;
     vertical-align: middle;
 }
 .caozuo .service-gouwu{
@@ -237,7 +269,21 @@
     display: flex;
     justify-content:space-between;
     padding: 20rpx 0;
-    border-top: 1rpx solid #e5e5e5;
+    position: relative;
+}
+.carBox .mid:after{
+    content:" ";
+    display: inline-block;
+    width:200%;
+    position:absolute;
+    top:0;
+    left:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scale(0.5);
+    transform:scale(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
 }
 .carBox .mid .num{
     display: flex;
@@ -316,11 +362,12 @@
 }
 .kuanshi .leibie text{
     font-size: 24rpx;
-    border:1px solid #e5e5e5;
+    border:1rpx solid #e5e5e5; 
     border-radius: 6rpx;
     padding: 10rpx; 
     box-sizing: border-box;
-    margin-right:10rpx;  
+    margin-right:10rpx;
+    position: relative;
 }
 .kuanshi .leibie text.white{
     background: #fff;

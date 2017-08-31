@@ -10,7 +10,7 @@
     </swiper>
     <!--简介  -->
     <view class="jianjie">
-        <view class="padding">
+        <view class="padding bod">
             <view class="title">
                 <text>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介</text>
             </view>
@@ -24,23 +24,23 @@
             <!--规格  -->
             <view class="xuanze" bindtap="addCar">
                 <view class="classname">选择：规格</view>
-                <view class="nextImg"><image src="../images/next.png" mode="widthFix"/></view>
+                <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
             </view>
         </view>
          <view class="padding margin">
             <view class="baozhang">
-                <view class="dianpu"><image src="../images/renzheng.png" mode="widthFix"/>店铺认证</view>
-                <view class="dianpu"><image src="../images/renzheng.png" mode="widthFix"/>担保交易</view>
+                <view class="dianpu"><image src="https://qncdn.playonwechat.com/shangcheng/renzheng.png" mode="widthFix"/>店铺认证</view>
+                <view class="dianpu"><image src="https://qncdn.playonwechat.com/shangcheng/renzheng.png" mode="widthFix"/>担保交易</view>
             </view>
         </view>
         <!--商品详情图片广告-->
-         <view class="padding">
+         <view class="padding shangpin">
             <view class="allImg">
                 <view class="title"><text>商品详情</text></view>
                 <view class="imgs">
-                    <image src="../images/output1.jpg" mode="widthFix"></image>
-                    <image src="../images/output3.jpg" mode="widthFix"></image>
-                    <image src="../images/output2.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/output1.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/output3.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/output2.jpg" mode="widthFix"></image>
                 </view>
             </view>
         </view>
@@ -48,13 +48,13 @@
     <!--foot  -->
      <view class="fixed">
         <view class="shouye" bindtap="backHome">
-            <view class="imgLogo"><image src="../images/shouye.png" mode="widthFix"/></view>
+            <view class="imgLogo"><image src="https://qncdn.playonwechat.com/shangcheng/shouye.png" mode="widthFix"/></view>
             <text>首页</text>
         </view>
         <view class="gouwu">
             <view class="imgLogo" style="width:48rpx;">
                 <text class="buyNum"></text>
-                <image src="../images/gouwu.png" mode="widthFix"/>
+                <image src="https://qncdn.playonwechat.com/shangcheng/gouwu.png" mode="widthFix"/>
             </view>
             <text>购物车</text>
         </view>
@@ -67,14 +67,14 @@
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="../images/out1.jpg" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/out1.jpg" mode="widthFix"></image>
                 </view>
                 <view class="right">
                     <text class="shuoming">车弹窗购物车弹窗购物车弹窗车弹窗购物车弹窗购物车弹窗</text>
                     <text class="price">￥22</text>
                 </view>
                 <view class="del" bindtap="closeCar">
-                    <image src="../images/icon_close.png" mode="widthFix"></image>
+                    <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
                 </view>
             </view>
             <view class="kuanshi">
@@ -98,7 +98,7 @@
                 </view>
             </view>
         </view>
-        <view class="btn">
+        <view class="btn" bindtap="xiayibu">
             <button class="ok">下一步</button>
         </view>
     </view>
