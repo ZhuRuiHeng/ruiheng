@@ -3,8 +3,10 @@
 var app = getApp()
 Page({
     data: {
-        motto: 'Hello World',
-        userInfo: {},
+        userInfo: [{
+          'userImg': '',
+          'wx_name': ''
+        }],
         list:[
            {
                pic:'https://qncdn.playonwechat.com/shangcheng/fu.png',
@@ -32,6 +34,55 @@ Page({
            }
 
         ]
+    },
+    onLoad: function (options) {
+      wx.showShareMenu({
+        withShareTicket: true
+      })
+      var that = this;
+      // 页面初始化 options为页面跳转所带来的参数
+      var signData = wx.getStorageSync("loginData");
+      var avatarUrl = wx.getStorageSync("avatarUrl");
+      var nickName = wx.getStorageSync("nickName");
+      var mobile = wx.getStorageSync("mobile");
+      console.log(nickName);
+      console.log(avatarUrl);
+      var userInfo = {
+        userImg: avatarUrl,
+        nickName: nickName
+      };
+      that.setData({
+        userInfo: userInfo
+      })
+    },
+    onShow: function () {
+      // 页面显示
+      wx.getSetting({
+        success(res) {
+          if (!res['scope.userInfo']) {
+            wx.authorize({
+              scope: 'scope.userInfo',
+              success(res) {
+                // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+                  console.log(res);
+              },
+              fail: function () {
+                wx.openSetting({
+                  success: (res) => {
+                    console.log(res);
+                    /*
+                     * res.authSetting = {
+                     *   "scope.userInfo": true,
+                     *   "scope.userLocation": true
+                     * }
+                     */
+                  }
+                })
+              }
+            })
+          }
+        }
+      })
     },
     //事件处理函数
     bindViewTap: function () {
@@ -62,21 +113,5 @@ Page({
         wx.switchTab({
             url: '../car/car'
         })
-    },
-    onLoad: function () {
-        console.log('onLoad');
-        wx.showToast({
-            title: '加载中',
-            icon: 'loading'
-        })
-        var that = this;
-        //调用应用实例的方法获取全局数据
-        app.getUserInfo(function (userInfo) {
-            //更新数据
-            that.setData({
-                userInfo: userInfo
-            })
-        });
-        
     }
 })

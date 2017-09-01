@@ -56,13 +56,13 @@
 .main:after {
   content:" ";
   display: inline-block;
-  width:200%;
+  width:100%;
   position:absolute;
   top:0;
   left:0;
-  border:1px solid #e8e8e8;
-  -webkit-transform:scale(0.5);
-  transform:scale(0.5);
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
   -webkit-transform-origin:0 0;
   transform-origin:0 0;
   box-sizing:border-box;
@@ -86,13 +86,13 @@
 .service-item:after{
   content:" ";
   display: inline-block;
-  width:200%;
+  width:100%;
   position:absolute;
   top:0;
   left:0;
-  border:1px solid #e8e8e8;
-  -webkit-transform:scale(0.5);
-  transform:scale(0.5);
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
   -webkit-transform-origin:0 0;
   transform-origin:0 0;
   box-sizing:border-box;
@@ -104,7 +104,7 @@
 .service-item image{
 	width: 160rpx;
 	height: 160rpx;
-    margin:10rpx 0 0 0;
+  margin:12rpx 0 0 0;
 }
 .service-text{
 	flex: 1;
@@ -235,9 +235,12 @@
     position: relative;
     top:-20rpx;
 }
-.carBox .top .left image,.carBox .top .del image{
+.carBox .top .left image{
+   width: 140rpx;
+    height: 140rpx;
+}
+.carBox .top .del image{
     width: 100%;
-    height: inherit;
 }
 .carBox .top .right{
     flex: 1;
@@ -377,4 +380,15 @@
     background: #ff4444;
     border-color:#ff4444;
     color:#fff;
+}
+.all{
+    font-size:26rpx;
+    text-align: center;
+    padding:20rpx;
+    background: #fff;
+    margin: 30rpx 0;
+}
+.modeList{
+    background: #fff;
+    width:100%;
 }

@@ -45,7 +45,7 @@
                         <text class="service-price">￥{{item.price}}</text>
                         <view class="service-gouwu">x{{item.num}}</view>
                     </view>
-                    <view class="del {{set2?'show':'hidden'}}" bindtap="delItem">删除</view>
+                    <view class="del {{set2?'show':'hidden'}}" bindtap="delItem" data-index="{{index}}">删除</view>
                 </view>
                 
             </view>

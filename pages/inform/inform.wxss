@@ -363,3 +363,10 @@
     background: #ff4444;
     color:#fff;
 }
+.allImg .imgs text{
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+  color:#3e3e3e;
+  line-height: 42rpx;
+}

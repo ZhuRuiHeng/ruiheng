@@ -4,8 +4,8 @@ var common = require('../../common.js');
 Page({
     onLoad: function (options) {
         var that = this;
-        var id = options.id;//列表页传来的id
-        console.log(id);
+        var gid = options.gid;//列表页传来的id
+        console.log(gid);
     },
   /**
    * 页面的初始数据
@@ -50,6 +50,11 @@ Page({
           addCar: true,
           sum: sum
       })
+  },
+  tianjia:function(){
+    wx.switchTab({
+      url: '../car/car'
+    })
   },
   //选择型号
   xuanze: function (e) {
