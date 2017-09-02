@@ -11,7 +11,7 @@ Page({
       minusStatus: 'disabled',//数量为1禁用
       carts: [],               // 购物车列表
       hasList: false,          // 列表是否有数据
-      totalPrice: 0,           // 总价，初始为0
+      totalPrice: "",           // 总价，初始为0
       selectAllStatus: true,
       seting : false,    // 全选状态，默认全选
       set1: true,
@@ -68,6 +68,7 @@ Page({
   },
   // 最新
   fetchNewData: function () {  //获取最新列表
+  console.log("time");
       let _this = this;
       wx.showToast({
           title: '加载中',
@@ -92,8 +93,10 @@ Page({
       }
       setTimeout(() => {
           _this.setData({
+            hasList: true,
               carts: _this.data.carts.concat(carts)
           })
+          this.getTotalPrice();
       }, 1500)
   },
  //seting编辑
@@ -211,6 +214,7 @@ Page({
   },  
   // 计算总价
   getTotalPrice() {
+    console.log("price");
     let carts = this.data.carts;                  // 获取购物车列表
     let total = 0;
     for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
@@ -227,8 +231,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-      this.fetchNewData(); //最新
-      this.getTotalPrice();
+      
+  },
+  onShow:function(){
+    this.fetchNewData(); //最新
+    
   },
   // 返回首页
   backHome: function () {

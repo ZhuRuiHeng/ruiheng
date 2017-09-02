@@ -1,7 +1,9 @@
 //index.js
 var common = require('../../common.js');
 //获取应用实例
-main_content: [];
+main_content: [];//最新最热
+main_content2: [];//列表
+modules: [];//模板
 var app = getApp()
 Page({
   data: {
@@ -130,7 +132,12 @@ Page({
     price: 1,//购物车数量
     minusStatus: 'disabled',//数量为1禁用
     sum:'',//购物车id
-    _num:1 //类型
+    _num:1, //类型型号
+    active:0,
+
+
+    cate: 0
+    
 },
  
 //轮播图预览
@@ -169,19 +176,22 @@ selected1: function (e) {
     selected1: true
   })
 },
-//商品列表
+//1最新最热
 tapKeyWorld: function (e) {
   wx.showLoading({
     title: '加载中',
   })
-  var that = this;
-  var word = e.target.dataset.ontap;
-  var cate = e.target.dataset.cate;
+  var   that = this;
+  var   word = e.target.dataset.ontap;
+  var   cate = e.target.dataset.cate;
+  var active = e.target.dataset.active;
+  console.log(e.target.dataset.active) 
   console.log("索引", cate);
   console.log("关键字", word);
   this.setData({
     searchword : word,
-        cateid : cate
+        cateid : cate,
+        active: active 
   })
   wx.request({
     url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
@@ -206,6 +216,45 @@ tapKeyWorld: function (e) {
       wx.hideLoading()
     }
   })
+},
+//分类模块切换
+tapKeyWorld1: function (e) {
+  // wx.showLoading({
+  //   title: '加载中',
+  // })
+  var that = this;
+  var word = e.target.dataset.ontap;
+  var cate = e.currentTarget.dataset.cate;
+  console.log("索引", cate);
+  console.log("关键字", word);
+  this.setData({
+    searchword: word,
+    cateid: cate,
+    cate: cate
+  })
+  // wx.request({
+  //   url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
+  //   data: {
+  //     order: that.data.searchword,
+  //     cate_id: that.data.cateid
+  //   },
+  //   header: {
+  //     'content-type': 'application/json'
+  //   },
+  //   method: "GET",
+  //   success: function (res) {
+  //     // 此处清空全局的数据
+  //     console.log("筛选2", res);
+  //     var main_content = [];
+  //     // 获取用户名称及发表时间
+  //     var contentTip = res.data.data.goodsList;
+  //     console.log('main_content', contentTip);
+  //     that.setData({
+  //       main_content1: contentTip
+  //     })
+  //     wx.hideLoading()
+  //   }
+  // })
 },
  //事件处理函数
 bindViewTap: function() {
@@ -298,7 +347,39 @@ bindManual: function (e) {
     });
 },
 // 加载
-  onLoad: function () { //加载数据渲染页面
+onLoad: function () {
+ 
+},
+onShow: function () { 
+  //获取所有分类
+  var that = this;
+  var sign = "2fb308d298a4f5482b757111c56c1a9c";
+  wx.request({
+    url: 'https://shop.playonwechat.com/api/get-category?sign=' + sign,
+    method: "GET",
+    success: function (res) {
+      console.log("获取所有分类",res);
+      var   fenlei = res.data.categorys;
+      // var Category =[];
+      console.log(fenlei);
+      // for (var i = 0; i < fenlei.length; i++){
+      //   var   cate_id = fenlei[i].cate_id;
+      //   var cate_name = fenlei[i].cate_name;
+      //   var sonCategory = fenlei[i].sonCategory;
+      //   console.log("sonCategory", Category)
+      //   // for (var j = 0; j < sonCategory.length; j++){
+      //   //   console.log(Category[j].cate_name);
+      //   // }
+      //   console.log(cate_id);
+      //   console.log(cate_name);
+      // }
+      that.setData({
+        modules: fenlei,
+        // modules
+      })
+    },
+  });
+  //加载数据渲染页面
     this.fetchHotData(); //最热
     this.fetchNewData(); //最新
     wx.showToast({
@@ -360,24 +441,7 @@ bindManual: function (e) {
     });
   },
 
-  //获取所有分类
-  onShow: function () {
-    var that = this;
-    var sign = "2fb308d298a4f5482b757111c56c1a9c";
-    wx.request({
-      url: 'https://shop.playonwechat.com/api/get-category?sign=' + sign,
-      method: "GET",
-      success: function (res) {
-        console.log(res);
-        var    fenlei = res.data.categorys; 
-        var cateName = [];
-        that.setData({
-          fenlei: cateName
-        })
-      },
-    });
-
-  },
+ 
   // 最热
   fetchHotData: function () {  //获取最热列表
     let _this = this;

@@ -18,12 +18,12 @@
         </view>
     </view> 
     <!--内容  -->
-    <!--切换  -->
+    <!--nav -->
     <view class="main">
         <view class="nav bc_white">
-             <view class="red default" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0"><span>最热</span></view>
-             <view class="default" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0"><span>最新</span></view> 
-       </view>
+             <view class="{{active == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0" data-active = "0"><span>最热</span></view>
+             <view class="{{active == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0" data-active = "1"><span>最新</span></view> 
+        </view>
         <!--content -->
         <view>
             <view class="service-list">
@@ -43,9 +43,10 @@
             </view>
         </view>
     </view>
-    <!--分类模块  -->
-    <view class="modelAll" style="width:100%">
-        <navigator class="nextUrl" url="../more/more" wx:for="{{cateName}}" wx:key="{{item.id}}">
+    <!--结束  -->
+    <!--分类模块开始  -->
+    <view class="modelAll{{index}}" style="width:100%" wx:for="{{modules}}" wx:key="{{item.id}}" >
+        <navigator class="nextUrl" url="../more/more?cate_id={{item.cate_id}}">
             <view class="medit">
                 <view class="center">
                     <text class="title">{{item.cate_name}}</text>
@@ -61,10 +62,14 @@
             </swiper-item>
           </block>
         </swiper>
+        <!--nav1  -->
+        <view class="nav bc_white">
+            <view  wx:for="{{item.sonCategory}}" wx:key="{{index}}"  wx:for-item="tab" class="{{cate == tab.cate_id?'red':'default'}}" bindtap="tapKeyWorld1" data-ontap="{{tab.cate_name}}" data-cate="{{tab.cate_id}}"><span>{{tab.cate_name}}</span></view>
+        </view>
         <!--列表  -->
         <view class="modeList">
             <view class="service-list">
-                <navigator class="service-item" wx:for="{{newlistsb}}" wx:key="{{item.id}}" url="../inform/inform?gid={{item.gid}}">
+                <navigator class="service-item" wx:for="{{main_content1}}" wx:key="{{item.id}}" url="../inform/inform?gid={{item.gid}}">
                     <view class="service-img">
                         <image src="{{item.imgurl}}" mode="aspectFill"></image>
                     </view>
@@ -79,12 +84,11 @@
                 </navigator>
             </view>
         </view>
-        <!--查看全部  -->
-        <view class="all">
-            查看全部
-        </view>
     </view>
-
+    <!--查看全部  -->
+    <view class="all" bindtap="seeAll">
+        查看全部
+    </view>
     <!--购物车弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view> 
     <view class="carBox {{addCar?'show':'hidden'}} carBox{{num}}">

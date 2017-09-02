@@ -342,6 +342,7 @@
     flex: 1;
     width:100%;
     font-size:30rpx;
+    padding:8rpx 0;
 }
 .btn .addcar{
     background: #ff8855;

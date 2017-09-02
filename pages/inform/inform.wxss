@@ -275,6 +275,7 @@
     color:#fff;
     border-radius: 0;
     font-size: 30rpx;
+    padding:7rpx 0;
 }
 .kuanshi .title{
     font-size: 28rpx;
@@ -354,6 +355,7 @@
 .fixed .style{
     flex:1;
     line-height:80rpx;
+    padding:5rpx 0;
 }
 .fixed .addCars{
     background: #ff8855;

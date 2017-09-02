@@ -25,13 +25,13 @@
 .xuanze:after,.listAll .list:after{
     content:" ";
     display: inline-block;
-    width:200%;
+    width:100%;
     position:absolute;
     top:0;
     left:0;
-    border:1px solid #e5e5e5;
-    -webkit-transform:scale(0.5);
-    transform:scale(0.5);
+    border:1px solid #f7f7f7;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
     -webkit-transform-origin:0 0;
     transform-origin:0 0;
     box-sizing:border-box;
@@ -39,11 +39,11 @@
 .xuanze:before{
     content:" ";
     display: inline-block;
-    width:200%;
+    width:100%;
     position:absolute;
-    bottom:0;
+    bottom:-1px;
     left:0;
-    border:1px solid #e5e5e5;
+    border:1px solid #f7f7f7;
     -webkit-transform:scale(0.5);
     transform:scale(0.5);
     -webkit-transform-origin:0 0;
@@ -129,7 +129,7 @@
     margin-top: 20rpx;
 }
 .listAll{
-    border-bottom:1px solid #e5e5e5;
+    border-bottom:1px solid #f7f7f7;
 }
 .navigator-hover{
   opacity: 1;
