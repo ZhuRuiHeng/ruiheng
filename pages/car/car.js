@@ -1,7 +1,7 @@
 // pages/car/car.js
 var common = require('../../common.js');
+var app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -17,87 +17,48 @@ Page({
       set1: true,
       set2: false,
       wenzi:'编辑',
-      ids : 1,
-      // carts: [{
-      //   imgurl: '../images/5.jpg',
-      //   name: "榴莲香雪蛋糕",
-      //   price: '126',
-      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
-      //   num:1,
-      //   selected: true
-
-      // }, {
-      //   imgurl: '../images/6.jpg',
-      //   name: "榴莲香雪蛋糕",
-      //   price: '126',
-      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
-      //   num: 2,
-      //   selected: true
-      // }, {
-      //   imgurl: '../images/7.jpg',
-      //   name: "榴莲香雪蛋糕",
-      //   price: '126',
-      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
-      //   num: 1,
-      //   selected: true
-      // }
-      //   , {
-      //   imgurl: '../images/8.jpg',
-      //   name: "榴莲香雪蛋糕",
-      //   price: '126',
-      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
-      //   num: 1,
-      //   selected: true
-      // }
-      //   , {
-      //   imgurl: '../images/9.jpg',
-      //   name: "榴莲香雪蛋糕",
-      //   price: '126',
-      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
-      //   num: 6,
-      //   selected: true
-      // }
-      //   , {
-      //   imgurl: '../images/5.jpg',
-      //   name: "榴莲香雪蛋糕",
-      //   price: '126',
-      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png',
-      //   num: 3,
-      //   selected: true
-      // }],
+      ids : 1
   },
   // 最新
   fetchNewData: function () {  //获取最新列表
-  console.log("time");
       let _this = this;
       wx.showToast({
           title: '加载中',
           icon: 'loading'
       })
       const perpage = 10;
-      this.setData({
+      _this.setData({
           page: this.data.page + 1
       })
       const page = this.data.page;
       const carts = [];
-      for (var i = (page - 1) * perpage; i < page * perpage; i++) {
-          console.log('carts');
-          carts.push({
-              "id": i + 1,
-              "name": "提拉米苏蛋糕" + (i + 1),
-              "price": "222.0" + (i + 1),
-              "num": i + 1,
-              "imgurl": "../images/6.jpg",
-              "selected": true
-          })
-      }
-      setTimeout(() => {
-          _this.setData({
-            hasList: true,
-              carts: _this.data.carts.concat(carts)
-          })
-          this.getTotalPrice();
-      }, 1500)
+      // for (var i = (page - 1) * perpage; i < page * perpage; i++) {
+      //     console.log('carts');
+      //     carts.push({
+      //         "id": i + 1,
+      //         "name": "提拉米苏蛋糕" + (i + 1),
+      //         "price": "222.0" + (i + 1),
+      //         "number": i + 1,
+      //         "imgurl": "../images/6.jpg",
+      //         "selected": true
+      //     })
+      // }
+      wx.request({
+        url: 'https://shop.playonwechat.com/api/get-carts?sign=2fb308d298a4f5482b757111c56c1a9c',
+        method: "GET",
+        success: function (res) {
+          var carts = res.data.data.carts;
+          console.log("carts", carts);
+          setTimeout(() => {
+            _this.setData({
+              hasList: true,
+              carts: carts
+            })
+            this.getTotalPrice();
+          }, 1500)
+        },
+      });
+      
   },
  //seting编辑
   seting:function(e){
@@ -166,9 +127,9 @@ Page({
   addCount(e) {
     const index = e.currentTarget.dataset.index;
     let carts = this.data.carts;
-    let num = carts[index].num;
-    num = num + 1;
-    carts[index].num = num;
+    let number = carts[index].number;
+    number = number + 1;
+    carts[index].number = number;
     this.setData({
       carts: carts
     });
@@ -178,12 +139,12 @@ Page({
   minusCount(e) {
     const index = e.currentTarget.dataset.index;
     let carts = this.data.carts;
-    let num = carts[index].num;
-    if (num <= 1) {
+    let number = carts[index].number;
+    if (number <= 1) {
       return false;
     }
-    num = num - 1;
-    carts[index].num = num;
+    number = number - 1;
+    carts[index].number = number;
     this.setData({
       carts: carts
     });
@@ -219,7 +180,7 @@ Page({
     let total = 0;
     for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
       if (carts[i].selected) {                   // 判断选中才会计算价格
-        total += carts[i].num * carts[i].price;     // 所有价格加起来
+        total += carts[i].number * carts[i].price;     // 所有价格加起来
       }
     }
     this.setData({                                // 最后赋值到data中渲染到页面

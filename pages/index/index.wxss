@@ -73,7 +73,26 @@
 .red span{display:inline-block;padding:0 20rpx;
  /* border-bottom:2px solid #ff4444;  */
 }
-
+.nav.bc_white{
+  background: #fff;
+}
+.modelAlls{
+  position: relative;
+}
+.nextUrl:after{
+    content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    border:1px solid #F7F7F7;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
 .show{display:block;}
 .hidden{display:none;}
 .service-list{
@@ -169,7 +188,6 @@
 .medit{
     width:100%;
     background: #fff;
-    margin-top: 20rpx;
     text-align: center;
 }
 .medit .center{
@@ -182,7 +200,6 @@
     font-size: 30rpx;
 }
 .medit .center .all{
-    border:1px solid #e5e5e5;
     padding:2rpx 0rpx 2rpx 10rpx;
     font-size: 22rpx;
     color:#8a8a8a;
@@ -277,13 +294,13 @@
 .carBox .mid:after{
     content:" ";
     display: inline-block;
-    width:200%;
+    width:100%;
     position:absolute;
     top:0;
     left:0;
     border:1px solid #e5e5e5;
-    -webkit-transform:scale(0.5);
-    transform:scale(0.5);
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
     -webkit-transform-origin:0 0;
     transform-origin:0 0;
     box-sizing:border-box;
@@ -392,4 +409,7 @@
 .modeList{
     background: #fff;
     width:100%;
+}
+.chakan{
+   width: 100%;
 }

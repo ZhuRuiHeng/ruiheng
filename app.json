@@ -1,11 +1,9 @@
 {
   "pages":[
-    
     "pages/index/index",
     "pages/login/login",
     "pages/use/use",
     "pages/car/car",
-    "pages/cars/cars",    
     "pages/dingdanInform/dingdanInform",
     "pages/my/my",
     "pages/inform/inform",

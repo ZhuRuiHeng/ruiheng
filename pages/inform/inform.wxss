@@ -131,11 +131,11 @@
 .allImg .imgs{
     text-align: center;
     vertical-align: middle;
+    margin-bottom:100rpx;
 }
 .allImg .imgs image{
     width: 100%;
 }
-
 /*型号弹窗  */
 .show{display:block;}
 .hidden{display:none;}

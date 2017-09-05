@@ -17,37 +17,28 @@
         <view class="service-list">
             <view class="service-item" wx:for="{{carts}}" wx:key="{{item.id}}">
                 <view class="radio-group">
-                    <!-- <label bindtap="selectAreaOk" areaId="{{item.id}}" id="{{item.id}}">
-                        <icon wx:if="{{item.isSelect}}" type="success" size="20" color="#ff4444"/> 
-                        <icon wx:else type="circle" size="20" />
-                    </label> -->
                      <icon wx:if="{{item.selected}}" type="success" size="20" color="#ff4444" bindtap="selectList" data-index="{{index}}" />
                      <icon wx:else type="circle" bindtap="selectList" size="20" data-index="{{index}}"/>
                 </view>
                 <view class="service-img">
-                    <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                    <image src="{{item.figure}}" mode="aspectFill"></image>
                 </view>
                 <view class="service-text">
-                    <view class="service-tite service-tite1 {{set1?'show':'hidden'}}">{{item.name}}</view>
+                    <view class="service-tite service-tite1 {{set1?'show':'hidden'}}">{{item.good_name}}</view>
+                    <view class="service-tite service-tite1 service-tite3 {{set1?'show':'hidden'}}">删除删除删除删除删除删除删除删除删除删除删除删除删除删除删除{{item.attribute_value}}</view>
                     <view class="service-tite service-tite2 {{set2?'show':'hidden'}}">
-                          <!-- <view class="num">
-                              <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
-                              <input type="number"  bindchange="bindManual" value="{{item.price}}" readonly="readonly"/>
-                              <button class="add normal" bindtap="bindPlus">+</button>
-                          </view> -->
                           <view class="num">
                               <button class="reduce" bindtap="minusCount" data-index="{{index}}">-</button>
-                              <input type="number" value="{{item.num}}" readonly="readonly"/>
+                              <input type="number" value="{{item.number}}" readonly="readonly"/>
                               <button  class="add normal" bindtap="addCount" data-index="{{index}}">+</button>
                           </view>
                     </view> 
                     <view class="caozuo">
                         <text class="service-price">￥{{item.price}}</text>
-                        <view class="service-gouwu">x{{item.num}}</view>
+                        <view class="service-gouwu">x{{item.number}}</view>
                     </view>
                     <view class="del {{set2?'show':'hidden'}}" bindtap="delItem" data-index="{{index}}">删除</view>
                 </view>
-                
             </view>
         </view>
     </view>

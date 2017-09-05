@@ -3,7 +3,7 @@
 App({
   data: {
     loginData: null,
-    sign: "2fb308d298a4f5482b757111c56c1a9c",
+    sign: "",
     mobile: "",
     wx_name: "",
     mid: "",

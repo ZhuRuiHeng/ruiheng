@@ -102,6 +102,10 @@ radio{
     -webkit-box-orient: vertical;  
     -webkit-line-clamp:2;  
 }
+.service-text .service-tite3{
+  color:#626262;font-size:22rpx;
+  display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
 .service-tags{
 	margin: 6rpx 0;
 }

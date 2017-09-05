@@ -1,5 +1,0 @@
-
-/* pages/cars/cars.wxss */
-.cart-box{
-    display: flex;
-}

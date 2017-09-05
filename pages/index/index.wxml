@@ -4,7 +4,7 @@
     <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
       <block wx:for="{{lunbo}}">
         <swiper-item>
-          <image src="{{item.icon}}" class="slide-image" width="355" height="150" id="{{index}}" catchtap="swipclick"/>
+          <image src="{{item.icon}}" class="slide-image" width="355" height="150" id="{{item.gid}}" catchtap="swipclick"/>
         </swiper-item>
       </block>
     </swiper>
@@ -21,8 +21,8 @@
     <!--nav -->
     <view class="main">
         <view class="nav bc_white">
-             <view class="{{active == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0" data-active = "0"><span>最热</span></view>
-             <view class="{{active == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0" data-active = "1"><span>最新</span></view> 
+             <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0" data-state = "0"><span>最热</span></view>
+             <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0" data-state = "1"><span>最新</span></view> 
         </view>
         <!--content -->
         <view>
@@ -45,39 +45,41 @@
     </view>
     <!--结束  -->
     <!--分类模块开始  -->
-    <view class="modelAll{{index}}" style="width:100%" wx:for="{{modules}}" wx:key="{{item.id}}" >
+    <view class="modelAll{{index}} modelAlls" style="width:100%" wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}" bindtap="suoyin">
         <navigator class="nextUrl" url="../more/more?cate_id={{item.cate_id}}">
             <view class="medit">
                 <view class="center">
                     <text class="title">{{item.cate_name}}</text>
-                    <view class="all">查看全部<image src="https://qncdn.playonwechat.com/shangcheng/next.png"></image></view>
+                    <view class="all"><image src="https://qncdn.playonwechat.com/shangcheng/next.png"></image></view>
                 </view>
             </view>
         </navigator>
         <!--轮播图 -->
-        <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
-          <block wx:for="{{imgUrls}}">
-            <swiper-item>
-              <image src="{{item}}" class="slide-image" width="355" height="150" id="{{index}}" catchtap="swipclick"/>
-            </swiper-item>
-          </block>
-        </swiper>
+        <view class="goodImg" style="width:100%">
+              <image src="https://shop.playonwechat.com/assets/images/icons/test-icon01.jpg" style="width:100%" id="{{index}}" catchtap="swipclick" mode="widthFix"/>
+        </view>
         <!--nav1  -->
         <view class="nav bc_white">
-            <view  wx:for="{{item.sonCategory}}" wx:key="{{index}}"  wx:for-item="tab" class="{{cate == tab.cate_id?'red':'default'}}" bindtap="tapKeyWorld1" data-ontap="{{tab.cate_name}}" data-cate="{{tab.cate_id}}"><span>{{tab.cate_name}}</span></view>
+            <view  wx:for="{{item.sonCategory}}" 
+                   wx:key="{{index}}"   data-fid="{{item.cate_id}}" 
+                   wx:for-item="tab" class="{{tab.active == true?'red':'default'}} {{cate == true?'red':'default'}}" 
+                   bindtap="tapKeyWorld1" 
+                   data-ontap="{{tab.cate_name}}" 
+                   data-cate="{{tab.cate_id}}" 
+                   data-active="{{tab.active}}"><span>{{tab.cate_name}}{{tab.active == true?'red':'default'}}</span></view>
         </view>
         <!--列表  -->
         <view class="modeList">
             <view class="service-list">
-                <navigator class="service-item" wx:for="{{main_content1}}" wx:key="{{item.id}}" url="../inform/inform?gid={{item.gid}}">
+                <navigator class="service-item" wx:for="{{main_content2}}" wx:key="{{item.id}}" url="../inform/inform?gid={{item.gid}}">
                     <view class="service-img">
-                        <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                        <image src="{{item.picture}}" mode="aspectFill"></image>
                     </view>
                     <view class="service-text">
-                        <view class="service-tite">{{item.name}}</view>
+                        <view class="service-tite">{{item.good_name}}</view>
                         <view class="caozuo">
                             <text class="service-price">￥{{item.price}}</text>
-                            <view class="service-gouwu"><image src="{{item.img}}" ></image></view>
+                            <view class="service-gouwu"><image src="https://qncdn.playonwechat.com/shangcheng/car.png" ></image></view>
                         </view>
                         <view id="gouwu{{item.id}}" class="buy-response" catchtap="addCar"></view>
                     </view>
@@ -86,12 +88,12 @@
         </view>
     </view>
     <!--查看全部  -->
-    <view class="all" bindtap="seeAll">
+    <view class="all chakan" bindtap="seeAll">
         查看全部
     </view>
     <!--购物车弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view> 
-    <view class="carBox {{addCar?'show':'hidden'}} carBox{{num}}">
+    <view class="carBox {{addCar?'show':'hidden'}} {{sum}}"  >
         <view class="padding">
             <view class="top">
                 <view class="left">

@@ -4,7 +4,7 @@ var common = require('../../common.js');
 main_content: [];//最新最热
 main_content2: [];//列表
 modules: [];//模板
-var app = getApp()
+var app = getApp();
 Page({
   data: {
     lunbo : [],
@@ -13,119 +13,10 @@ Page({
       , '../images/3.jpg'
       ,'../images/4.jpg'
     ],
-    newlists:[{
-      imgurl: 'https://gd4.alicdn.com/imgextra/i2/1747771701/TB2Imq3XnZKL1JjSZFIXXX_DFXa_!!1747771701.jpg_400x400.jpg',
-      name: "红浆果提拉米苏百香果芒果星空蛋糕",
-      price:'126',
-      img:'https://qncdn.playonwechat.com/shangcheng/car.png'
-
-    }, {
-        imgurl: '../images/6.jpg',
-        name: "柠檬生姜星空蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }, {
-        imgurl: '../images/7.jpg',
-        name: "牛轧糖坚果星空蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }
-      , {
-      imgurl: '../images/8.jpg',
-      name: "芒果沙滩星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }
-      , {
-        imgurl: '../images/9.jpg',
-        name: "芝士海盐星空蛋糕 ",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }
-      , {
-        imgurl: '../images/6.jpg',
-        name: "步步高升星空蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }],
-    newlistsa: [{
-      imgurl: '../images/7.jpg',
-      name: "芒果茫茫星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-
-    }, {
-      imgurl: '../images/9.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }, {
-      imgurl: '../images/8.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }
-      , {
-      imgurl: '../images/7.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }
-      , {
-      imgurl: '../images/6.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }
-      , {
-      imgurl: '../images/5.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }],
-    newlistsb: [{
-      imgurl: '../images/9.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-
-    }, {
-      imgurl: '../images/8.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }, {
-      imgurl: '../images/9.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }
-      , {
-      imgurl: '../images/8.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }
-      , {
-      imgurl: '../images/7.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }
-      , {
-      imgurl: '../images/6.jpg',
-      name: "榴莲香雪星空蛋糕",
-      price: '126',
-      img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-    }],
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
     duration: 1000,
-    selected: true,
-    selected1: false,
-    hotlist: [], //最热列表
-    newlist: [], //最新列表
     page: 0,  //分页
     addCar: false,//打开购物车
     closeCar: true,//关闭购物车
@@ -133,13 +24,10 @@ Page({
     minusStatus: 'disabled',//数量为1禁用
     sum:'',//购物车id
     _num:1, //类型型号
-    active:0,
-
-
+    state:0,
     cate: 0
     
 },
- 
 //轮播图预览
   imgPreview: function () { //图片预览
       const imgs = this.data.imgUrls;
@@ -150,30 +38,17 @@ Page({
       })
   },
   //轮播图点击跳转
-  swipclick: function (e) {
-    wx.navigateTo({
-      url: '../inform/inform'
+  swipclick: function (event) {
+    //console.log(event);
+    var gid = event.currentTarget.id
+    wx.navigateTo({ 
+      url: '../inform/inform?gid=' + gid 
     })
-  },
-
-  
+},
   //搜索跳转
 search: function() {
   wx.navigateTo({
     url: '../search/search'
-  })
-},
-//最新最热
-selected: function (e) {
-  this.setData({
-    selected1: false,
-    selected: true
-  })
-},
-selected1: function (e) {
-  this.setData({
-    selected: false,
-    selected1: true
   })
 },
 //1最新最热
@@ -182,16 +57,16 @@ tapKeyWorld: function (e) {
     title: '加载中',
   })
   var   that = this;
-  var   word = e.target.dataset.ontap;
-  var   cate = e.target.dataset.cate;
-  var active = e.target.dataset.active;
-  console.log(e.target.dataset.active) 
+  var   word = e.currentTarget.dataset.ontap;
+  var   cate = e.currentTarget.dataset.cate;
+  var state = e.currentTarget.dataset.state;
+ // console.log(e.target.dataset.state) 
   console.log("索引", cate);
   console.log("关键字", word);
   this.setData({
     searchword : word,
         cateid : cate,
-        active: active 
+        state: state 
   })
   wx.request({
     url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
@@ -217,44 +92,90 @@ tapKeyWorld: function (e) {
     }
   })
 },
+suoyin: function (e) {
+  console.log("e",e)
+  var allindex = e.currentTarget.dataset.allindex;
+  this.setData({
+    allindex: allindex,
+  });
+  console.log("this.index",this.data.allindex);
+},
 //分类模块切换
 tapKeyWorld1: function (e) {
-  // wx.showLoading({
-  //   title: '加载中',
-  // })
-  var that = this;
-  var word = e.target.dataset.ontap;
-  var cate = e.currentTarget.dataset.cate;
-  console.log("索引", cate);
-  console.log("关键字", word);
-  this.setData({
-    searchword: word,
-    cateid: cate,
-    cate: cate
+  wx.showLoading({
+    title: '加载中',
   })
-  // wx.request({
-  //   url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
-  //   data: {
-  //     order: that.data.searchword,
-  //     cate_id: that.data.cateid
-  //   },
-  //   header: {
-  //     'content-type': 'application/json'
-  //   },
-  //   method: "GET",
-  //   success: function (res) {
-  //     // 此处清空全局的数据
-  //     console.log("筛选2", res);
-  //     var main_content = [];
-  //     // 获取用户名称及发表时间
-  //     var contentTip = res.data.data.goodsList;
-  //     console.log('main_content', contentTip);
-  //     that.setData({
-  //       main_content1: contentTip
-  //     })
-  //     wx.hideLoading()
-  //   }
-  // })
+  var that = this;
+  var modules = that.data.modules;
+  var cate = e.currentTarget.dataset.cate;
+  
+
+  //var fid = e.currentTarget.dataset.fid;
+  // for (var i = 0; i < modules.length;i++){
+      
+  // }
+  
+  setTimeout(function(){
+    var allindex = that.data.allindex;                   // 获取购物车列表
+    var active1 = e.currentTarget.dataset.active;         // 获取当前商品的选中状态
+    //allindex[allindex].active = !active;              // 改变状态
+    var active1 = true;
+    console.log(active1);
+    //console.log("索引", cate);
+    //console.log("allindex", allindex);
+  
+    var sonCategory = modules[allindex].sonCategory;
+    var _modules = that.data.modules;
+    console.log(sonCategory);
+      for (var j = 0; j < sonCategory.length; j++) {
+        console.log("mmmmm",sonCategory[j].active);
+        sonCategory[j].active = false;
+        console.log('1111', cate);
+        if (cate == sonCategory[j].cate_id) {
+          sonCategory[j].active = true;
+        }
+      }
+      _modules[allindex].sonCategory = sonCategory;
+      that.setData({
+        modules: modules
+      })
+     
+
+
+  //   var obj = {};
+  //   obj.cate_id = cate;
+  //   obj.cate_name = cate;
+  //   obj.active = false;
+
+  //  that.setData({
+  //     cateid: cate,
+  //     cate: cate,
+  //     active: active1
+  //   })
+    wx.request({
+      url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
+      data: {
+        cate_id: that.data.cateid
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        // 此处清空全局的数据
+        console.log("筛选2", res);
+        var main_content2 = [];
+        // 获取用户名称及发表时间
+        var contentTip = res.data.data.goodsList;
+        console.log('main_content2', contentTip);
+        that.setData({
+          main_content2: contentTip
+        })
+        wx.hideLoading()
+      }
+    })
+  },300)
+      
 },
  //事件处理函数
 bindViewTap: function() {
@@ -263,12 +184,12 @@ bindViewTap: function() {
     })
 },
 //购物车
-addCar: function (obj) {
+addCar: function (event) {
     wx.showToast({
         title: '加载中',
         icon: 'loading'
     });
-    var sum = obj.target.id;
+    var sum = event.target.id;
     console.log('sum'+sum);
     var that = this;
     that.setData({
@@ -338,6 +259,7 @@ addCars: function(){
     duration: 2000
   })
 },
+
 /* 输入框事件 */
 bindManual: function (e) {
     var price = e.detail.value;
@@ -353,35 +275,20 @@ onLoad: function () {
 onShow: function () { 
   //获取所有分类
   var that = this;
-  var sign = "2fb308d298a4f5482b757111c56c1a9c";
   wx.request({
-    url: 'https://shop.playonwechat.com/api/get-category?sign=' + sign,
+    url: 'https://shop.playonwechat.com/api/get-category?sign=' + app.data.sign,
     method: "GET",
     success: function (res) {
       console.log("获取所有分类",res);
+      var  alldata = res.data;
       var   fenlei = res.data.categorys;
-      // var Category =[];
-      console.log(fenlei);
-      // for (var i = 0; i < fenlei.length; i++){
-      //   var   cate_id = fenlei[i].cate_id;
-      //   var cate_name = fenlei[i].cate_name;
-      //   var sonCategory = fenlei[i].sonCategory;
-      //   console.log("sonCategory", Category)
-      //   // for (var j = 0; j < sonCategory.length; j++){
-      //   //   console.log(Category[j].cate_name);
-      //   // }
-      //   console.log(cate_id);
-      //   console.log(cate_name);
-      // }
+      //console.log("alldata",alldata);
       that.setData({
         modules: fenlei,
-        // modules
       })
     },
   });
   //加载数据渲染页面
-    this.fetchHotData(); //最热
-    this.fetchNewData(); //最新
     wx.showToast({
       title: '加载中',
       icon: 'loading'
@@ -394,11 +301,11 @@ onShow: function () {
       },
       method: "GET",
       success: function (res) {
-        console.log("最热", res);
+        //console.log("最热", res);
         var main_content = [];
         // 获取用户名称及发表时间
         var contentTip = res.data.data.goodsList;
-        console.log('main_content',contentTip);
+        //console.log('main_content',contentTip);
         that.setData({
           main_content: contentTip
         })
@@ -413,7 +320,7 @@ onShow: function () {
         },
         method: "GET",
         success: function (res) {
-          //console.log("轮播", res);
+          console.log("轮播", res);
           var imgUrls1 = res.data.data.carouselGoods;
           var    lunbo = [];
           // 获取用户名称及发表时间
@@ -431,9 +338,8 @@ onShow: function () {
         },
         method: "GET",
         success: function (res) {
-          console.log("推荐商品列表", res);
-          
           // 获取用户名称及发表时间
+          console.log(res);
           that.setData({
             // lunbo: imgUrls1
           })
@@ -441,63 +347,7 @@ onShow: function () {
     });
   },
 
- 
-  // 最热
-  fetchHotData: function () {  //获取最热列表
-    let _this = this;
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading'
-    })
-    const perpage = 10;
-    this.setData({
-      page: this.data.page + 1
-    })
-    const page = this.data.page;
-    const newlist = [];
-    for (var i = (page - 1) * perpage; i < page * perpage; i++) {
-      newlist.push({
-        "id": i + 1,
-        "name": "上海拜特信息技术有限公司上海拜特信息上海拜特信息技术有限公司" + (i + 1),
-        "price": "122",
-        "img": "https://qncdn.playonwechat.com/shangcheng/car.png",
-        "imgurl": "https://gd2.alicdn.com/imgextra/i2/1747771701/TB2Imq3XnZKL1JjSZFIXXX_DFXa_!!1747771701.jpg_400x400.jpg_.webp"
-      })
-    }
-    setTimeout(() => {
-      _this.setData({
-        hotlist: _this.data.hotlist.concat(newlist)
-      })
-    }, 1500)
-  },
-  // 最新
-  fetchNewData: function () {  //获取最新列表
-    let _this = this;
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading'
-    })
-    const perpage = 10;
-    this.setData({
-      page: this.data.page + 1
-    })
-    const page = this.data.page;
-    const newlist = [];
-    for (var i = (page - 1) * perpage; i < page * perpage; i++) {
-      newlist.push({
-        "id": i + 1,
-        "name": "深圳龙岗深圳宝安信息技术有限公司信息技术有限公司" + (i + 1),
-        "price": "222.00",
-        "img": "http://p1.meituan.net/320.0.a/deal/7788d06d1051890780b9076e495ed260334638.jpg@7_0_626_380a%7C388h_640w_2e_100Q",
-        "imgurl": "../images/1.jpg"
-      })
-    }
-    setTimeout(() => {
-      _this.setData({
-        newlist: _this.data.newlist.concat(newlist)
-      })
-    }, 1500)
-  },
+
   // 搜索框
   inputSearch: function (e) {  //输入搜索文字
     this.setData({
@@ -507,7 +357,6 @@ onShow: function () {
   },
   submitSearch: function () {  //提交搜索
     console.log(this.data.searchtext);
-    this.fetchHotData();
   },
   //设置分享
   onShareAppMessage: function () {

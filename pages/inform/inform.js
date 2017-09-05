@@ -1,21 +1,13 @@
 // pages/inform/inform.js
 var common = require('../../common.js');
+var app = getApp();
 
 Page({
-    onLoad: function (options) {
-        var that = this;
-        var gid = options.gid;//列表页传来的id
-        console.log(gid);
-    },
   /**
    * 页面的初始数据
    */
   data: {
-    imgUrls: ['../images/1.jpg'
-      , '../images/2.jpg'
-      , '../images/3.jpg'
-      , '../images/4.jpg'
-    ],
+      imgUrls: [],
       indicatorDots: true,
       autoplay: true,
       interval: 3000,
@@ -26,6 +18,45 @@ Page({
       minusStatus: 'disabled',//数量为1禁用
       sum: '',//购物车id
       _num: 1 //类型
+  },
+  onLoad: function (options) {
+    var that = this;
+    var gid = options.gid;//列表页传来的id
+    console.log("gid", gid);
+    this.setData({
+      gid: gid,
+    });
+  },
+  onShow: function (options) {
+    var that = this;
+    var gid = that.data.gid;//列表页传来的id
+    wx.request({
+      url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
+      data: {
+        gid: gid
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("详情", res);
+        var list = [];
+        // 获取用户名称及发表时间
+        var  inform = res.data.data.goodsDetail;
+        var picture = inform.picture;
+        var informImg = inform.content;
+        var shuxing = inform.attribute;
+        console.log('shuxing', inform.attribute );
+        that.setData({
+          inform: inform,
+          imgUrls: picture,
+          informImg: informImg,
+          attribute:shuxing
+        })
+        wx.hideLoading()
+      }
+    })
   },
   //轮播图预览
   imgPreview: function () { //图片预览
@@ -56,12 +87,26 @@ Page({
       url: '../car/car'
     })
   },
+  // 冒泡到leibieall
+  leibieall:function(e){
+    var that = this;
+      var allindex = e.currentTarget.dataset.anid;
+      that.setData({
+        allindex: allindex
+      })
+  },
   //选择型号
   xuanze: function (e) {
-      console.log(e.target.dataset.num)
-      this.setData({
-          _num: e.target.dataset.num
+    var priceGroup = [];
+    var that = this;
+    setTimeout(function (){
+      var allindex = that.data.allindex;
+      console.log(allindex);
+      console.log(e.target.dataset.num);
+      that.setData({
+        _num: e.target.dataset.num
       })
+    },300) 
   },
   closeCar: function (obj) {
       console.log('closeCar');
@@ -112,6 +157,7 @@ Page({
   backHome: function () {
       common.backHome();
   },
+ 
   /**
    * 生命周期函数--监听页面加载
    */
