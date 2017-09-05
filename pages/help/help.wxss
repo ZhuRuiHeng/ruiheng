@@ -1,0 +1,15 @@
+/* pages/help/help.wxss */
+.container {
+  padding:0 20rpx;
+  box-sizing: border-box;
+}
+.container .h1{
+    font-size: 24rpx;
+    padding:20rpx;
+    box-sizing: border-box;
+}
+.container .content{
+    font-size: 22rpx;
+    padding:0rpx;
+    box-sizing: border-box;
+}

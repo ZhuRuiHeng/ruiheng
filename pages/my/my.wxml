@@ -2,12 +2,15 @@
 <!--引用摸版  -->
 <import src="../../utils/foot.wxml" />
 <!--用户信息  -->
-<view class="container" style="padding:60rpx;background:#fff;">
+<view class="container" style="padding:60rpx;background:#fff;position:relative;">
   <view  bindtap="bindViewTap" class="userinfo">
       <view class="user_circle2">
         <image class="userinfo-avatar" src="{{userInfo.userImg}}" background-size="cover"></image>
       </view>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view bindtap="fenxiang" class="share fenxiang" style="width:60rpx;height:60rpx;background:#272636;border-radius:50%;text-align:center;vertical-align: middle;">
+          <image style="width:40rpx;vertical-align: middle;" src="../images/share.png" mode="widthFix"></image>
+      </view>
   </view>
 </view>
 <!--订单  -->
@@ -15,8 +18,8 @@
     <view class="classname">我的订单</view>
     <view class="nextImg">查看全部订单<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
 </view>   
-<view class="listAll" >
-    <view class="list" >
+<view class="listAll">
+    <view class="list">
         <navigator class="flex"  url="{{item.url}}" wx:for="{{list}}">
             <view class="" data-id="{{index}}">
                 <text class="num">{{item.num}}</text>
@@ -26,12 +29,35 @@
         </navigator>
     </view>
 </view>
-<view class="xuanze" bindtap="payCar">
-    <view class="classname">购物车</view>
-    <view class="carNum"><text>2</text></view>
+<view class="allXuan">
+    <view class="xuanze" bindtap="coupon">
+        <view class="classname">优惠卡卷</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view>
+    <view class="xuanze" bindtap="tuijian">
+        <view class="classname">推荐有奖</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
+    </view>
+    <view class="xuanze" bindtap="payCar">
+        <view class="classname">购物车</view>
+        <view class="carNum"><text>2</text></view>
+    </view>
+    <view class="xuanze bottom page-body-line">
+        <view class="kefu">联系客服</view>  
+        <contact-button size="20" session-from="weapp"></contact-button>
+    </view>
 </view>
-<view class="xuanze bottom"  bindtap="makePhoneCall">
-    <view class="classname">联系客服</view>
-    <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
+<view class="fixed {{showView?'show':'hide'}}">
+  <button class="flex" open-type="share">
+      <view class="aimg"><image src="../images/zhu.png" mode="widthFix"></image></view>
+      <text>转发微信群</text>
+  </button>
+  <button class="flex" open-type="share">
+      <view class="aimg"><image src="../images/quan.png" mode="widthFix"></image></view>
+      <text>生成朋友圈分享图</text>
+  </button>
+  <button class="flex">
+      <view class="aimg"><image src="../images/ewm.png" mode="widthFix"></image></view>
+      <text>生成二维码</text>
+  </button>
 </view>
-<template is="foot" />

@@ -4,6 +4,26 @@ function backHome() {
     url: '../index/index'
   })
 };
+function getSign(cb){
+  wx.login({
+    success(res){
+      console.log(res);
+      wx.request({
+        url: 'https://shop.playonwechat.com/api/auth?code=${res.code}',
+        data: {
+          code: res.code
+        },
+        success(res){
+          var sign = res.data.data.sign;
+          //缓存
+          wx.setStorageSync("sign", sign);
+          console.log(sign);
+          typeof cb == "function"&& cb();
+        }
+      })
+    }
+  })
+}
 //时间
 function time(unixtime, withTime) {
       if (!unixtime) {
@@ -36,5 +56,8 @@ function time(unixtime, withTime) {
       // return month + '/' + day + ' ' + hour + ':' + minute +':'+ second;
   };
 //通过module.exports暴露给其他问件引用
-module.exports.time = time;
-module.exports.backHome = backHome;
+module.exports = {
+  time,
+  backHome,
+  getSign
+}

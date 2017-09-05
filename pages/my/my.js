@@ -7,6 +7,7 @@ Page({
           'userImg': '',
           'wx_name': ''
         }],
+        showView: false,
         list:[
            {
                pic:'https://qncdn.playonwechat.com/shangcheng/fu.png',
@@ -36,11 +37,39 @@ Page({
         ]
     },
     onLoad: function (options) {
+      // 生命周期函数--监听页面加载  
+      showView: (options.showView == "false" ? true : false)
+    },
+    // 分享
+    fenxiang: function(){
+      var that = this;
+      that.setData({
+        showView: (!that.data.showView)
+      })  
+    },
+    onChangeShowState: function () {
+      var that = this;
+      that.setData({
+        showView: (!that.data.showView)
+      })
+    },  
+    // 优惠券
+    coupon: function () {
+      wx.navigateTo({
+        url: '../coupon/coupon'
+      })
+    },
+    //推荐有奖
+    tuijian:function(){
+      wx.navigateTo({
+        url: '../tuijian/tuijian'
+      })
+    },
+    onShow: function () {
       wx.showShareMenu({
         withShareTicket: true
       })
       var that = this;
-      // 页面初始化 options为页面跳转所带来的参数
       var signData = wx.getStorageSync("loginData");
       var avatarUrl = wx.getStorageSync("avatarUrl");
       var nickName = wx.getStorageSync("nickName");
@@ -54,8 +83,6 @@ Page({
       that.setData({
         userInfo: userInfo
       })
-    },
-    onShow: function () {
       // 页面显示
       wx.getSetting({
         success(res) {
@@ -90,19 +117,7 @@ Page({
             url: '../logs/logs'
         })
     },
-    //拨打电话
-    makePhoneCall: function () {
-        wx.makePhoneCall({
-            phoneNumber: '12345678900', //此号码并非真实电话号码，仅用于测试
-            success: function () {
-                console.log("拨打电话成功！")
-            },
-            fail: function () {
-                console.log("拨打电话失败！")
-            }
-        })
-    },
-    //
+    
     dingdan:function(){
         wx.navigateTo({
             url: '../dingdan/dingdan'
@@ -114,4 +129,5 @@ Page({
             url: '../car/car'
         })
     }
+    
 })

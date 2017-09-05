@@ -32,32 +32,41 @@ Page({
       })
       const page = this.data.page;
       const carts = [];
-      // for (var i = (page - 1) * perpage; i < page * perpage; i++) {
-      //     console.log('carts');
-      //     carts.push({
-      //         "id": i + 1,
-      //         "name": "提拉米苏蛋糕" + (i + 1),
-      //         "price": "222.0" + (i + 1),
-      //         "number": i + 1,
-      //         "imgurl": "../images/6.jpg",
-      //         "selected": true
-      //     })
-      // }
-      wx.request({
-        url: 'https://shop.playonwechat.com/api/get-carts?sign=2fb308d298a4f5482b757111c56c1a9c',
-        method: "GET",
-        success: function (res) {
-          var carts = res.data.data.carts;
-          console.log("carts", carts);
-          setTimeout(() => {
-            _this.setData({
-              hasList: true,
-              carts: carts
-            })
-            this.getTotalPrice();
-          }, 1500)
-        },
-      });
+      for (var i = (page - 1) * perpage; i < page * perpage; i++) {
+          console.log('carts');
+          carts.push({
+              "id": i + 1,
+              "name": "提拉米苏蛋糕" + (i + 1),
+              "price": "222.0" + (i + 1),
+              "number": i + 1,
+              "imgurl": "../images/6.jpg",
+              "selected": true
+          })
+      }
+      setTimeout(() => {
+        _this.setData({
+          hasList: true,
+          carts: _this.data.carts.concat(carts)
+        })
+        this.getTotalPrice();
+      }, 1500) 
+      wx.hideLoading()
+      // wx.request({
+      //   url: 'https://shop.playonwechat.com/api/get-carts?sign=' + app.data.sign,
+      //   method: "GET",
+      //   success: function (res) {
+      //     var carts = res.data.data.carts;
+      //     console.log("carts", carts);
+      //     setTimeout(() => {
+      //       _this.setData({
+      //         hasList: true,
+      //         carts: carts
+      //       })
+      //       this.getTotalPrice();
+      //     }, 1500)
+      //     wx.hideLoading()
+      //   },
+      // });
       
   },
  //seting编辑
@@ -196,7 +205,7 @@ Page({
   },
   onShow:function(){
     this.fetchNewData(); //最新
-    
+
   },
   // 返回首页
   backHome: function () {

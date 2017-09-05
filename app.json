@@ -9,8 +9,10 @@
     "pages/inform/inform",
     "pages/search/search",
     "pages/more/more",
-    "pages/dingdan/dingdan"
-    
+    "pages/dingdan/dingdan",
+    "pages/coupon/coupon",
+    "pages/tuijian/tuijian",
+    "pages/help/help"   
     
   ],
   "window":{

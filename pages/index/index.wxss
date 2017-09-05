@@ -1,6 +1,7 @@
 /**index.wxss**/
 .container {
   padding: 0;
+  overflow: hidden;
 }
 /*轮播*/
 .swiper{
@@ -69,7 +70,7 @@
 }
 .nav{width:100%;height:68rpx;display:flex;flex-direction:row;}
 .default{line-height:68rpx;text-align:center;flex:1;color:#000;font-size:28rpx;}
-.red{line-height:68rpx;text-align:center;color:#fc5558;flex:1;font-size:28rpx;}
+.red{text-align:center;color:#fc5558;flex:1;font-size:28rpx;}
 .red span{display:inline-block;padding:0 20rpx;
  /* border-bottom:2px solid #ff4444;  */
 }
@@ -258,6 +259,7 @@
 }
 .carBox .top .del image{
     width: 100%;
+    height:100%;
 }
 .carBox .top .right{
     flex: 1;

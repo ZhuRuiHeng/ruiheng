@@ -105,6 +105,9 @@ radio{
 .service-text .service-tite3{
   color:#626262;font-size:22rpx;
   display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  width:60%;
+  height:18px;
+  padding:0;
 }
 .service-tags{
 	margin: 6rpx 0;
@@ -124,11 +127,10 @@ radio{
 	color: #666;
 }
 .caozuo{
-  padding-top: 20rpx;
   display: flex;
   justify-content:space-between;
-  height: 63rpx;
-  line-height: 63rpx;
+  height: 53rpx;
+  line-height: 53rpx;
 }
 .caozuo .service-price{
     color:#ff4444;

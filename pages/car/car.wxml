@@ -25,7 +25,7 @@
                 </view>
                 <view class="service-text">
                     <view class="service-tite service-tite1 {{set1?'show':'hidden'}}">{{item.good_name}}</view>
-                    <view class="service-tite service-tite1 service-tite3 {{set1?'show':'hidden'}}">删除删除删除删除删除删除删除删除删除删除删除删除删除删除删除{{item.attribute_value}}</view>
+                    <view class="service-tite service-tite1 service-tite3 {{set1?'show':'hidden'}}">{{item.attribute_value}}</view>
                     <view class="service-tite service-tite2 {{set2?'show':'hidden'}}">
                           <view class="num">
                               <button class="reduce" bindtap="minusCount" data-index="{{index}}">-</button>
@@ -43,8 +43,7 @@
         </view>
     </view>
     <!--foot  -->
-    
-    
+ 
 </view>
 <view class="foot">
     <view class="one checkbox flex">

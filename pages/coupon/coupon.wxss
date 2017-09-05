@@ -1,0 +1,114 @@
+/* pages/coupon/coupon.wxss */
+.container{
+  font-size: 24rpx;
+  overflow: hidden;
+}
+.help{
+  width: 100%;
+  padding:20rpx;
+  background: #fff;
+  position: relative;
+  text-align: center;
+}
+.help:after{
+  content:" ";
+  display: inline-block;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing: border-box;
+}
+.couList{
+  width: 100%;
+  margin-top: 20rpx;
+  background: #fff;
+}
+.couList .list{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+.couList .list .item{
+  padding: 20rpx 40rpx;
+  position: relative;
+}
+.couList .list .item.two:after{
+  content:" ";
+  display: inline-block;
+  height:100%;
+  position:absolute;
+  bottom:0;
+  left:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleX(0.5);
+  transform:scaleX(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing: border-box;
+}
+.couList .list .item.two:before{
+  content:" ";
+  display: inline-block;
+  height:100%;
+  position:absolute;
+  bottom:0;
+  right:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleX(0.5);
+  transform:scaleX(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing: border-box;
+}
+.couList .list:after{
+  content:" ";
+  display: inline-block;
+  width:100%;
+  position:absolute;
+  bottom:0;
+  left:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing: border-box;
+}
+.couList .list:before{
+  content:" ";
+  display: inline-block;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing: border-box;
+}
+.couList .list .one{
+  width: 22rpx;
+  writing-mode:lr-tb;
+}
+.couList .list .two{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.couList .list .three text{
+    display: block;
+}
+
+.position{
+  position: absolute;
+  top:20rpx;
+  right:10rpx;
+}

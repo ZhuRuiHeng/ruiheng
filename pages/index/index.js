@@ -59,7 +59,7 @@ tapKeyWorld: function (e) {
   var   that = this;
   var   word = e.currentTarget.dataset.ontap;
   var   cate = e.currentTarget.dataset.cate;
-  var state = e.currentTarget.dataset.state;
+  var  state = e.currentTarget.dataset.state;
  // console.log(e.target.dataset.state) 
   console.log("索引", cate);
   console.log("关键字", word);
@@ -92,13 +92,14 @@ tapKeyWorld: function (e) {
     }
   })
 },
+// 获取索引默认加载引用
 suoyin: function (e) {
-  console.log("e",e)
+  console.log("e", e)
   var allindex = e.currentTarget.dataset.allindex;
   this.setData({
     allindex: allindex,
   });
-  console.log("this.index",this.data.allindex);
+  console.log("this.index", this.data.allindex);
 },
 //分类模块切换
 tapKeyWorld1: function (e) {
@@ -108,29 +109,19 @@ tapKeyWorld1: function (e) {
   var that = this;
   var modules = that.data.modules;
   var cate = e.currentTarget.dataset.cate;
-  
-
-  //var fid = e.currentTarget.dataset.fid;
-  // for (var i = 0; i < modules.length;i++){
-      
-  // }
-  
+  that.setData({
+    cate_id: cate
+  })
+  // console.log("cate",cate);
+  // console.log("cate_id", cate);
   setTimeout(function(){
-    var allindex = that.data.allindex;                   // 获取购物车列表
+    var allindex = that.data.allindex;                   // 获取模块列表索引
     var active1 = e.currentTarget.dataset.active;         // 获取当前商品的选中状态
-    //allindex[allindex].active = !active;              // 改变状态
     var active1 = true;
-    console.log(active1);
-    //console.log("索引", cate);
-    //console.log("allindex", allindex);
-  
     var sonCategory = modules[allindex].sonCategory;
     var _modules = that.data.modules;
-    console.log(sonCategory);
       for (var j = 0; j < sonCategory.length; j++) {
-        console.log("mmmmm",sonCategory[j].active);
         sonCategory[j].active = false;
-        console.log('1111', cate);
         if (cate == sonCategory[j].cate_id) {
           sonCategory[j].active = true;
         }
@@ -139,23 +130,11 @@ tapKeyWorld1: function (e) {
       that.setData({
         modules: modules
       })
-     
-
-
-  //   var obj = {};
-  //   obj.cate_id = cate;
-  //   obj.cate_name = cate;
-  //   obj.active = false;
-
-  //  that.setData({
-  //     cateid: cate,
-  //     cate: cate,
-  //     active: active1
-  //   })
+      //console.log("参数", allindex, that.data.cate);
     wx.request({
       url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
       data: {
-        cate_id: that.data.cateid
+        cate_id: that.data.cate_id
       },
       header: {
         'content-type': 'application/json'
@@ -163,13 +142,15 @@ tapKeyWorld1: function (e) {
       method: "GET",
       success: function (res) {
         // 此处清空全局的数据
-        console.log("筛选2", res);
-        var main_content2 = [];
+        //console.log("筛选2", res);
+        var typelist = [];
         // 获取用户名称及发表时间
         var contentTip = res.data.data.goodsList;
-        console.log('main_content2', contentTip);
+        //console.log('typelist', contentTip);
+        modules[allindex].typelist = [];
+        modules[allindex].typelist = contentTip;
         that.setData({
-          main_content2: contentTip
+          modules: modules
         })
         wx.hideLoading()
       }
@@ -183,18 +164,38 @@ bindViewTap: function() {
         url: '../logs/logs'
     })
 },
-//购物车
-addCar: function (event) {
+//购物车选择商品
+addCar: function (e) {
     wx.showToast({
         title: '加载中',
         icon: 'loading'
     });
-    var sum = event.target.id;
-    console.log('sum'+sum);
     var that = this;
+    var gid = e.currentTarget.dataset.gid
+    console.log("gid",gid);
     that.setData({
-        addCar: true,
-        sum: sum
+      _gid : gid
+    })
+    wx.request({
+      url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
+      data: {
+        gid: that.data._gid
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("详情", res);
+        var list = [];
+        // 获取用户名称及发表时间
+        var inform = res.data.data.goodsDetail;
+        that.setData({
+          addCar: true,
+          inform: inform
+        })
+        wx.hideLoading()
+      }
     })
 },
 closeCar: function (obj) {
@@ -205,32 +206,73 @@ closeCar: function (obj) {
           addCar: false
       })
  },
-addCars:function(){
-  wx.showToast({
-    title: '加入购物车成功',
-  });
+//  添加购物车
+addCars:function(e){
+  var  that = this;
+  var gid = that.data._gid;
+  var shuliang = that.data.price;
+  var attribute ="1:1,2:1,3:1";
+  console.log(gid + shuliang + attribute);
+  wx.request({
+    url: "https://shop.playonwechat.com/api/add-carts?sign=" + app.data.sign,
+    data: {
+      gid: that.data._gid,
+      num: that.data.price,
+      attribute: that.data._attribute
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    method: "POST",
+    success: function (res) {
+      console.log("post", res.data.status);
+      var status = res.data.status;
+      if (status == 1){
+        wx.showToast({
+          title: '加入购物车成功',
+        });
+      }else{
+        wx.showToast({
+          title: '加入购物车失败',
+        });
+      }
+     
+    }
+  })
+
+ 
 },
 buy:function(){
   wx.navigateTo({
     url: '../dingdanInform/dingdanInform'
   })
 },
+leibieall:function(e){
+  console.log("e", e)
+  var anids = e.currentTarget.dataset.anid;
+  this.setData({
+    anids: anids,
+  });
+  console.log("this.index", this.data.anids);
+},
  //选择型号
 xuanze: function (e) {
-    console.log(e.target.dataset.num)
-    this.setData({
-        _num: e.target.dataset.num
+  var that = this;
+  setTimeout(function(){
+    var anids = that.data.anids;
+    var num = e.target.dataset.num
+    console.log("参数", anids, num);
+    that.setData({
+      _num: e.target.dataset.num
     })
+  })
 },
 /* 点击减号 */
 bindMinus: function () {
-    console.log('-');
     var price = this.data.price;
-    // 如果大于1时，才可以减 
     if (price > 1) {
         price--;
     }
-    // 只有大于一件的时候，才能normal状态，否则disable状态 
     var minusStatus = price <= 1 ? 'disabled' : 'normal';
     // 将数值与状态写回 
     this.setData({
@@ -240,24 +282,14 @@ bindMinus: function () {
 },
 /* 点击加号 */
 bindPlus: function () {
-    console.log('+');
     var price = this.data.price;
-    // 不作过多考虑自增1 
     price++;
-    // 只有大于一件的时候，才能normal状态，否则disable状态 
     var minusStatus = price < 1 ? 'disabled' : 'normal';
     // 将数值与状态写回 
     this.setData({
         price: price,
         minusStatus: minusStatus
     });
-},
-// 加入购物车
-addCars: function(){
-  wx.showToast({
-    title: '添加购物车成功 ~',
-    duration: 2000
-  })
 },
 
 /* 输入框事件 */
@@ -273,79 +305,101 @@ onLoad: function () {
  
 },
 onShow: function () { 
-  //获取所有分类
-  var that = this;
-  wx.request({
-    url: 'https://shop.playonwechat.com/api/get-category?sign=' + app.data.sign,
-    method: "GET",
-    success: function (res) {
-      console.log("获取所有分类",res);
-      var  alldata = res.data;
-      var   fenlei = res.data.categorys;
-      //console.log("alldata",alldata);
-      that.setData({
-        modules: fenlei,
-      })
-    },
+  wx.showLoading({
+    title: '加载中',
   });
-  //加载数据渲染页面
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading'
-    }),
-    //最热列表
+  // 轮播
+  var that = this;
+  common.getSign(function (){
+    // get
+    var sign =wx.getStorageSync("sign");
     wx.request({
-      url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
+      url: 'https://shop.playonwechat.com/api/carousel-goods?sign=' + sign,
       header: {
         'content-type': 'application/json'
       },
       method: "GET",
       success: function (res) {
-        //console.log("最热", res);
+        var imgUrls1 = res.data.data.carouselGoods;
+        var lunbo = [];
+        // 获取用户名称及发表时间
+        that.setData({
+          lunbo: imgUrls1
+        })
+      }
+    });
+    //最热列表
+    wx.request({
+      url: "https://shop.playonwechat.com/api/goods-list?sign=" + sign,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
         var main_content = [];
         // 获取用户名称及发表时间
         var contentTip = res.data.data.goodsList;
-        //console.log('main_content',contentTip);
         that.setData({
           main_content: contentTip
         })
       }
-    })
-    // 轮播
-    var that = this;
-    wx.request({
-        url: 'https://shop.playonwechat.com/api/carousel-goods?sign=' + app.data.sign,
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("轮播", res);
-          var imgUrls1 = res.data.data.carouselGoods;
-          var    lunbo = [];
-          // 获取用户名称及发表时间
-          that.setData({
-            lunbo: imgUrls1
-          })
-        }
     });
-    
-    //商品列表
+    //获取所有分类
     wx.request({
-      url: 'https://shop.playonwechat.com/api/goods-list?sign=' + app.data.sign,
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          // 获取用户名称及发表时间
-          console.log(res);
-          that.setData({
-            // lunbo: imgUrls1
-          })
-        }
+      url: 'https://shop.playonwechat.com/api/get-category?sign=' + sign,
+      method: "GET",
+      success: function (res) {
+        console.log("获取所有分类", res);
+        var alldata = res.data;
+        var fenlei = res.data.categorys;
+        that.setData({
+          modules: fenlei,
+        })
+        // 默认渲染列表
+        setTimeout(function () {
+          var modules = that.data.modules;
+          var sindex = [];
+          for (let i = 0; i < modules.length; i++) {
+            var a = i;
+            //sindex.push(i);
+            //console.log(i);
+            var _modules = that.data.modules;
+            var cate_id = modules[i].sonCategory[0].cate_id;
+            //console.log("cate_id", cate_id);
+            wx.request({
+              url: "https://shop.playonwechat.com/api/goods-list?sign=" + sign,
+              data: {
+                cate_id: cate_id
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+                // 此处清空全局的数据
+                //console.log("筛选2", res);
+                var main_content2 = [];
+                // 获取用户名称及发表时间
+                var contentTip = res.data.data.goodsList;
+                //console.log('typelist', contentTip);
+                modules[i].typelist = [];
+                modules[i].typelist = contentTip;
+                that.setData({
+                  modules: modules
+                })
+                wx.hideLoading()
+              }
+            })
+          }
+        }, 300)
+
+      },
     });
-  },
+
+
+
+  });
+},
 
 
   // 搜索框

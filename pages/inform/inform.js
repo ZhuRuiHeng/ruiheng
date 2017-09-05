@@ -22,7 +22,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     var gid = options.gid;//列表页传来的id
-    console.log("gid", gid);
+    console.log("gidqqqqq", gid);
     this.setData({
       gid: gid,
     });

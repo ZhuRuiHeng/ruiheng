@@ -37,7 +37,7 @@
                             <text class="service-price">￥{{item.price}}</text>
                             <view class="service-gouwu"><image src="https://qncdn.playonwechat.com/shangcheng/car.png"></image></view>
                         </view>
-                        <view id="gouwu{{item.gid}}" class="buy-response" catchtap="addCar"></view>
+                        <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view>
                     </view>
                 </navigator>
             </view>
@@ -56,9 +56,9 @@
         </navigator>
         <!--轮播图 -->
         <view class="goodImg" style="width:100%">
-              <image src="https://shop.playonwechat.com/assets/images/icons/test-icon01.jpg" style="width:100%" id="{{index}}" catchtap="swipclick" mode="widthFix"/>
+              <image src="{{item.recommendGoods.icon}}" cata-gid="{{item.recommendGoods.gid}}" style="width:100%" id="{{index}}" catchtap="swipclick" mode="widthFix"/>
         </view>
-        <!--nav1  -->
+        <!--nav  -->
         <view class="nav bc_white">
             <view  wx:for="{{item.sonCategory}}" 
                    wx:key="{{index}}"   data-fid="{{item.cate_id}}" 
@@ -66,22 +66,23 @@
                    bindtap="tapKeyWorld1" 
                    data-ontap="{{tab.cate_name}}" 
                    data-cate="{{tab.cate_id}}" 
-                   data-active="{{tab.active}}"><span>{{tab.cate_name}}{{tab.active == true?'red':'default'}}</span></view>
+                   data-active="{{tab.active}}"><span>{{tab.cate_name}}</span>
+            </view>
         </view>
         <!--列表  -->
         <view class="modeList">
             <view class="service-list">
-                <navigator class="service-item" wx:for="{{main_content2}}" wx:key="{{item.id}}" url="../inform/inform?gid={{item.gid}}">
+                <navigator class="service-item" wx:for="{{item.typelist}}" wx-item="typelist"  wx:for-item="v" wx:key="{{item.id}}" url="../inform/inform?gid={{v.gid}}">
                     <view class="service-img">
-                        <image src="{{item.picture}}" mode="aspectFill"></image>
+                        <image src="{{v.picture}}" mode="aspectFill"></image>
                     </view>
                     <view class="service-text">
-                        <view class="service-tite">{{item.good_name}}</view>
+                        <view class="service-tite">{{v.good_name}}</view>
                         <view class="caozuo">
-                            <text class="service-price">￥{{item.price}}</text>
+                            <text class="service-price">￥{{v.price}}</text>
                             <view class="service-gouwu"><image src="https://qncdn.playonwechat.com/shangcheng/car.png" ></image></view>
                         </view>
-                        <view id="gouwu{{item.id}}" class="buy-response" catchtap="addCar"></view>
+                        <view id="gouwu{{v.gid}}" data-gid="{{v.gid}}" class="buy-response" catchtap="addCar"></view>
                     </view>
                 </navigator>
             </view>
@@ -93,33 +94,30 @@
     </view>
     <!--购物车弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view> 
-    <view class="carBox {{addCar?'show':'hidden'}} {{sum}}"  >
+    <view class="carBox {{addCar?'show':'hidden'}} {{gid}}">
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="https://qncdn.playonwechat.com/shangcheng/im.jpg" mode="widthFix"></image>
+                    <image src="{{inform.picture[0]}}"></image>
                 </view>
                 <view class="right">
-                    <text class="shuoming">车弹窗购物车弹窗购物车弹窗车弹窗购物车弹窗购物车弹窗</text>
-                    <text class="price">￥22</text>
+                    <text class="shuoming">{{inform.good_name}}</text>
+                    <text class="price">￥{{inform.low_price}}~{{inform.high_price}}</text>
                 </view>
                 <view class="del" bindtap="closeCar">
                     <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
                 </view>
             </view>
-            <view class="kuanshi">
-                <view class="title">款式：</view>
-                <view class="leibie">
-                    <text data-num="1"  class="white {{_num==1 ? 'red':''}}" bindtap="xuanze">分类1</text>
-                    <text data-num="2"  class="white {{_num==2 ? 'red':''}}" bindtap="xuanze">分类2</text>
-                    <text data-num="3"  class="white {{_num==3 ? 'red':''}}" bindtap="xuanze">分类3</text>
-                    <text data-num="4"  class="white {{_num==4 ? 'red':''}}" bindtap="xuanze">分类4</text>
+            <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
+                <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
+                <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" >
+                    <text wx:for="{{item.attribute_value}}" wx:key="{{index}}"  wx:for-item="attr" data-num="{{attr.avid}}"  class="white {{_num==attr.avid ? 'red':''}}" bindtap="xuanze">{{attr.attribute_value}}</text>
                 </view>
-            </view>
+           </view>
             <view class="mid">
                 <view class="buy">
-                    <text>购买数量：</text>
-                    <text class="gray">剩余222件</text>
+                    <text>购买数量：{{price}}</text>
+                    <text class="gray">剩余{{inform.total_stock-price}}件</text>
                 </view>
                 <view class="num">
                     <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>

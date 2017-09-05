@@ -13,6 +13,9 @@ App({
     authSuccess: false
   },
   onLaunch: function () {
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     var that = this;
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || [];
@@ -112,4 +115,5 @@ App({
     userInfo: null,
     sign: ""
   }
+ 
 })
