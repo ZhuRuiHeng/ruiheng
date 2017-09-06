@@ -1,71 +1,18 @@
 <!--pages/more/more.wxml-->
 <view class="container">
-    <!--商品 列表  -->
     <scroll-view scroll-y="true" style="height:600px" bindscrolltolower="lower">
         <view class="boxList">
-            <view class="chose-list" wx:for="{{list}}" wx:key="{{item.id}}"> 
-                <navigator class="chose-item"  url="../inform/inform?id={{item.id}}">
-                    <view class="chose-img">
-                        <image src="../images/5.jpg" mode="widthFix"></image>
-                    </view>
-                    <view class="chose-text">
-                        <view class="chose-title">{{item.title}}</view>
-                        <view class="price">￥{{item.price}}</view>
-                    </view>
-                </navigator> 
-                <navigator class="chose-item"  url="../inform/inform?id={{item.id}}">
-                    <view class="chose-img">
-                        <image src="../images/6.jpg" mode="widthFix"></image>
-                    </view>
-                    <view class="chose-text">
-                        <view class="chose-title">{{item.title}}</view>
-                        <view class="price">￥{{item.price}}</view>
-                    </view>
-                </navigator> 
-            </view>
-        </view>
-    </scroll-view>
-    <!--静态  -->
-     <!-- <view class="boxList">
-        <view class="chose-list">
-            <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
-                <view class="chose-img">
-                    <image src="https://qncdn.playonwechat.com/shangcheng/out4.jpg" mode="widthFix"></image>
-                </view>
-                <view class="chose-text">
-                    <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
-                    <view class="price">￥222</view>
-                </view>
-            </navigator>
-            <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
-                <view class="chose-img">
-                    <image src="https://qncdn.playonwechat.com/shangcheng/out5.jpg" mode="widthFix"></image>
-                </view>
-                <view class="chose-text">
-                    <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
-                    <view class="price">￥222</view>
-                </view>
-            </navigator>
-        </view> 
-        <view class="chose-list">
-            <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
-                <view class="chose-img">
-                    <image src="https://qncdn.playonwechat.com/shangcheng/out4.jpg" mode="widthFix"></image>
-                </view>
-                <view class="chose-text">
-                    <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
-                    <view class="price">￥222</view>
-                </view>
-            </navigator>
-            <navigator class="chose-item" url="../inform/inform?id={{item.id}}">
-                <view class="chose-img">
-                    <image src="https://qncdn.playonwechat.com/shangcheng/out5.jpg" mode="widthFix"></image>
-                </view>
-                <view class="chose-text">
-                    <view class="chose-title">商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品商品</view>
-                    <view class="price">￥222</view>
-                </view>
-            </navigator>
-        </view> 
-    </view>  -->
+              <view class="chose-list" >
+                  <navigator wx:for="{{list}}" class="chose-item" url="../inform/inform?gid={{item.gid}}">
+                      <view class="chose-img">
+                          <image src="{{item.picture}}" mode="scaleToFill"></image>
+                      </view>
+                      <view class="chose-text">
+                          <view class="chose-title">{{item.good_name}}</view>
+                          <view class="price">￥{{item.price}}</view>
+                      </view>
+                  </navigator>
+             </view> 
+          </view> 
+    </scroll-view> 
 </view>

@@ -1,21 +1,44 @@
 // pages/dingdanInform/dingdanInform.js
+var app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    
+    gid : ""
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    
+      console.log(options);
+      var that = this;
+      that.setData({
+        gid: options.gid,
+        price: options.price
+      })
+      var gid = that.data.gid;//列表页传来的
+      var price = that.data.price;
+      console.log(gid);
+      console.log("price", price);
+      wx.request({
+        url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
+        data: {
+          gid: gid
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("详情", res);
+          var list = [];
+          // 获取用户名称及发表时间
+          var inform = res.data.data.goodsDetail;
+          that.setData({
+            inform: inform
+          })
+          wx.hideLoading()
+        }
+      })
   },
+  
   onShow: function () {
-
+      
   },
   nextAddress:function(){
     var that = this;

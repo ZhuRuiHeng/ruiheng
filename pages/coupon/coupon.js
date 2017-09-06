@@ -26,7 +26,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this;
+    var sign = wx.getStorageSync("sign");
+    wx.request({
+      url: 'https://shop.playonwechat.com/api/my-coupons?sign=' + sign,
+      success:function(res){
+        console.log("优惠券", res.data.data.myCoupons);
+        if(res.data.status){
+          var myCoupons = res.data.data.myCoupons;
+          that.setData({
+            myCoupons: myCoupons
+          })
+        }
+      }
+    })
   },
 
   /**

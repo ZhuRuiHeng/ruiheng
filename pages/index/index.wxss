@@ -74,6 +74,9 @@
 .red span{display:inline-block;padding:0 20rpx;
  /* border-bottom:2px solid #ff4444;  */
 }
+.nav.bc_white .red{
+  line-height:68rpx;
+}
 .nav.bc_white{
   background: #fff;
 }

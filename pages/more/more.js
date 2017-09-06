@@ -1,55 +1,70 @@
 //获取应用实例  
 // pages/inform/inform.js
-var id, url1, url2, list = [], that, data, listadd, pageNum = 1;
-var common = require('../../common.js');
-var url = "http://my.ganjiangps.com/send/moremoneyclk.action?";
+var id, url1, url2, list = [], that, data, listadd, limit = 1;
+// var common = require('../../common.js');
+var app = getApp();
+var url = 'https://shop.playonwechat.com/api/goods-list?';
  
 Page({
-    data: {},
-
+    data: {
+      cate_id:''
+    },
     onLoad: function (options) {
+      console.log(options);
+      this.setData({
+        cate_id: options.cate_id
+      })
+    },
+    onShow: function () {
         // 页面初始化 options为页面跳转所带来的参数
         wx.showToast({
             title: '加载中',
             icon: 'loading'
         })
         that = this;//在请求数据时setData使用
-        id = options.id;//options.id为上个页面传来的参数
-        // console.log(id)
+        console.log("cate_id",that.data.cate_id);
         url1 = url;
         queryRequest(url1);
     },
     lower: function (e) {
         console.log('下拉');
-        pageNum = pageNum++;
-        console.log(pageNum);
-        url2 = url2 = url1 + "pageNum" + pageNum;
+        limit = limit++;
+        console.log(limit);
+        url2 = url2 = url1 + "limit" + limit;
         getmoreRequest(url2);
     }
 }) 
 //请求数据
+// wx.request({
+//   url: 'https://shop.playonwechat.com/api/carousel-goods?sign=' + sign,
+//   header: {
+//     'content-type': 'application/json'
+//   },
+//   method: "GET",
+//   success: function (res) {
+//     var imgUrls1 = res.data.data.carouselGoods;
+//     var lunbo = [];
+//     // 获取用户名称及发表时间
+//     that.setData({
+//       lunbo: imgUrls1
+//     })
+//   }
+// });
 function queryRequest(url) {
     wx.request({
         url: url,
-        data: {},
+        data: {
+          sign: app.data.sign,
+          cate_id:that.data.cate_id
+        },
         method: 'GET',
         header: {
             'content-type': 'application/json'
         },
         success: function (res) {
             // success
-            console.log(res.data);
-            data = res.data;
-            list = res.data.list;
-             console.log(list);
-            for (var i = 0; i < list.length; i++) {
-                var a = timeString(list[i].loantime);
-                list[i].time = a;
-                list[i].title = list[i].tname;
-                list[i].price = list[i].id;
-                console.log(list[i].price)
-                // console.log(list[i].time)
-            }
+            console.log(res);
+            list = res.data.data.goodsList;
             that.setData({
                 list: list
             })
@@ -59,9 +74,13 @@ function queryRequest(url) {
 
 //下拉加载的请求
 function getmoreRequest(url) {
+    var that = this;
     wx.request({
         url: url,
-        data: {},
+        data: {
+          sign: app.data.sign,
+          cate_id: that.data.cate_id
+        },
         method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         header: {
             'content-type': 'application/json'

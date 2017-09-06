@@ -22,7 +22,7 @@
     <view class="list">
         <navigator class="flex"  url="{{item.url}}" wx:for="{{list}}">
             <view class="" data-id="{{index}}">
-                <text class="num">{{item.num}}</text>
+                <text class="num" wx:if="{{item.num != 0}}">{{item.num}}</text>
                 <image class="image{{index}}" src="{{item.pic}}" mode="widthFix"></image>
                 <text>{{item.title}}</text>
             </view>
@@ -40,11 +40,11 @@
     </view>
     <view class="xuanze" bindtap="payCar">
         <view class="classname">购物车</view>
-        <view class="carNum"><text>2</text></view>
+        <view class="carNum"><text wx:if="{{countCarts != 0}}">{{countCarts}}</text></view>
     </view>
-    <view class="xuanze bottom page-body-line">
+    <view class="xuanze bottom page-body-line" data-phone="{{service}}" bindtap='makePhone'>
         <view class="kefu">联系客服</view>  
-        <contact-button size="20" session-from="weapp"></contact-button>
+        <!-- <contact-button size="20" session-from="weapp"></contact-button> -->
     </view>
 </view>
 <view class="fixed {{showView?'show':'hide'}}">
@@ -52,11 +52,11 @@
       <view class="aimg"><image src="../images/zhu.png" mode="widthFix"></image></view>
       <text>转发微信群</text>
   </button>
-  <button class="flex" open-type="share">
+  <!-- <button class="flex" open-type="share">
       <view class="aimg"><image src="../images/quan.png" mode="widthFix"></image></view>
       <text>生成朋友圈分享图</text>
-  </button>
-  <button class="flex">
+  </button> -->
+  <button class="flex" bindtap='erwei'>
       <view class="aimg"><image src="../images/ewm.png" mode="widthFix"></image></view>
       <text>生成二维码</text>
   </button>

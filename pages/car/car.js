@@ -17,7 +17,8 @@ Page({
       set1: true,
       set2: false,
       wenzi:'编辑',
-      ids : 1
+      ids : 1,
+      change_carts : ''
   },
   // 最新
   fetchNewData: function () {  //获取最新列表
@@ -26,48 +27,25 @@ Page({
           title: '加载中',
           icon: 'loading'
       })
-      const perpage = 10;
-      _this.setData({
-          page: this.data.page + 1
-      })
-      const page = this.data.page;
-      const carts = [];
-      for (var i = (page - 1) * perpage; i < page * perpage; i++) {
-          console.log('carts');
-          carts.push({
-              "id": i + 1,
-              "name": "提拉米苏蛋糕" + (i + 1),
-              "price": "222.0" + (i + 1),
-              "number": i + 1,
-              "imgurl": "../images/6.jpg",
-              "selected": true
-          })
-      }
-      setTimeout(() => {
-        _this.setData({
-          hasList: true,
-          carts: _this.data.carts.concat(carts)
-        })
-        this.getTotalPrice();
-      }, 1500) 
-      wx.hideLoading()
-      // wx.request({
-      //   url: 'https://shop.playonwechat.com/api/get-carts?sign=' + app.data.sign,
-      //   method: "GET",
-      //   success: function (res) {
-      //     var carts = res.data.data.carts;
-      //     console.log("carts", carts);
-      //     setTimeout(() => {
-      //       _this.setData({
-      //         hasList: true,
-      //         carts: carts
-      //       })
-      //       this.getTotalPrice();
-      //     }, 1500)
-      //     wx.hideLoading()
-      //   },
-      // });
-      
+      wx.request({
+        url: 'https://shop.playonwechat.com/api/get-carts?sign=' + app.data.sign,
+        method: "GET",
+        success: function (res) {
+          console.log(res);
+          var carts = res.data.data.carts;
+          var count = res.data.data.count;
+          console.log("count", count);
+          // setTimeout(() => {
+            _this.setData({
+              hasList: true,
+              carts: carts,
+              len: count
+            })
+            _this.getTotalPrice();
+          // }, 1500)
+          wx.hideLoading()
+        },
+      });
   },
  //seting编辑
   seting:function(e){
@@ -87,6 +65,35 @@ Page({
         set2: false,
         wenzi: '编辑',
         ids:1
+      })
+
+      var carts = this.data.carts;
+      var change_carts = this.data.change_carts;
+      for (var i = 0; i < carts.length;i++){
+        change_carts += carts[i].str + ";";
+      } 
+      change_carts = change_carts.substr(0, change_carts.length - 1); 
+      wx.request({
+        url: "https://shop.playonwechat.com/api/carts-manage?sign=" + app.data.sign,
+        method: "POST",
+        data: {
+          change_carts: change_carts
+        },
+        success: function (res) {
+          console.log("post", res);
+          var status = res.data.status;
+          if (status == 1) {
+            wx.showToast({
+              title: '编辑商品成功',
+              image: '../images/success.png'
+            });
+          } else {
+            wx.showToast({
+              title: '编辑商品失败',
+              image: '../images/false.png'
+            });
+          }
+          }
       })
     }
   },
@@ -136,32 +143,44 @@ Page({
   addCount(e) {
     const index = e.currentTarget.dataset.index;
     let carts = this.data.carts;
-    let number = carts[index].number;
+    let number = parseInt(carts[index].number);
+    let key = carts[index].key;
     number = number + 1;
+    console.log(number);
     carts[index].number = number;
+    var str = key + '|' + number;
+    carts[index].str = str;
     this.setData({
-      carts: carts
-    });
+      carts : carts,      
+    });4
+    console.log(carts);
     this.getTotalPrice();
   },
   // 减少数量
   minusCount(e) {
     const index = e.currentTarget.dataset.index;
     let carts = this.data.carts;
+    let key = carts[index].key;
     let number = carts[index].number;
     if (number <= 1) {
       return false;
     }
     number = number - 1;
     carts[index].number = number;
+    var str = key + '|' + number;
+    carts[index].str = str;
     this.setData({
-      carts: carts
+      carts: carts,
     });
+    this.setData({
+      carts : carts
+    });
+    console.log(carts);
     this.getTotalPrice();
   },
   //删除商品
   delItem: function (e) {
-    var that = this
+    var that = this;
     wx.showModal({
       title: '提示',
       content: '是否删除？',
@@ -170,7 +189,36 @@ Page({
           //获取列表中要删除项的下标  
           var index = e.target.dataset.index;
           var carts = that.data.carts;
+          var keys  =  carts[index].key;
+          console.log(keys);
           //移除列表中下标为index的项  
+           wx.request({
+             url: "https://shop.playonwechat.com/api/remove-cart-by-key?sign=" + app.data.sign,
+             header: {
+               'content-type': 'application/json'
+             },
+             method: "GET",
+              data: {
+                keys: carts[index].key
+              },
+              success: function (res) {
+                console.log("post", res);
+                var status = res.data.status;
+                if (status == 1) {
+                  wx.showToast({
+                    title: '删除商品成功',
+                    image: '../images/success.png'
+                  });
+                } else {
+                  wx.showToast({
+                    title: '删除商品失败',
+                    image: '../images/false.png'
+                  });
+                }
+
+              }
+          })
+  
           carts.splice(index, 1);
           //更新列表的状态  
           that.setData({
@@ -184,14 +232,16 @@ Page({
   },  
   // 计算总价
   getTotalPrice() {
-    console.log("price");
-    let carts = this.data.carts;                  // 获取购物车列表
+    let carts = this.data.carts; 
+    let len = this.data.len; 
     let total = 0;
-    for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
-      if (carts[i].selected) {                   // 判断选中才会计算价格
+    console.log("len",len);
+    for (let i = 0; i < len; i++) {     // 循环列表得到每个数据
+      if (carts[i].selected) { 
         total += carts[i].number * carts[i].price;     // 所有价格加起来
       }
     }
+    
     this.setData({                                // 最后赋值到data中渲染到页面
       carts: carts,
       totalPrice: total.toFixed(2)

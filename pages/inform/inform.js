@@ -68,46 +68,147 @@ Page({
       })
   },
   //购物车
-  addCar: function (obj) {
-      console.log('addcar');
-      wx.showToast({
-          title: '加载中',
-          icon: 'loading'
-      });
-      var sum = obj.target.id;
-      console.log('sum' + sum);
-      var that = this;
-      that.setData({
+  // addCar: function (obj) {
+  //     console.log('addcar');
+  //     wx.showToast({
+  //         title: '加载中',
+  //         icon: 'loading'
+  //     });
+  //     var sum = obj.target.id;
+  //     console.log('sum' + sum);
+  //     var that = this;
+  //     that.setData({
+  //         addCar: true,
+  //         sum: sum
+  //     })
+  // },
+  addCar: function (e) {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    });
+    var that = this;
+    var gid = e.currentTarget.dataset.gid
+    console.log("gid", gid);
+    that.setData({
+      _gid: gid
+    })
+    wx.request({
+      url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
+      data: {
+        gid: that.data._gid
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("详情", res);
+        var list = [];
+        // 获取用户名称及发表时间
+        var inform = res.data.data.goodsDetail;
+        //infoem.attribute
+        that.setData({
           addCar: true,
-          sum: sum
-      })
+          inform: inform
+        })
+        wx.hideLoading()
+      }
+    })
   },
   tianjia:function(){
     wx.switchTab({
       url: '../car/car'
     })
   },
-  // 冒泡到leibieall
-  leibieall:function(e){
-    var that = this;
-      var allindex = e.currentTarget.dataset.anid;
-      that.setData({
-        allindex: allindex
-      })
+  // // 冒泡到leibieall
+  // leibieall:function(e){
+  //   var that = this;
+  //     var allindex = e.currentTarget.dataset.anid;
+  //     that.setData({
+  //       allindex: allindex
+  //     })
+  // },
+  // //选择型号
+  // xuanze: function (e) {
+  //   var priceGroup = [];
+  //   var that = this;
+  //   setTimeout(function (){
+  //     var allindex = that.data.allindex;
+  //     console.log(allindex);
+  //     console.log(e.target.dataset.num);
+  //     that.setData({
+  //       _num: e.target.dataset.num
+  //     })
+  //   },300) 
+  // },
+
+  leibieall: function (e) {
+    console.log("e", e)
+    var anids = e.currentTarget.dataset.anid;
+    this.setData({
+      anids: anids,
+    });
+    console.log("this.index", this.data.anids);
   },
   //选择型号
   xuanze: function (e) {
-    var priceGroup = [];
     var that = this;
-    setTimeout(function (){
-      var allindex = that.data.allindex;
-      console.log(allindex);
-      console.log(e.target.dataset.num);
+    var attribute = [];
+    setTimeout(function () {
+      var anids = that.data.anids;//索引
+      var active2 = e.currentTarget.dataset.active; //状态
+      var avid = e.target.dataset.avid;//值
+      var _attribute = that.data.inform.attribute;
+      var _inform = that.data.inform;
+      //console.log("_attribute", _attribute) 
+      console.log("参数", anids, avid);
+      ///////////    
+      var attribute_value = _attribute[anids - 1].attribute_value;
+      console.log("attribute_value", attribute_value);
+      console.log(attribute_value.length);
+      for (var j = 0; j < attribute_value.length; j++) {
+        attribute_value[j].active = false;
+        if (avid == attribute_value[j].avid) {
+          attribute_value[j].active = true;
+          console.log(attribute_value[j].active);
+          var avid1 = attribute_value[j].avid;
+          console.log(avid1);
+          setTimeout(function () {
+            if (anids == 1) {
+              that.setData({
+                one: avid
+              })
+            } else if (anids == 2) {
+              that.setData({
+                two: avid
+              })
+            } else if (anids == 3) {
+              that.setData({
+                three: avid
+              })
+            }
+          }, 100)
+        }
+      }
+
       that.setData({
-        _num: e.target.dataset.num
+        inform: _inform
       })
-    },300) 
+      ///////////////
+      //attribute = ["attr-" + 1 + ":" + that.data.one + "," + 2 + ":" + that.data.two + "," + 3 + ":" + that.data.three]
+      attribute = [1 + ":" + that.data.one + "," + 2 + ":" + that.data.two + "," + 3 + ":" + that.data.three]
+      console.log("attribute111:", attribute);
+      that.setData({
+        _num: e.target.dataset.avid,
+        attribute: attribute
+      })
+    })
   },
+
+
+
+
   closeCar: function (obj) {
       console.log('closeCar');
       var id = obj.target.id;

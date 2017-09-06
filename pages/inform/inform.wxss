@@ -166,10 +166,12 @@
     margin: 0 auto
 }
 .carBox .top .left{
-    width: 140rpx;
+     width: 140rpx;
     height: 140rpx;
 }
 .carBox .top .left image{
+  width: 140rpx;
+    height: 140rpx;
    border-radius: 10rpx;
     border:1px solid #fff;
     position: relative;

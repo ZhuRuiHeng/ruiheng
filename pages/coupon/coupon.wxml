@@ -1,23 +1,21 @@
 <!--pages/coupon/coupon.wxml-->
 <view class="container">
-    <navigator url="../help/help" class="help">优惠券帮助中心？</navigator>
-    <view class="couList">
+    <navigator url="../help/help" class="help">优惠券帮助中心</navigator>
+    <view class="couList" wx:for="{{myCoupons}}" wx:key="{{index}}">
         <view class="list">
-            <view class="item one">
-                满减卷
-            </view>   
+            <view class="item one">{{item.type}}</view>   
             <view class="item two">
-                ￥{{price}}100
+                ￥{{item.amount}}
             </view>
             <view class="item three">
-                <text>null不是一个空引用</text>
-                <text>而是一个原始值</text>
-                <text>typeof null结果是object,</text>
+                <text>{{item.coupon_name}}</text>
+                <text>{{item.description}}</text>
+                <text>{{item.expire_date}}</text>
             </view> 
             <!--定位  -->
             <view class="position">
-                <text wx:if="{{user?true:false}}">即将过期</text>
-                <text wx:else>已过期</text>
+                <text wx:if="{{item.status == 1}}">即将过期</text>
+                <text wx:elif="{{item.status == 2}}">已过期</text>
             </view>
         </view>
     </view>

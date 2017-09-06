@@ -137,3 +137,6 @@
 button::after{
     content: "";
 }
+navigator-hover{
+  opacity: 1;
+}

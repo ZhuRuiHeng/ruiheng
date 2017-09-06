@@ -2,197 +2,202 @@
 //支付
 const paymentUrl = require('../../config').paymentUrl;
 console.log("paymentUrl:" + paymentUrl);
+var app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-      selected: true,
-      selected1: false,
-      selected2: false,
-      selected3: false,
-      selected4: false,
-      hotlist: [], //最热列表
-      newlist: [], //最新列表
+      status: "",
+      navList:[
+        {
+          word: "全部",
+          status:""
+        },
+        {
+          word: " 待付款",
+          status: "payment"
+        },
+        {
+          word: " 待发货",
+          status: "deliver"
+        },
+        {
+          word: "待收货",
+          status: "receipt"
+        },
+        {
+          word: "已完成",
+          status: "finish"
+        }
+      ],
       page: 0,  //分页
-      newlists: [{
-        imgurl: '../images/5.jpg',
-        name: "榴莲香雪蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // newlists: [{
+      //   imgurl: '../images/5.jpg',
+      //   name: "榴莲香雪蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
 
-      }, {
-        imgurl: '../images/6.jpg',
-        name: "芒果雪沙蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }, {
-        imgurl: '../images/7.jpg',
-        name: "四重奏蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }
-        , {
-        imgurl: '../images/8.jpg',
-        name: "芒果沙滩蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }
-        , {
-        imgurl: '../images/9.jpg',
-        name: "提拉米苏蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }
-        , {
-        imgurl: '../images/5.jpg',
-        name: "步步高升蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }],
-      newlistsa: [{
-        imgurl: '../images/5.jpg',
-        name: "草莓白天使蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }, {
+      //   imgurl: '../images/6.jpg',
+      //   name: "芒果雪沙蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }, {
+      //   imgurl: '../images/7.jpg',
+      //   name: "四重奏蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }
+      //   , {
+      //   imgurl: '../images/8.jpg',
+      //   name: "芒果沙滩蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }
+      //   , {
+      //   imgurl: '../images/9.jpg',
+      //   name: "提拉米苏蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }
+      //   , {
+      //   imgurl: '../images/5.jpg',
+      //   name: "步步高升蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }],
+      // newlistsa: [{
+      //   imgurl: '../images/5.jpg',
+      //   name: "草莓白天使蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
 
-      }, {
-        imgurl: '../images/9.jpg',
-        name: "榴莲香雪蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }, {
-        imgurl: '../images/8.jpg',
-        name: "盛夏爱琴海蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }
-        , {
-        imgurl: '../images/7.jpg',
-        name: "加州阳光蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }
-        , {
-        imgurl: '../images/6.jpg',
-        name: "步步高升蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }
-        , {
-        imgurl: '../images/5.jpg',
-        name: "芒果茫茫蛋糕",
-        price: '126',
-        img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
-      }],
+      // }, {
+      //   imgurl: '../images/9.jpg',
+      //   name: "榴莲香雪蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }, {
+      //   imgurl: '../images/8.jpg',
+      //   name: "盛夏爱琴海蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }
+      //   , {
+      //   imgurl: '../images/7.jpg',
+      //   name: "加州阳光蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }
+      //   , {
+      //   imgurl: '../images/6.jpg',
+      //   name: "步步高升蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }
+      //   , {
+      //   imgurl: '../images/5.jpg',
+      //   name: "芒果茫茫蛋糕",
+      //   price: '126',
+      //   img: 'https://qncdn.playonwechat.com/shangcheng/car.png'
+      // }],
   },
-  //最新最热
-  selected: function (e) {
-      this.setData({
-          selected1: false,
-          selected2: false,
-          selected3: false,
-          selected4: false,
-          selected: true
-      })
-  },
-  selected1: function (e) {
-    this.setData({
-        selected: false,
-        selected2: false,
-        selected3: false,
-        selected4: false,
-        selected1: true
-    })
-  },
-  selected2: function (e) {
-    this.setData({
-        selected: false,
-        selected1: false,
-        selected3: false,
-        selected4: false,
-        selected2: true
-    })
-  }, 
-  selected3: function (e) {
-    this.setData({
-      selected: false,
-      selected1: false,
-      selected2: false,
-      selected4: false,
-      selected3: true
-    })
-  }, 
-  selected4: function (e) {
-    this.setData({
-      selected: false,
-      selected1: false,
-      selected2: false,
-      selected3: false,
-      selected4: true
-    })
-  }, 
+  
 onLoad: function () { //加载数据渲染页面
-console.log('onload');
-    this.fetchHotData(); //最热
-    this.fetchNewData(); //最新
+    //this.fetchHotData(); //最热
 },
-  // 最热
-  fetchHotData: function () {  //获取最热列表
-      let _this = this;
-      wx.showToast({
-          title: '加载中',
-          icon: 'loading'
+  // // 最热
+  // fetchHotData: function () {  //获取最热列表
+  //     let _this = this;
+  //     wx.showToast({
+  //         title: '加载中',
+  //         icon: 'loading'
+  //     })
+  //     const perpage = 10;
+  //     this.setData({
+  //         page: this.data.page + 1
+  //     })
+  //     const page = this.data.page;
+  //     const newlist = [];
+  //     for (var i = (page - 1) * perpage; i < page * perpage; i++) {
+  //         newlist.push({
+  //             "id": i + 1,
+  //             "name": "上海拜特信息技术有限公司上海拜特信息上海拜特信息技术有限公司" + (i + 1),
+  //             "price": "122",
+  //             "img": "https://qncdn.playonwechat.com/shangcheng/car.png",
+  //             "imgurl": "https://qncdn.playonwechat.com/shangcheng/out3.jpg"
+  //         })
+  //     }
+  //     setTimeout(() => {
+  //         _this.setData({
+  //             hotlist: _this.data.hotlist.concat(newlist)
+  //         })
+  //     }, 1500)
+  // },
+// 加载
+onShow: function () {
+  wx.showLoading({
+    title: '加载中',
+  });
+  // 轮播
+  var that = this;
+  //最热列表
+  wx.request({
+    url: "https://shop.playonwechat.com/api/order-list?sign=" + app.data.sign,
+    header: {
+      'content-type': 'application/json'
+    },
+    method: "GET",
+    success: function (res) {
+      console.log("全部",res);
+      var newlists = [];
+      var orderList = res.data.data.orderList;
+      that.setData({
+        allData: orderList,
+        len: orderList.length
       })
-      const perpage = 10;
-      this.setData({
-          page: this.data.page + 1
-      })
-      const page = this.data.page;
-      const newlist = [];
-      for (var i = (page - 1) * perpage; i < page * perpage; i++) {
-          newlist.push({
-              "id": i + 1,
-              "name": "上海拜特信息技术有限公司上海拜特信息上海拜特信息技术有限公司" + (i + 1),
-              "price": "122",
-              "img": "https://qncdn.playonwechat.com/shangcheng/car.png",
-              "imgurl": "https://qncdn.playonwechat.com/shangcheng/out3.jpg"
-          })
+      wx.hideLoading()
+    }
+  });
+},
+  
+// 切换
+tapKeyWorld: function (e) {
+  wx.showLoading({
+    title: '加载中',
+  })
+
+  var that = this;
+  var word = e.currentTarget.dataset.status;
+  console.log(word);
+  this.setData({
+    status: word
+  })
+  setTimeout(function () {
+    wx.request({
+      url: "https://shop.playonwechat.com/api/order-list?sign=" + app.data.sign,
+      data: {
+        status: that.data.status
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        // 此处清空全局的数据
+        console.log("数据", res);
+        var allData = [];
+        var orderList = res.data.data.orderList;
+        that.setData({
+          allData : orderList,
+              len : orderList.length
+        })
+        wx.hideLoading()
       }
-      setTimeout(() => {
-          _this.setData({
-              hotlist: _this.data.hotlist.concat(newlist)
-          })
-      }, 1500)
-  },
-  // 最新
-  fetchNewData: function () {  //获取最新列表
-      let _this = this;
-      wx.showToast({
-          title: '加载中',
-          icon: 'loading'
-      })
-      const perpage = 10;
-      this.setData({
-          page: this.data.page + 1
-      })
-      const page = this.data.page;
-      const newlist = [];
-      for (var i = (page - 1) * perpage; i < page * perpage; i++) {
-          newlist.push({
-              "id": i + 1,
-              "name": "深圳龙岗深圳宝安信息技术有限公司信息技术有限公司" + (i + 1),
-              "price": "222.00",
-              "img": "https://qncdn.playonwechat.com/shangcheng/car.png",
-              "imgurl": "https://qncdn.playonwechat.com/shangcheng/out2.jpg"
-          })
-      }
-      setTimeout(() => {
-          _this.setData({
-              newlist: _this.data.newlist.concat(newlist)
-          })
-      }, 1500)
-  },
+    })
+  })
+},
   //取消订单
   quxiao: function () {
       wx.showModal({
@@ -254,6 +259,7 @@ console.log('onload');
               })
           }
       })
-  }
+  },
+ 
 
 })

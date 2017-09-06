@@ -1,160 +1,57 @@
 <!--pages/dingdan/dingdan.wxml-->
 <view class="main">
-        <view class="nav bc_white">
-            <view class="{{selected?'red':'default'}}" bindtap="selected"><span>全部</span></view>
-            <view class="{{selected1?'red':'default'}}" bindtap="selected1"><span>代付款</span></view>
-            <view class="{{selected2?'red':'default'}}" bindtap="selected2"><span>代发货</span></view>
-            <view class="{{selected3?'red':'default'}}" bindtap="selected3"><span>待收货</span></view>
-            <view class="{{selected4?'red':'default'}}" bindtap="selected4"><span>已完成</span></view>
+        <view class="nav bc_white" >
+            <view wx:for="{{navList}}" wx:key="{{item.id}}" class="selected {{status == item.status?'red':'default'}}" data-status="{{item.status}}" bindtap="tapKeyWorld"><span>{{item.word}}</span></view>
         </view>
         <!--全部  -->
-        <view class="{{selected?'show':'hidden'}}">
-            <view class="service-list">
-              <navigator class="" wx:for="{{newlistsa}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
+        <view class="" style="width:100%">
+            <view style="padding:30rpx;font-size:24rpx;text-align:center;" wx:if="{{len == 0}}">暂时没有订单哦！</view>
+            <view class="service-list" wx:else>
+              <navigator class=""  wx:for="{{allData}}" wx:key="{{item.id}}" url="../car/car?id={{item.order_id}}">
                     <view class="diangdanNum">
                         <view class="left">
-                            <view class="shop">店铺：时尚</view>
-                            <view class="bianhao">订单编号：<text>53465879867</text></view>
+                            <view class="shop">店铺：{{item.store_name}}</view>
+                            <view class="bianhao">订单编号：<text>{{item.out_trade_no}}</text></view>
                         </view>
-                        <view class="right">
-                            交易关闭
-                        </view>
+                        <view class="right"  wx:if="{{item.status == ''}}"> 全部</view>
+                        <view class="right"  wx:elif="{{item.status == 'payment'}}"> 待付款</view>
+                        <view class="right"  wx:elif="{{item.status == 'deliver'}}"> 待发货</view>
+                        <view class="right"  wx:elif="{{item.status == 'receipt'}}"> 待收货</view>
+                        <view class="right"  wx:elif="{{item.status == 'finish'}}"> 已完成</view>
+                        <view class="right"  wx:else="{{item.status == 'close'}}"> 交易关闭</view>
                     </view>
                     <view class="service-item">
                         <view class="service-img">
-                            <image src="{{item.imgurl}}" mode="aspectFill"></image>
+                            <image src="{{item.figure}}" mode="aspectFill"></image>
                         </view>
                         <view class="service-text">
-                            <view class="service-tite">{{item.name}}</view>
-                             <view class="fenlei">灰色M号</view>
+                            <view class="service-tite">{{item.good_name}}</view>
+                             <view class="fenlei">{{item.attribute_value}}</view>
                         </view>
                         <view class="jiage">
-                            <view class="price">￥11.00</view>
-                            <view class="sum">x1</view>
+                            <view class="price">￥{{item.price}}</view>
+                            <view class="sum">x{{item.number}}</view>
                         </view>
                     </view>
                     <view class="heji">
                         <view class="money">
-                            合计:<text>￥22.00</text>
+                            合计:<text>￥{{item.price*item.number}}</text>
                         </view>
                     </view>
-                </navigator>
-            </view>
-        </view>
-        <!--代付款  -->
-        <view class="{{selected1?'show':'hidden'}}">
-           <view class="service-list">
-              <navigator class="" wx:for="{{newlists}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
-                    <view class="diangdanNum">
-                        <view class="left">
-                            <view class="shop">店铺：时尚</view>
-                            <view class="bianhao">订单编号：<text>53465879867</text></view>
-                        </view>
-                        <view class="right">
-                            等待买家付款
-                        </view>
-                    </view>
-                    <view class="service-item">
-                        <view class="service-img">
-                            <image src="{{item.imgurl}}" mode="aspectFill"></image>
-                        </view>
-                        <view class="service-text">
-                            <view class="service-tite">{{item.name}}</view>
-                            <view class="fenlei">灰色M号</view>
-                        </view>
-                        <view class="jiage">
-                            <view class="price">￥11.00</view>
-                            <view class="sum">x1</view>
-                        </view>
-                    </view>
-                    <view class="heji">
-                        <view class="money">
-                            合计:<text>￥22.00</text>
-                        </view>
-                    </view>
-                    <view class="button">
-                        <button catchtap="quxiao">取消订单</button>
+                    <view class="button" wx:if="{{item.status == 'payment'}}">
+                        <!-- <button catchtap="quxiao">取消订单</button> -->
                         <button catchtap="requestPayment">确认付款</button>
                     </view>
+                    <view class="button" wx:if="{{item.status == 'deliver'}}">
+                        <!-- <button catchtap="quxiao">取消订单</button> -->
+                    </view>
+                    <view class="button" wx:if="{{item.status == 'receipt'}}">
+                        <button catchtap="shouhuo">确认收货</button>
+                    </view>
+                    <view class="button" wx:if="{{item.status == 'finish'}}">
+                    </view>
+                    <view class="button" wx:else></view>
                 </navigator>
-            </view>
-        </view>
-        <!--代发货  -->
-        <view class="{{selected2?'show':'hidden'}}">
-            <view class="service-list">
-              <navigator class="" wx:for="{{newlistsa}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
-                    <view class="diangdanNum">
-                        <view class="left">
-                            <view class="shop">店铺：时尚</view>
-                            <view class="bianhao">订单编号：<text>53465879867</text></view>
-                        </view>
-                        <view class="right">
-                            交易关闭
-                        </view>
-                    </view>
-                    <view class="service-item">
-                        <view class="service-img">
-                            <image src="{{item.imgurl}}" mode="aspectFill"></image>
-                        </view>
-                        <view class="service-text">
-                            <view class="service-tite">{{item.name}}</view>
-                             <view class="fenlei">灰色M号</view>
-                        </view>
-                        <view class="jiage">
-                            <view class="price">￥11.00</view>
-                            <view class="sum">x1</view>
-                        </view>
-                    </view>
-                    <view class="heji">
-                        <view class="money">
-                            合计:<text>￥22.00</text>
-                        </view>
-                    </view>
-                </navigator>
-            </view>
-        </view>
-        <!--待收货  -->
-        <view class="{{selected3?'show':'hidden'}}">
-           <view class="service-list">
-              <navigator class="" wx:for="{{newlists}}" wx:key="{{item.id}}" url="../inform/inform?id={{item.id}}">
-                    <view class="diangdanNum">
-                        <view class="left">
-                            <view class="shop">店铺：时尚</view>
-                            <view class="bianhao">订单编号：<text>53465879867</text></view>
-                        </view>
-                        <view class="right">
-                            等待买家付款
-                        </view>
-                    </view>
-                    <view class="service-item">
-                        <view class="service-img">
-                            <image src="{{item.imgurl}}" mode="aspectFill"></image>
-                        </view>
-                        <view class="service-text">
-                            <view class="service-tite">{{item.name}}</view>
-                            <view class="fenlei">灰色M号</view>
-                        </view>
-                        <view class="jiage">
-                            <view class="price">￥11.00</view>
-                            <view class="sum">x1</view>
-                        </view>
-                    </view>
-                    <view class="heji">
-                        <view class="money">
-                            合计:<text>￥22.00</text>
-                        </view>
-                    </view>
-                    <view class="button">
-                        <button catchtap="quxiao">取消订单</button>
-                        <button catchtap="requestPayment">确认付款</button>
-                    </view>
-                </navigator>
-            </view>
-        </view>
-        <!--已完成  -->
-        <view class="{{selected4?'show':'hidden'}}">
-            <view class="kong" style="font-size:24rpx;color:$626262;text-align:center;padding:60rpx 0;">
-              暂时没有已完成订单哦！
             </view>
         </view>
     </view>

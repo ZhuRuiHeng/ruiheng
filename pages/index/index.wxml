@@ -94,7 +94,7 @@
     </view>
     <!--购物车弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view> 
-    <view class="carBox {{addCar?'show':'hidden'}} {{gid}}">
+    <view class="carBox {{addCar?'show':'hidden'}}">
         <view class="padding">
             <view class="top">
                 <view class="left">
@@ -110,10 +110,13 @@
             </view>
             <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
                 <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
-                <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" >
-                    <text wx:for="{{item.attribute_value}}" wx:key="{{index}}"  wx:for-item="attr" data-num="{{attr.avid}}"  class="white {{_num==attr.avid ? 'red':''}}" bindtap="xuanze">{{attr.attribute_value}}</text>
+                <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}">
+                    <text wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
+                          wx:for-item="attr" data-avid="{{attr.avid}}"  data-active="{{attr.active}}"
+                          class="white {{attr.active==true ? 'red':''}}" 
+                          bindtap="xuanze" >{{attr.attribute_value}}</text>
                 </view>
-           </view>
+            </view>
             <view class="mid">
                 <view class="buy">
                     <text>购买数量：{{price}}</text>
@@ -128,7 +131,7 @@
         </view>
         <view class="btn">
             <button class="addCar" bindtap="addCars">加入购物车</button>
-            <button class="buy" bindtap="buy">立即购买</button>
+            <button class="buy" bindtap="buy" >立即购买</button>
         </view>
     </view>
 </view>

@@ -2,15 +2,19 @@
 .container{
     padding:20rpx;
     box-sizing: border-box;
+    overflow: hidden;
 }
 .chose-list{
     width: 100%;
-    display: flex;
-    justify-content:space-around;
     text-align: center;
 }
 .chose-list .chose-item{
     width: 48%;
+    margin: 0 1%;
+    float: left;
+}
+navigator{
+  display: inline-block;
 }
 .chose-list .chose-item .chose-img{
     width: 100%;

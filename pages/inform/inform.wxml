@@ -4,7 +4,7 @@
     <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
       <block wx:for="{{imgUrls}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" width="355" height="150" bindtap="previewImage"/>
+          <image src="{{item}}" class="slide-image" width="355" height="150" bindtap="previewImage"  catchtap="tapKeyWorld"/>
         </swiper-item>
       </block>
     </swiper>
@@ -22,8 +22,8 @@
                 <view class="now">剩余：{{inform.total_stock}}</view>
             </view>
             <!--规格  -->
-            <view class="xuanze" bindtap="addCar">
-                <view class="classname">选择：尺寸</view>
+            <view class="xuanze" bindtap="addCar" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
+                <view class="classname">选择：尺寸{{inform.gid}}</view>
                 <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
             </view>
         </view>
@@ -61,11 +61,11 @@
     </view> 
     <!--型号弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view>
-    <view class="carBox {{addCar?'show':'hidden'}} carBox{{sum}}">
+    <view class="carBox {{addCar?'show':'hidden'}}">
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="../images/7.jpg" mode="widthFix"></image>
+                    <image src="{{imgUrls[0]}}"></image>
                 </view>
                 <view class="right">
                     <text class="shuoming">{{inform.good_name}}</text>
@@ -75,12 +75,24 @@
                     <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
                 </view>
             </view>
-            <view class="kuanshi"  wx:for="{{attribute}}" wx:key="{{index}}">
+             <!-- <view class="kuanshi"  wx:for="{{attribute}}" wx:key="{{index}}">
                 <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
                 <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" >
-                    <text wx:for="{{item.attribute_value}}" wx:key="{{index}}"  wx:for-item="attr" data-num="{{attr.avid}}"  class="white {{_num==attr.avid ? 'red':''}}" bindtap="xuanze">{{attr.attribute_value}}</text>
+                    <text wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
+                          wx:for-item="attr" data-num="{{attr.avid}}" 
+                          class="white {{_num==attr.avid ? 'red':''}}" bindtap="xuanze">
+                            {{attr.attribute_value}}
+                    </text>
                 </view>
-            </view>
+            </view>  -->
+             <view class="kuanshi"  wx:for="{{attribute}}" wx:key="{{index}}">
+                <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
+                <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" >
+                    <text wx:for="{{item.attribute_value}}" 
+                    wx:key="{{index}}"  wx:for-item="attr" data-num="{{attr.avid}}"  
+                    class="white {{_num==attr.avid ? 'red':''}}" bindtap="xuanze">{{attr.attribute_value}}</text>
+                </view>
+            </view> 
             <view class="mid">
                 <view class="buy">
                     <text>购买数量：{{price}}</text>

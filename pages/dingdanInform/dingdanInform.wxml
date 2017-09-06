@@ -34,13 +34,13 @@
         <view class="service-list">
             <view class="service-item">
                 <view class="service-img">
-                    <image src="https://gd4.alicdn.com/imgextra/i2/1747771701/TB2Imq3XnZKL1JjSZFIXXX_DFXa_!!1747771701.jpg_400x400.jpg" mode="aspectFill"></image>
+                    <image src="{{inform.picture[0]}}" mode="aspectFill"></image>
                 </view>
                 <view class="service-text">
-                    <view class="service-tite">weruiyeeubgfsdjkgfdbhfgj</view>
+                    <view class="service-tite">{{inform.good_name}}</view>
                     <view class="caozuo">
-                        <text class="service-price">￥200.00</text>
-                        <view class="service-gouwu">x3</view>
+                        <text class="service-price">￥{{inform.low_price}}</text>
+                        <view class="service-gouwu">x{{price}}</view>
                     </view>
                 </view>
             </view>
@@ -54,11 +54,11 @@
         <view class="left">留言</view>
         <view class="right"><input class="liuyan" type="text" placeholder="点击给商家留言"/></view>
     </view>
-    <view class="controllist">
+    <!-- <view class="controllist">
         <view class="left">合计</view>
-        <view class="right color">￥111.00</view>
-    </view>
-    <view class="controllist youhui top" >
+        <view class="right color">￥{{inform.low_price*price}}</view>
+    </view> -->
+    <view class="controllist youhui top" bindtap="addCar">
         <view class="left">优惠</view>
         <view class="right">使用优惠<image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image></view>
     </view>
@@ -73,27 +73,27 @@
     <view class="jine top">
        <view class="controllist ">
           <view class="left">商品金额</view>
-          <view class="right color">￥111.00</view>
+          <view class="right color">￥{{inform.low_price}}</view>
       </view>
       <view class="controllist">
           <view class="left">运费</view>
-          <view class="right color">+￥111.00</view>
+          <view class="right color">免运费</view>
       </view>
     </view>
      <!--购物车弹窗  -->
     <view class="bg {{addCar?'show':'hidden'}}"></view> 
-    <view class="carBox {{addCar?'show':'hidden'}} carBox{{sum}}">
+      <view class="carBox {{addCar?'show':'hidden'}}">
         <view class="padding">
             <view class="title">选择优惠</view>
             <view class="coupon">
                 <view class="left">
                     <input type="text" placeholder="请输入优惠码"/>
-                    <text>优惠码位数有误，请重新输入</text>
                 </view>
                 <view class="right">
-                   <text>兑换</text>
+                   <text >兑换</text>
                 </view>
             </view>
+            <text style="color:#ff4444;">优惠码位数有误，请重新输入</text>
         </view>
         <view class="btn">
             <button class="addCar" bindtap="quxiao">取消</button>
@@ -102,7 +102,7 @@
     </view>
     <!--foot  -->
     <view class="fixed">
-        <view class="heji">合计：<text>￥111.00</text> </view>
+        <view class="heji">合计：<text>￥{{inform.low_price*price}}</text> </view>
         <view class="submit">提交订单</view>
     </view>
 </view>

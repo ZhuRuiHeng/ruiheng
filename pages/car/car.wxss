@@ -103,8 +103,7 @@ radio{
     -webkit-line-clamp:2;  
 }
 .service-text .service-tite3{
-  color:#626262;font-size:22rpx;
-  display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  color:#626262;font-size:22rpx;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   width:60%;
   height:18px;
   padding:0;

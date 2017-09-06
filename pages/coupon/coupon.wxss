@@ -9,6 +9,7 @@
   background: #fff;
   position: relative;
   text-align: center;
+  margin-top: 20rpx;
 }
 .help:after{
   content:" ";
@@ -98,13 +99,21 @@
 .couList .list .one{
   width: 22rpx;
   writing-mode:lr-tb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
 }
 .couList .list .two{
-  font-size: 30rpx;
+  font-size: 40rpx;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .couList .list .three text{
     display: block;
+    line-height: 50rpx;
 }
 
 .position{
