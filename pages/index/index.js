@@ -26,7 +26,9 @@ Page({
     _num:"", //类型型号
     state:0,
     cate: 0,
-    arr: []
+    arr: [],
+    attrLen:'', //长度
+    values:[] //型号
 },
 //轮播图预览
   imgPreview: function () { //图片预览
@@ -200,12 +202,13 @@ addCar: function (e) {
         var list = [];
         // 获取用户名称及发表时间
         var inform = res.data.data.goodsDetail;
-        //infoem.attribute
+        //inform.attribute
         that.setData({
           addCar: true,
           inform: inform
         })
         wx.hideLoading()
+        console.log("inform详情", inform);
       }
     })
 },
@@ -214,7 +217,9 @@ closeCar: function (obj) {
       console.log(id);
       var that = this;
       that.setData({
-          addCar: false
+          addCar: false,
+          arr: [],
+          values:[]
       })
  },
 //  添加购物车
@@ -222,13 +227,16 @@ addCars:function(e){
   var  that = this;
   var gid = that.data._gid;
   var attribute = "";
-  
+  var types = "";
   var arr = that.data.arr;
+  var values = that.data.values;
   for(var i=0;i<arr.length;i++){
     if(arr[i]){
       attribute += arr[i] + ',';
+      types +=values[i];
     }     
   }
+  // 截取最后一位字符
   attribute = attribute.substr(0, attribute.length-1);
   console.log("aaaaaa", attribute);
   
@@ -260,21 +268,61 @@ addCars:function(e){
         });
       }
       that.setData({
-        arr: []
+        arr: [],
+        values:[],
+        price:1
       })
      
     }
   })
+  that.setData({
+    addCar: false
+  })
 },
 buy:function(e){
   var that = this;
+  var attribute = "";
+  var types ="";
   var arr = that.data.arr;
+  var values = that.data.values;
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i]) {
+      attribute += arr[i] + ',';
+      types += values[i] + ' ';
+    }
+  }
+  attribute = attribute.substr(0, attribute.length - 1);
+  console.log("aaaaaa", attribute);
+  console.log("types", types);
   var carid = wx.getStorageSync("carid");
-  // console.log("carid",carid);
-  wx.navigateTo({
-    url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price
+  var attrLen = that.data.inform.attribute.length;//获取attribute长度
+  var arrlen = that.data.arr.length; //数组长度
+  console.log('获取attribute长度', attrLen);
+  console.log('数组长度', arrlen); //bug 数组长度
+  if (attrLen > 0){
+    if (arrlen == attrLen){
+       wx.navigateTo({
+         url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types
+        })
+       console.log(attribute);
+      }else{
+        wx.showToast({
+          title: '请选择属性',
+          image: '../images/false.png'
+        });
+      }
+  } else{
+      wx.navigateTo({
+        url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price
+      })
+  }
+  that.setData({
+    arr: [],
+    values:[],
+    addCar: false,
+    price:1
   })
-},
+ },
 leibieall:function(e){
   console.log(e.currentTarget.dataset.index);
   var index = e.currentTarget.dataset.index;
@@ -291,6 +339,7 @@ xuanze: function (e) {
   // console.log(e.currentTarget.dataset.index);
   var that = this;
   var arr = that.data.arr;
+  var values = that.data.values;;
   var attribute =[];
   setTimeout(function(){
     var anids = that.data.anids;//
@@ -298,9 +347,11 @@ xuanze: function (e) {
     // console.log("aaa",index);
     var active2 = e.currentTarget.dataset.active; //状态
     var avid = e.target.dataset.avid;//值
+    var value = e.target.dataset.value;//value
+    console.log("值", value);
     var _attribute = that.data.inform.attribute;
     var _inform = that.data.inform;
-    console.log("参数", anids, avid);
+    console.log("参数", anids, avid, value);
     
     var attribute_value = _attribute[index].attribute_value;
     console.log("attribute_value",attribute_value);
@@ -315,24 +366,22 @@ xuanze: function (e) {
             setTimeout(function () {
                 if (index == 0){
                   arr[0] = anids + ':' + avid;
+                  values[0] = value;
                 }else if(index == 1){
                   arr[1] = anids + ':' + avid;
+                  values[1] = value;
                 }else if(index == 2){
                   arr[2] = anids + ':' + avid;
+                  values[2] = value;
                 }
             },100)
       }
     }
-   
-
-    // 获取用户名称及发表时间
-    //_inform[anids].attribute_value = attribute_value;
+    
     that.setData({
       inform : _inform
     })
     ///////////////
-    //attribute = ["attr-" + 1 + ":" + that.data.one + "," + 2 + ":" + that.data.two + "," + 3 + ":" + that.data.three]
-    // attribute = [that.data.one_anid + ":" + that.data.one + "," + that.data.two_anid + ":" + that.data.two + "," + that.data.three_anid + ":" + that.data.three]
     console.log("attribute111:",attribute);
     that.setData({
       _num: e.target.dataset.avid,

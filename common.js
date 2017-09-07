@@ -16,8 +16,9 @@ function getSign(cb){
         success(res){
           var sign = res.data.data.sign;
           //缓存
-          wx.setStorageSync("sign", sign);
-          console.log(sign);
+          wx.setStorageSync('sharecode', res.data.data.sharecode);
+          wx.setStorageSync('sign', sign);
+          //console.log(sign);
           typeof cb == "function"&& cb();
         }
       })

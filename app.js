@@ -28,7 +28,7 @@ App({
     })
     wx.login({
       success: function (res) {
-         console.log(res);
+         //console.log(res);
         if (res.code) {
           //console.log(res.code);
           //发起网络请求
@@ -45,6 +45,8 @@ App({
               that.data.sharecode = res.data.data.sharecode;
               try {
                 // wx.setStorageSync('mobile', res.data.data.mobile);
+                wx.setStorageSync('sharecode', res.data.data.sharecode);
+                wx.setStorageSync('sign', res.data.data.sign);
                 wx.setStorageSync('loginData', res.data.data.sign);
                 wx.setStorageSync('loginData', res.data.data.mid);
                 // that.data.mobile = res.data.data.mobile;

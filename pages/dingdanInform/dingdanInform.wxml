@@ -38,6 +38,7 @@
                 </view>
                 <view class="service-text">
                     <view class="service-tite">{{inform.good_name}}</view>
+                    <view class="fenlei"> {{types}}</view>
                     <view class="caozuo">
                         <text class="service-price">￥{{inform.low_price}}</text>
                         <view class="service-gouwu">x{{price}}</view>
@@ -66,7 +67,7 @@
         <view class="left" style="position:relative;top:13rpx;">短信通知收件人</view>
         <view class="right">
             <view class="page-section page-section-gap">
-              <switch name="switch"/>
+              <switch name="switch" bindchange="listenerSwitch" />
             </view>
         </view>
     </view>
@@ -103,6 +104,9 @@
     <!--foot  -->
     <view class="fixed">
         <view class="heji">合计：<text>￥{{inform.low_price*price}}</text> </view>
-        <view class="submit">提交订单</view>
+        <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+            <button class="submit" formType="submit">提交订单</button>
+        </form>
+        <!-- <view class="submit">提交订单</view> -->
     </view>
 </view>

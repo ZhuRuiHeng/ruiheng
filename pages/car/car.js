@@ -47,56 +47,7 @@ Page({
         },
       });
   },
- //seting编辑
-  seting:function(e){
-    console.log(e.target.id);
-    
-    var ids = e.target.id;
-    if(ids == 1){
-      this.setData({
-        set1: false,
-        set2: true,
-        wenzi: '完成',
-        ids:2
-      })
-    }else{
-      this.setData({
-        set1: true,
-        set2: false,
-        wenzi: '编辑',
-        ids:1
-      })
 
-      var carts = this.data.carts;
-      var change_carts = this.data.change_carts;
-      for (var i = 0; i < carts.length;i++){
-        change_carts += carts[i].str + ";";
-      } 
-      change_carts = change_carts.substr(0, change_carts.length - 1); 
-      wx.request({
-        url: "https://shop.playonwechat.com/api/carts-manage?sign=" + app.data.sign,
-        method: "POST",
-        data: {
-          change_carts: change_carts
-        },
-        success: function (res) {
-          console.log("post", res);
-          var status = res.data.status;
-          if (status == 1) {
-            wx.showToast({
-              title: '编辑商品成功',
-              image: '../images/success.png'
-            });
-          } else {
-            wx.showToast({
-              title: '编辑商品失败',
-              image: '../images/false.png'
-            });
-          }
-          }
-      })
-    }
-  },
   //选择
   selectList(e) {
     const index = e.currentTarget.dataset.index;    // 获取data- 传进来的index
@@ -172,9 +123,6 @@ Page({
     this.setData({
       carts: carts,
     });
-    this.setData({
-      carts : carts
-    });
     console.log(carts);
     this.getTotalPrice();
   },
@@ -246,6 +194,64 @@ Page({
       carts: carts,
       totalPrice: total.toFixed(2)
     });
+  },
+  //seting编辑
+  seting: function (e) {
+    console.log(e.target.id);
+    var ids = e.target.id;
+    if (ids == 1) {
+      this.setData({
+        set1: false,
+        set2: true,
+        wenzi: '完成',
+        ids: 2
+      })
+    } else {
+      this.setData({
+        set1: true,
+        set2: false,
+        wenzi: '编辑',
+        ids: 1
+      })
+
+      var carts = this.data.carts;
+      var change_carts = this.data.change_carts;
+      //console.log(carts.length);
+      for (var i = 0; i < carts.length; i++) {
+        console.log(carts[i].str);
+        if (carts[i].str != undefined){
+          change_carts += carts[i].str + ";"; //拼接字符
+        }
+      }
+      change_carts = change_carts.substr(0, change_carts.length - 1); // 截取最后一位字符
+      console.log("change_carts:", change_carts);
+      wx.request({
+        url: "https://shop.playonwechat.com/api/carts-manage?sign=" + app.data.sign,
+        method: "POST",
+        data: {
+          change_carts: change_carts
+        },
+        success: function (res) {
+          //console.log("post", res);
+          var status = res.data.status;
+          if (status == 1) {
+            wx.showToast({
+              title: '编辑商品成功',
+              image: '../images/success.png'
+            });
+          } else {
+            wx.showToast({
+              title: '编辑商品失败',
+              image: '../images/false.png'
+            });
+          }
+        }
+      })
+      this.setData({
+        change_carts:''
+      })
+
+    }
   },
   /**
    * 生命周期函数--监听页面加载

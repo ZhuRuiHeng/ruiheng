@@ -38,7 +38,7 @@ Page({
     common.getSign(function(){      
       var sign = wx.getStorageSync("sign");
       var pageSharecode = that.data.pageSharecode;
-      pageSharecode = "f58d807ee9f31e24e9d382afe18c6dea";
+      // pageSharecode = "f58d807ee9f31e24e9d382afe18c6dea";
       wx.request({
         url: 'https://shop.playonwechat.com/api/invitee-page?sign=' + sign + "&sharecode=" + pageSharecode,
         success: function (res) {

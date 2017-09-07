@@ -112,7 +112,7 @@
                 <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
                 <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}">
                     <text wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
-                          wx:for-item="attr" data-avid="{{attr.avid}}"  data-active="{{attr.active}}"
+                          wx:for-item="attr" data-avid="{{attr.avid}}" data-value="{{attr.attribute_value}}" data-active="{{attr.active}}"
                           class="white {{attr.active==true ? 'red':''}}" 
                           bindtap="xuanze" >{{attr.attribute_value}}</text>
                 </view>
