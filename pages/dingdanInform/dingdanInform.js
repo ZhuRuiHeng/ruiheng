@@ -9,7 +9,7 @@ Page({
     attr : "",//属性
     types:"", //类型
     userMes: '',//留言信息
-    price:'', //数量
+    num:'', //数量
     detail:''
   },
   onLoad: function (options) {
@@ -18,13 +18,13 @@ Page({
       //this.nextAddress();
       that.setData({
         gid: options.gid,
-        price: options.price,
+        num: options.price,
         attr: options.attr,
         types: options.types,
-        detail: options.gid+'-'+ options.attr+'-'+options.price
+        detail: options.gid + '-' + options.attr + '-' + options.price
       })
       var gid = that.data.gid;//列表页传来的
-      var price = that.data.price;
+      var num = that.data.num;
       wx.request({
         url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
         data: {
@@ -114,6 +114,23 @@ Page({
       success: function (res) {
         // success
         console.log(res);
+        var status = res.data.status;
+        if (status == 1) {
+          // 调用支付
+          wx.requestPayment({
+              timeStamp: res.data.data.timeStamp,
+              nonceStr: res.data.data.nonceStr,
+              package: res.data.data.package,
+              signType: res.data.data.signType,
+              paySign: res.data.data.paySign
+            })
+
+        } else {
+          wx.showToast({
+            title: '创建订单失败',
+            image: '../images/false.png'
+          });
+        }
       },
       fail: function (res) {
         // fail
@@ -125,47 +142,7 @@ Page({
     })
   },
 
-  //支付
-  requestPayment: function () {
-    var self = this
-
-    self.setData({
-      loading: true
-    })
-    // 此处需要先调用wx.login方法获取code，然后在服务端调用微信接口使用code换取下单用户的openId
-    // 具体文档参考https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html?t=20161230#wxloginobject
-    app.getUserOpenId(function (err, openid) {
-      if (!err) {
-        wx.request({
-          url: paymentUrl,
-          data: {
-            openid
-          },
-          method: 'POST',
-          success: function (res) {
-            console.log('unified order success, response is:', res)
-            var payargs = res.data.payargs
-            wx.requestPayment({
-              timeStamp: payargs.timeStamp,
-              nonceStr: payargs.nonceStr,
-              package: payargs.package,
-              signType: payargs.signType,
-              paySign: payargs.paySign
-            })
-
-            self.setData({
-              loading: false
-            })
-          }
-        })
-      } else {
-        console.log('err:', err)
-        self.setData({
-          loading: false
-        })
-      }
-    })
-  },
+ 
   /**
    * 生命周期函数--监听页面隐藏
    */
