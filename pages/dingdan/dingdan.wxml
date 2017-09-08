@@ -7,7 +7,8 @@
         <view class="" style="width:100%">
             <view style="padding:30rpx;font-size:24rpx;text-align:center;" wx:if="{{len == 0}}">暂时没有订单哦！</view>
             <view class="service-list" wx:else>
-              <navigator class=""  wx:for="{{allData}}" wx:key="{{item.id}}" url="../car/car?id={{item.order_id}}">
+              <navigator class=""  wx:for="{{allData}}" wx:key="{{item.id}}" 
+              url="../shangpinInform/shangpinInform?oid={{item.order_id}}">
                     <view class="diangdanNum">
                         <view class="left">
                             <view class="shop">店铺：{{item.store_name}}</view>
@@ -40,13 +41,13 @@
                     </view>
                     <view class="button" wx:if="{{item.status == 'payment'}}">
                         <!-- <button catchtap="quxiao">取消订单</button> -->
-                        <button catchtap="requestPayment">确认付款</button>
+                        <button>确认付款</button>
                     </view>
                     <view class="button" wx:if="{{item.status == 'deliver'}}">
                         <!-- <button catchtap="quxiao">取消订单</button> -->
                     </view>
                     <view class="button" wx:if="{{item.status == 'receipt'}}">
-                        <button catchtap="shouhuo">确认收货</button>
+                        <button>确认收货</button>
                     </view>
                     <view class="button" wx:if="{{item.status == 'finish'}}">
                     </view>

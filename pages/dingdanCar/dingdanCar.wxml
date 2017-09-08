@@ -31,17 +31,17 @@
     </view>
     <!--商品  -->
     <view class="shangpin">
-        <view class="service-list">
+        <view class="service-list" wx:for="{{gouwu}}">
             <view class="service-item">
                 <view class="service-img">
-                    <image src="{{inform.picture[0]}}" mode="aspectFill"></image>
+                    <image src="{{item.figure}}" mode="aspectFill"></image>
                 </view>
                 <view class="service-text">
-                    <view class="service-tite">{{inform.good_name}}</view>
-                    <view class="fenlei"> {{types}}</view>
+                    <view class="service-tite">{{item.good_name}}</view>
+                    <view class="fenlei"> {{item.attribute_value}}</view>
                     <view class="caozuo">
-                        <text class="service-price">￥{{inform.low_price}}</text>
-                        <view class="service-gouwu">x{{price}}</view>
+                        <text class="service-price">￥{{item.price}}</text>
+                        <view class="service-gouwu">x{{item.number}}</view>
                     </view>
                 </view>
             </view>
@@ -74,7 +74,7 @@
     <view class="jine top">
        <view class="controllist ">
           <view class="left">商品金额</view>
-          <view class="right color">￥{{inform.low_price}}</view>
+          <view class="right color">￥{{totalPrice}}</view>
       </view>
       <view class="controllist">
           <view class="left">运费</view>
@@ -103,7 +103,7 @@
     </view>
     <!--foot  -->
     <view class="fixed">
-        <view class="heji">合计：<text>￥{{inform.low_price*price}}</text> </view>
+        <view class="heji">合计：<text>￥{{totalPrice}}</text> </view>
         <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
             <button class="submit" formType="submit">提交订单</button>
         </form>

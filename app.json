@@ -13,7 +13,9 @@
     "pages/coupon/coupon",
     "pages/tuijian/tuijian",
     "pages/help/help",
-    "pages/tuijianShare/tuijianShare"   
+    "pages/tuijianShare/tuijianShare",
+    "pages/shangpinInform/shangpinInform",
+    "pages/dingdanCar/dingdanCar"   
     
   ],
   "window":{

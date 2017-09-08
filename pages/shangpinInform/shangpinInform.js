@@ -5,96 +5,91 @@ console.log("paymentUrl:" + paymentUrl);
 var app = getApp();
 Page({
   data: {
-    gid : "",
-    attr : "",//属性
-    types:"", //类型
-    userMes: '',//留言信息
-    price:'', //数量
-    detail:''
+    oid: "",
+    list:'',
+    goods_list:''
   },
   onLoad: function (options) {
-      console.log(options);
-      var that = this;
-      //this.nextAddress();
-      that.setData({
-        gid: options.gid,
-        price: options.price,
-        attr: options.attr,
-        types: options.types,
-        detail: options.gid+'-'+ options.attr+'-'+options.price
-      })
-      var gid = that.data.gid;//列表页传来的
-      var price = that.data.price;
-      wx.request({
-        url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
-        data: {
-          gid: gid
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          //console.log("详情", res);
-          var list = [];
-          // 获取用户名称及发表时间
-          var inform = res.data.data.goodsDetail;
-          that.setData({
-            inform: inform
-          })
-          wx.hideLoading()
-        }
-      })
+    console.log(options);
+    var that = this;
+    that.setData({
+      oid: options.oid,
+    })
   },
-  
+
   onShow: function () {
+    var that = this;
     var dizhi = wx.getStorageSync("dizhi");
     console.log(dizhi);
-    if (dizhi != undefined){
-      console.log(111);
-      console.log(dizhi);
-    }else{
-      console.log(2222);
+    if (dizhi != undefined) {
+      that.setData({
+        dizhi: dizhi
+      })
+    } else {
+      console.log("请选择地址")
     }
+    // 详情
+    wx.request({
+      url: "https://shop.playonwechat.com/api/order-detail?sign=" + app.data.sign,
+      data: {
+        oid: that.data.oid
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        var list = res.data.data.orderDetail;
+        console.log("list", list);
+        // 获取用户名称及发表时间
+        var goods_list = list.goods_list;
+        that.setData({
+          list : list,
+          goods_list: list.goods_list
+        })
+        console.log(goods_list);
+        wx.hideLoading()
+      }
+    })
   },
   //地址
-  nextAddress:function(){
+  nextAddress: function () {
     var that = this;
     if (wx.chooseAddress) {
       wx.chooseAddress({
         success: function (res) {
           that.setData({
-              dizhi:res
+            dizhi: res
           })
           wx.setStorageSync('dizhi', res);
           console.log(res);
-      },
+        },
         fail: function (err) {
           console.log(JSON.stringify(err))
         }
       })
     } else {
-        wx.showModal({
-          title: '提示',
-          content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
   },
   // switch
   listenerSwitch: function (e) {
-     console.log('switch类型开关当前状态-----', e.detail.value);
+    console.log('switch类型开关当前状态-----', e.detail.value);
   },
   //input
-  userMesInput: function (e) {
-    var that = this;
-    
-    var userMes = that.data.userMes;
-    that.setData({
-      userMes: e.detail.value
-    })
-    console.log(userMes);
-  },
-//提交订单
+  // userMesInput: function (e) {
+  //   var that = this;
+
+  //   var userMes = that.data.userMes;
+  //   that.setData({
+  //     userMes: e.detail.value
+  //   })
+  //   console.log(userMes);
+  // },
+  //提交订单
   formSubmit: function (e) {
     var that = this;
     wx.request({
@@ -102,7 +97,7 @@ Page({
       data: {
         form_id: e.detail.formId,
         receiver: that.data.dizhi.userName,
-        message:that.data.userMes,//留言
+        message: that.data.userMes,//留言
         receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
         receiver_phone: that.data.dizhi.telNumber,
         detail: that.data.detail
@@ -170,34 +165,34 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

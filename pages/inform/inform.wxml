@@ -23,7 +23,7 @@
             </view>
             <!--规格  -->
             <view class="xuanze" bindtap="addbuy" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
-                <view class="classname">选择：规格</view>
+                <view class="classname">选择：<text wx:for="{{all}}">{{item}}</text></view>
                 <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
             </view>
         </view>

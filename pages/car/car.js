@@ -18,7 +18,8 @@ Page({
       set2: false,
       wenzi:'编辑',
       ids : 1,
-      change_carts : ''
+      change_carts : '',
+      gouwu:[]
   },
   // 最新
   fetchNewData: function () {  //获取最新列表
@@ -58,6 +59,7 @@ Page({
       carts: carts,
       selectAllStatus: false   //状态改变去掉全选样式
     });
+    console.log("选中的carts：", carts)
     this.getTotalPrice();                           // 重新获取总价
   },
   //全选
@@ -184,17 +186,30 @@ Page({
     let len = this.data.len; 
     let total = 0;
     console.log("len",len);
+    var gouwu = [];
     for (let i = 0; i < len; i++) {     // 循环列表得到每个数据
       if (carts[i].selected) { 
+        var both = {};
         total += carts[i].number * carts[i].price;     // 所有价格加起来
+        console.log(carts[i].good_name);
+        both.good_name = carts[i].good_name; //新建both对象
+        both.number    = carts[i].number;
+        both.price     = carts[i].price;
+        both.attribute_value = carts[i].attribute_value;
+        both.figure = carts[i].figure;
+        gouwu[i] = both; //将多个both对象pushgouwu数组
       }
     }
-    
+   ///////////////????????
+    wx.setStorageSync('gouwu', gouwu);
     this.setData({                                // 最后赋值到data中渲染到页面
       carts: carts,
       totalPrice: total.toFixed(2)
+      //gouwu: gouwu
     });
+   // console.log("gouwu111:", this.data.gouwu);
   },
+
   //seting编辑
   seting: function (e) {
     console.log(e.target.id);
@@ -250,8 +265,14 @@ Page({
       this.setData({
         change_carts:''
       })
-
     }
+  },
+  //结算
+  jiesuan: function(){
+    //console.log(this.data.totalPrice +','+ this.data.gouwu);
+        wx.navigateTo({
+          url: '../dingdanCar/dingdanCar?totalPrice=' + this.data.totalPrice
+        })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -261,7 +282,7 @@ Page({
   },
   onShow:function(){
     this.fetchNewData(); //最新
-
+    this.getTotalPrice();
   },
   // 返回首页
   backHome: function () {

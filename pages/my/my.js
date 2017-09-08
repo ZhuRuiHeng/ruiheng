@@ -11,26 +11,26 @@ Page({
         list:[
            {
                pic:'https://qncdn.playonwechat.com/shangcheng/fu.png',
-               title:'代付款',
-               url:'../index/index',
+               title:'待付款',
+               status: "payment",
                num:'0'
            },
            {
                pic: 'https://qncdn.playonwechat.com/shangcheng/fa.png',
-               title: '代发货',
-               url: '../index/index',
+               title: '待发货',
+               status: "deliver",
                num: '0'
            },
            {
                pic: 'https://qncdn.playonwechat.com/shangcheng/shou.png',
-               title: '代收款',
-               url: '../index/index',
+               title: '待收款',
+               status: "receipt",
                num: '0'
            },
            {
                pic: 'https://qncdn.playonwechat.com/shangcheng/finish.png',
                title: '已完成',
-               url: '../index/index',
+               status: "finish",
                num: '0'
            }
 
@@ -144,7 +144,7 @@ Page({
     
     dingdan:function(){
         wx.navigateTo({
-            url: '../dingdan/dingdan'
+          url: "../dingdan/dingdan?status="
         })
     },
     payCar:function(){

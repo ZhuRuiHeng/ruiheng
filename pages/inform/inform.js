@@ -21,7 +21,9 @@ Page({
       _num: 1, //类型
       arr: [],
       attrLen: '',
-      values: [] //型号
+      values: [], //型号
+      shuxing:'',
+      all:[]
   },
   onLoad: function (options) {
     var that = this;
@@ -50,12 +52,26 @@ Page({
         var  inform = res.data.data.goodsDetail;
         var picture = inform.picture;
         var informImg = inform.content;
-        console.log('shuxing', inform.attribute );
+       
         that.setData({
           inform: inform,
           imgUrls: picture,
-          informImg: informImg
+          informImg: informImg,
+          shuxing: inform.attribute
         })
+        var shuxing = that.data.shuxing;
+        var all = '';
+        console.log('shuxing', that.data.shuxing);
+        for (var i = 0; i < that.data.shuxing.length;i++){
+            var news = [];
+            var all = that.data.all;
+            news+= shuxing[i].attribute_name;
+            all.push(news); //将多个both对象pushgouwu数组
+        }
+        that.setData({
+          all: all
+        })
+        console.log("all:", that.data.all);
         wx.hideLoading()
       }
     })
@@ -198,10 +214,19 @@ Page({
           }, 100)
         }
       }
-
+    
       that.setData({
-        inform: _inform
+        inform: _inform,
+        avid: avid
       })
+      setTimeout(function(){
+        console.log('222', that.data.values);
+        var all = that.data.values;
+        that.setData({
+          all: all
+        })
+      },300)
+      
       ///////////////
       console.log("attribute111:", attribute);
       that.setData({

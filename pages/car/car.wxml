@@ -57,7 +57,7 @@
         <view class="top">合计：￥{{totalPrice}}</view>
         <view class="btm">不含运费</view>
     </view>
-    <view class="three flex">
+    <view class="three flex" bindtap="jiesuan">
         结算
     </view>
 </view>

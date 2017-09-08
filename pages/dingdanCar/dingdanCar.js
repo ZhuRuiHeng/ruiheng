@@ -5,56 +5,30 @@ console.log("paymentUrl:" + paymentUrl);
 var app = getApp();
 Page({
   data: {
-    gid : "",
-    attr : "",//属性
-    types:"", //类型
-    userMes: '',//留言信息
-    price:'', //数量
-    detail:''
+    
   },
   onLoad: function (options) {
       console.log(options);
       var that = this;
       //this.nextAddress();
       that.setData({
-        gid: options.gid,
-        price: options.price,
-        attr: options.attr,
-        types: options.types,
-        detail: options.gid+'-'+ options.attr+'-'+options.price
-      })
-      var gid = that.data.gid;//列表页传来的
-      var price = that.data.price;
-      wx.request({
-        url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
-        data: {
-          gid: gid
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          //console.log("详情", res);
-          var list = [];
-          // 获取用户名称及发表时间
-          var inform = res.data.data.goodsDetail;
-          that.setData({
-            inform: inform
-          })
-          wx.hideLoading()
-        }
+        totalPrice: options.totalPrice
       })
   },
   
   onShow: function () {
+    var that = this;
     var dizhi = wx.getStorageSync("dizhi");
+    var gouwu = wx.getStorageSync("gouwu");
     console.log(dizhi);
-    if (dizhi != undefined){
-      console.log(111);
-      console.log(dizhi);
-    }else{
-      console.log(2222);
+    console.log(gouwu);
+    if (dizhi != undefined) {
+      that.setData({
+        dizhi: dizhi,
+        gouwu:gouwu
+      })
+    } else {
+      console.log("请选择地址")
     }
   },
   //地址
