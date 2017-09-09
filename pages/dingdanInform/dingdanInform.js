@@ -2,8 +2,9 @@
 //支付
 const paymentUrl = require('../../config').paymentUrl;
 console.log("paymentUrl:" + paymentUrl);
+var Zan = require('../../dist/index');
 var app = getApp();
-Page({
+Page(Object.assign({}, Zan.Toast, {
   data: {
     gid : "",
     attr : "",//属性
@@ -15,13 +16,22 @@ Page({
   onLoad: function (options) {
       console.log(options);
       var that = this;
+     // that.showZanToast('1111111111111');
+      var attr = options.attr;
+      console.log(attr);
+      if (attr == undefined){
+        var attr = 0;
+        that.setData({
+          attr : attr
+        })
+      }
+      console.log("new",that.data.attr);
       //this.nextAddress();
       that.setData({
         gid: options.gid,
         num: options.price,
-        attr: options.attr,
         types: options.types,
-        detail: options.gid + '-' + options.attr + '-' + options.price
+        detail: options.gid + '-' + attr + '-' + options.price
       })
       var gid = that.data.gid;//列表页传来的
       var num = that.data.num;
@@ -35,7 +45,7 @@ Page({
         },
         method: "GET",
         success: function (res) {
-          //console.log("详情", res);
+          console.log("详情数据", res);
           var list = [];
           // 获取用户名称及发表时间
           var inform = res.data.data.goodsDetail;
@@ -48,12 +58,18 @@ Page({
   },
   
   onShow: function () {
+    var that = this;
+    //that.showZanToast('222222222222');
     var dizhi = wx.getStorageSync("dizhi");
     console.log(dizhi);
     if (dizhi != undefined){
-      console.log(111);
       console.log(dizhi);
-    }else{
+      
+      that.setData({
+        dizhi: dizhi
+      })
+    }
+    else{
       console.log(2222);
     }
   },
@@ -92,54 +108,80 @@ Page({
     that.setData({
       userMes: e.detail.value
     })
-    console.log(userMes);
+   // console.log(userMes);
   },
+  
 //提交订单
   formSubmit: function (e) {
     var that = this;
-    wx.request({
-      url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign,
-      data: {
-        form_id: e.detail.formId,
-        receiver: that.data.dizhi.userName,
-        message:that.data.userMes,//留言
-        receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
-        receiver_phone: that.data.dizhi.telNumber,
-        detail: that.data.detail
-      },
-      //detail:"gid -   attribute   - number"
-      //detail:" 1  -  1:2,2:4,3:6  - 1"
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: function (res) {
-        // success
-        console.log(res);
-        var status = res.data.status;
-        if (status == 1) {
-          // 调用支付
-          wx.requestPayment({
+    var dizhi = that.data.dizhi;
+    console.log("dizhi:", dizhi);
+    console.log(dizhi.length);
+    
+    if (dizhi.length == 0){
+      wx.showToast({
+        title: '请选择收货地址',
+        image: '../images/false.png'
+      });
+    }else{
+      wx.request({
+        url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign,
+        data: {
+          form_id: e.detail.formId,
+          receiver: that.data.dizhi.userName,
+          message: that.data.userMes,//留言
+          receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
+          receiver_phone: that.data.dizhi.telNumber,
+          detail: that.data.detail
+        },
+        //detail:"gid -   attribute   - number"
+        //detail:" 1  -  1:2,2:4,3:6  - 1"
+        method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        // header: {}, // 设置请求的 header
+        success: function (res) {
+          // success
+          that.showZanToast('toast的内容');
+
+          console.log(res);
+          var status = res.data.status;
+          if (status == 1) {
+            // 调用支付
+            wx.requestPayment({
               timeStamp: res.data.data.timeStamp,
               nonceStr: res.data.data.nonceStr,
               package: res.data.data.package,
               signType: res.data.data.signType,
               paySign: res.data.data.paySign
             })
+            
 
-        } else {
-          wx.showToast({
-            title: '创建订单失败',
-            image: '../images/false.png'
-          });
+          } else {
+            that.showZanToast('创建订单失败');
+            wx.showToast({
+              title: '创建订单失败',
+              image: '../images/false.png'
+            });
+          }
+        },
+        fail: function (res) {
+          // fail
+          console.log(res)
+        },
+        complete: function () {
+          // complete
         }
-      },
-      fail: function (res) {
-        // fail
-        console.log(res)
-      },
-      complete: function () {
-        // complete
-      }
-    })
+      })
+      // 重置属性
+      that.setData({
+        gid: "",
+        attr: "",//属性
+        types: "", //类型
+        userMes: '',//留言信息
+        num: '', //数量
+        detail: ''
+      })
+    }
+    
   },
 
  
@@ -177,4 +219,4 @@ Page({
   onShareAppMessage: function () {
   
   }
-})
+}));

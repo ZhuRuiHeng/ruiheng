@@ -95,12 +95,12 @@ Page({
     var gid = e.currentTarget.dataset.gid
     console.log("gid", gid);
     that.setData({
-      _gid: gid
+      gid: gid
     })
     wx.request({
       url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
       data: {
-        gid: that.data._gid
+        gid: that.data.gid
       },
       header: {
         'content-type': 'application/json'
@@ -117,6 +117,7 @@ Page({
           inform: inform
         })
         wx.hideLoading()
+        console.log("inform详情", inform);
       }
     })
   },
@@ -130,12 +131,12 @@ Page({
     var gid = e.currentTarget.dataset.gid
     console.log("gid", gid);
     that.setData({
-      _gid: gid
+      gid: gid
     })
     wx.request({
       url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
       data: {
-        gid: that.data._gid
+        gid: that.data.gid
       },
       header: {
         'content-type': 'application/json'
@@ -280,7 +281,7 @@ Page({
   //加入购物车
    addCars: function (e) {
     var that = this;
-    var gid = that.data._gid;
+    var gid = that.data.gid;
     var attribute = "";
     var types = "";
     var arr = that.data.arr;
@@ -302,7 +303,7 @@ Page({
       url: "https://shop.playonwechat.com/api/add-carts?sign=" + app.data.sign,
       method: "POST",
       data: {
-        gid: that.data._gid,
+        gid: that.data.gid,
         num: that.data.price,
         attribute: attribute
       },
@@ -325,7 +326,8 @@ Page({
           arr: [],
           addCar: false,
           addbuy: false,
-          price:1
+          price:1,
+          num:1
         })
 
       }

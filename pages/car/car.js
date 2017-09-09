@@ -32,7 +32,7 @@ Page({
         url: 'https://shop.playonwechat.com/api/get-carts?sign=' + app.data.sign,
         method: "GET",
         success: function (res) {
-          console.log(res);
+          console.log('购物车：',res);
           var carts = res.data.data.carts;
           var count = res.data.data.count;
           console.log("count", count);
@@ -105,7 +105,7 @@ Page({
     carts[index].str = str;
     this.setData({
       carts : carts,      
-    });4
+    });
     console.log(carts);
     this.getTotalPrice();
   },
@@ -185,6 +185,7 @@ Page({
     let carts = this.data.carts; 
     let len = this.data.len; 
     let total = 0;
+    console.log("carts", carts);
     console.log("len",len);
     var gouwu = [];
     for (let i = 0; i < len; i++) {     // 循环列表得到每个数据
@@ -197,6 +198,8 @@ Page({
         both.price     = carts[i].price;
         both.attribute_value = carts[i].attribute_value;
         both.figure = carts[i].figure;
+        both.detail = carts[i].attribute;
+        both.gid = carts[i].gid;
         gouwu[i] = both; //将多个both对象pushgouwu数组
       }
     }

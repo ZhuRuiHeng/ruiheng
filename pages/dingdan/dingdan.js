@@ -46,7 +46,6 @@ onShow: function () {
   wx.showLoading({
     title: '加载中',
   });
-  // 轮播
   var that = this;
   wx.request({
     url: "https://shop.playonwechat.com/api/order-list?sign=" + app.data.sign,
@@ -58,7 +57,7 @@ onShow: function () {
     },
     method: "GET",
     success: function (res) {
-      //console.log("全部",res);
+      console.log("全部",res);
       var newlists = [];
       var orderList = res.data.data.orderList;
       console.log("orderList", res.data.data.orderList);

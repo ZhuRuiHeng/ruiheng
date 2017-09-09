@@ -3,6 +3,7 @@
 const paymentUrl = require('../../config').paymentUrl;
 console.log("paymentUrl:" + paymentUrl);
 var app = getApp();
+console.log("sign:",app.data.sign);
 Page({
   data: {
     oid: "",
@@ -28,7 +29,7 @@ Page({
     } else {
       console.log("请选择地址")
     }
-    // 详情
+    // 列表
     wx.request({
       url: "https://shop.playonwechat.com/api/order-detail?sign=" + app.data.sign,
       data: {
@@ -49,6 +50,59 @@ Page({
         })
         console.log(goods_list);
         wx.hideLoading()
+      }
+    })
+  },
+  //提交订单
+  formSubmit: function (e) {
+    var that = this;
+    console.log("oid", that.data.oid)
+    wx.request({
+      url: 'https://shop.playonwechat.com/api/order-payment?sign=' + app.data.sign,
+      data: {
+        oid: that.data.oid
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      success: function (res) {
+        // success
+        console.log(res);
+        var status = res.data.status;
+        if (status == 1) {
+          // 调用支付
+          wx.requestPayment({
+            timeStamp: res.data.data.timeStamp,
+            nonceStr: res.data.data.nonceStr,
+            package: res.data.data.package,
+            signType: res.data.data.signType,
+            paySign: res.data.data.paySign
+          })
+          // 重置属性
+          that.setData({
+            gid: "",
+            attr: "",//属性
+            types: "", //类型
+            userMes: '',//留言信息
+            num: '', //数量
+            detail: '',
+            oid : ''
+          })
+
+        } else {
+          wx.showToast({
+            title: '创建订单失败',
+            image: '../images/false.png'
+          });
+        }
+      },
+      fail: function (res) {
+        // fail
+        console.log(res)
+      },
+      complete: function () {
+        // complete
       }
     })
   },
@@ -79,88 +133,9 @@ Page({
   listenerSwitch: function (e) {
     console.log('switch类型开关当前状态-----', e.detail.value);
   },
-  //input
-  // userMesInput: function (e) {
-  //   var that = this;
+ 
 
-  //   var userMes = that.data.userMes;
-  //   that.setData({
-  //     userMes: e.detail.value
-  //   })
-  //   console.log(userMes);
-  // },
-  //提交订单
-  formSubmit: function (e) {
-    var that = this;
-    wx.request({
-      url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign,
-      data: {
-        form_id: e.detail.formId,
-        receiver: that.data.dizhi.userName,
-        message: that.data.userMes,//留言
-        receiver_address: that.data.dizhi.provinceName + that.data.dizhi.cityName + that.data.dizhi.countyName + that.data.dizhi.detailInfo,
-        receiver_phone: that.data.dizhi.telNumber,
-        detail: that.data.detail
-      },
-      //detail:"gid -   attribute   - number"
-      //detail:" 1  -  1:2,2:4,3:6  - 1"
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: function (res) {
-        // success
-        console.log(res);
-      },
-      fail: function (res) {
-        // fail
-        console.log(res)
-      },
-      complete: function () {
-        // complete
-      }
-    })
-  },
-
-  //支付
-  requestPayment: function () {
-    var self = this
-
-    self.setData({
-      loading: true
-    })
-    // 此处需要先调用wx.login方法获取code，然后在服务端调用微信接口使用code换取下单用户的openId
-    // 具体文档参考https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html?t=20161230#wxloginobject
-    app.getUserOpenId(function (err, openid) {
-      if (!err) {
-        wx.request({
-          url: paymentUrl,
-          data: {
-            openid
-          },
-          method: 'POST',
-          success: function (res) {
-            console.log('unified order success, response is:', res)
-            var payargs = res.data.payargs
-            wx.requestPayment({
-              timeStamp: payargs.timeStamp,
-              nonceStr: payargs.nonceStr,
-              package: payargs.package,
-              signType: payargs.signType,
-              paySign: payargs.paySign
-            })
-
-            self.setData({
-              loading: false
-            })
-          }
-        })
-      } else {
-        console.log('err:', err)
-        self.setData({
-          loading: false
-        })
-      }
-    })
-  },
+ 
   /**
    * 生命周期函数--监听页面隐藏
    */

@@ -15,6 +15,9 @@ Page({
         cate_id: options.cate_id
       })
     },
+    onReachBottom: function () {
+      console.log('上拉');
+    },
     onShow: function () {
         // 页面初始化 options为页面跳转所带来的参数
         wx.showToast({
@@ -113,6 +116,8 @@ function getmoreRequest(url) {
         }
     })
 }
+
+ 
 
 //时间戳转换为时间
 function timeString(time) {

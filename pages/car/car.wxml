@@ -15,7 +15,7 @@
     <!--商品  -->
     <view class="spAll">
         <view class="service-list">
-            <view class="service-item" wx:for="{{carts}}" wx:key="{{item.id}}">
+            <view class="service-item" wx:for="{{carts}}" wx:key="{{item.id}}" data-detail="{{item.attribute}}" data-gid="{{item.gid}}">
                 <view class="radio-group">
                      <icon wx:if="{{item.selected}}" type="success" size="20" color="#ff4444" bindtap="selectList" data-index="{{index}}" />
                      <icon wx:else type="circle" bindtap="selectList" size="20" data-index="{{index}}"/>
