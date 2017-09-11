@@ -8,13 +8,15 @@ Page({
   data: {
     oid: "",
     list:'',
-    goods_list:''
+    goods_list:'',
+    status1:''
   },
   onLoad: function (options) {
     console.log(options);
     var that = this;
     that.setData({
       oid: options.oid,
+      status1: options.status1
     })
   },
 
@@ -107,28 +109,28 @@ Page({
     })
   },
   //地址
-  nextAddress: function () {
-    var that = this;
-    if (wx.chooseAddress) {
-      wx.chooseAddress({
-        success: function (res) {
-          that.setData({
-            dizhi: res
-          })
-          wx.setStorageSync('dizhi', res);
-          console.log(res);
-        },
-        fail: function (err) {
-          console.log(JSON.stringify(err))
-        }
-      })
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
-      })
-    }
-  },
+  // nextAddress: function () {
+  //   var that = this;
+  //   if (wx.chooseAddress) {
+  //     wx.chooseAddress({
+  //       success: function (res) {
+  //         that.setData({
+  //           dizhi: res
+  //         })
+  //         wx.setStorageSync('dizhi', res);
+  //         console.log(res);
+  //       },
+  //       fail: function (err) {
+  //         console.log(JSON.stringify(err))
+  //       }
+  //     })
+  //   } else {
+  //     wx.showModal({
+  //       title: '提示',
+  //       content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+  //     })
+  //   }
+  // },
   // switch
   listenerSwitch: function (e) {
     console.log('switch类型开关当前状态-----', e.detail.value);

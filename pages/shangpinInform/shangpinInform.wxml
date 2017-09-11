@@ -14,8 +14,8 @@
             <text wx:if="{{list.status == 'payment'}}">请于{{list.order_time}}内付款，超时订单将自动关闭</text>
         </view>
     </view>
-    <!--地址  -->
-    <view class="address" bindtap="nextAddress">
+    <!--地址 bindtap="nextAddress" -->
+    <view class="address">
         <view class="inform">
             <view class="left">
                 <image src="https://qncdn.playonwechat.com/shangcheng/address.png" mode="widthFix"></image>
@@ -28,9 +28,9 @@
         <view class="dizhi">
             收货地址：{{dizhi.provinceName}}{{dizhi.cityName}}{{dizhi.countyName}}{{dizhi.detailInfo}}
         </view>
-        <view class="next">
+        <!-- <view class="next">
             <image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"></image>
-        </view>
+        </view> -->
     </view>
     <view class="line">
         <image src="https://qncdn.playonwechat.com/shangcheng/line.png" mode="widthFix"></image>
@@ -99,7 +99,8 @@
     <!--foot  -->
     <view class="fixed">
         <view class="heji">合计：<text>￥{{list.total_fee}}</text> </view>
-        <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
+        <!--如果status1=待支付就显示去支付  -->
+        <form wx:if="{{status1 == 'payment'}}" report-submit="true" bindsubmit="formSubmit" class="formSubmit">
             <button class="submit" formType="submit">去支付</button>
         </form>
     </view>

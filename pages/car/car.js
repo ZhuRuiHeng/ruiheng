@@ -57,7 +57,8 @@ Page({
     carts[index].selected = !selected;              // 改变状态
     this.setData({
       carts: carts,
-      selectAllStatus: false   //状态改变去掉全选样式
+      selectAllStatus: false,   //状态改变去掉全选样式
+      selected: selected
     });
     console.log("选中的carts：", carts)
     this.getTotalPrice();                           // 重新获取总价
@@ -99,7 +100,7 @@ Page({
     let number = parseInt(carts[index].number);
     let key = carts[index].key;
     number = number + 1;
-    console.log(number);
+    console.log('key',carts[index].key);
     carts[index].number = number;
     var str = key + '|' + number;
     carts[index].str = str;
@@ -137,10 +138,12 @@ Page({
       success: function (res) {
         if (res.confirm) {
           //获取列表中要删除项的下标  
+          var selected = that.data.selected;
           var index = e.target.dataset.index;
           var carts = that.data.carts;
           var keys  =  carts[index].key;
           console.log(keys);
+          console.log(selected);
           //移除列表中下标为index的项  
            wx.request({
              url: "https://shop.playonwechat.com/api/remove-cart-by-key?sign=" + app.data.sign,
@@ -180,6 +183,72 @@ Page({
       }
     })
   },  
+  // 删除选中的全部商品
+  shanchu:function(){
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: "确认删除选中的商品吗？",
+      cancelText: '取消',
+      confirmText: '确定',
+      success: function (res) {
+        if (res.confirm) {
+          //获取列表中要删除项的下标  
+          var carts = that.data.carts;
+          var allKey = "";
+         // var delLen = [];
+          console.log(that.data.carts);
+          for(var i = 0;i < carts.length; i++){
+            if (carts[i].selected) { 
+              var key = carts[i].key;
+              // console.log("key:",key);
+              // console.log("gid:", carts[i].gid);
+             // delLen.push(i);
+              allKey += carts[i].key + ";"; //拼接字符
+            }
+          }
+          //var long = delLen.length;
+          allKey = allKey.substr(0, allKey.length - 1); // 截取最后一位字符
+          console.log("allKey:", allKey);
+          wx.request({
+            url: "https://shop.playonwechat.com/api/remove-cart-by-key?sign=" + app.data.sign,
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "GET",
+            data: {
+              keys: allKey
+            },
+            success: function (res) {
+              console.log("post", res);
+              var status = res.data.status;
+              if (status == 1) {
+                wx.showToast({
+                  title: '删除商品成功',
+                  image: '../images/success.png'
+                });
+              } else {
+                wx.showToast({
+                  title: '删除商品失败',
+                  image: '../images/false.png'
+                });
+              }
+
+            }
+          })
+
+        //carts.splice(index, 1);
+          that.fetchNewData();
+          //更新列表的状态  
+          that.setData({
+            carts: carts
+          });
+        } else {
+          initdata(that)
+        }
+      }
+    })
+  },
   // 计算总价
   getTotalPrice() {
     let carts = this.data.carts; 
@@ -192,7 +261,7 @@ Page({
       if (carts[i].selected) { 
         var both = {};
         total += carts[i].number * carts[i].price;     // 所有价格加起来
-        console.log(carts[i].good_name);
+        //console.log(carts[i].good_name);
         both.good_name = carts[i].good_name; //新建both对象
         both.number    = carts[i].number;
         both.price     = carts[i].price;

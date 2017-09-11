@@ -98,11 +98,15 @@
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="{{inform.picture[0]}}"></image>
+                     <!-- <image src="{{inform.picture[0]}}"></image>  -->
+                    <image src="{{figure}}"></image>
                 </view>
                 <view class="right">
                     <text class="shuoming">{{inform.good_name}}</text>
-                    <text class="price">￥{{inform.low_price}}~{{inform.high_price}}</text>
+                    <text class="price">
+                        <text wx:if="{{low_price == high_price}}">￥{{low_price}}</text> 
+                        <text wx:else>￥{{low_price}}~{{high_price}}</text>
+                    </text>
                 </view>
                 <view class="del" bindtap="closeCar">
                     <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
@@ -111,10 +115,10 @@
             <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
                 <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
                 <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}">
-                    <text wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
+                    <view  wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
                           wx:for-item="attr" data-avid="{{attr.avid}}" data-value="{{attr.attribute_value}}" data-active="{{attr.active}}"
-                          class="white {{attr.active==true ? 'red':''}}" 
-                          bindtap="xuanze" >{{attr.attribute_value}}</text>
+                          class="text white {{attr.active==true ? 'red':''}}" 
+                          bindtap="xuanze" >{{attr.attribute_value}}</view>
                 </view>
             </view>
             <view class="mid">

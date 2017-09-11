@@ -40,7 +40,7 @@
                     <view class="service-tite">{{inform.good_name}}</view>
                     <view class="fenlei"> {{types}}</view>
                     <view class="caozuo">
-                        <text class="service-price">￥{{inform.low_price}}</text>
+                        <text class="service-price">￥{{low_price}}</text>
                         <view class="service-gouwu">x{{num}}</view>
                     </view>
                 </view>
@@ -57,7 +57,7 @@
     </view>
     <!-- <view class="controllist">
         <view class="left">合计</view>
-        <view class="right color">￥{{inform.low_price*price}}</view>
+        <view class="right color">￥{{low_price*price}}</view>
     </view> -->
     <view class="controllist youhui top" bindtap="addCar">
         <view class="left">优惠</view>
@@ -74,7 +74,7 @@
     <view class="jine top">
        <view class="controllist ">
           <view class="left">商品金额</view>
-          <view class="right color">￥{{inform.low_price}}</view>
+          <view class="right color">￥{{low_price}}</view>
       </view>
       <view class="controllist">
           <view class="left">运费</view>
@@ -103,7 +103,7 @@
     </view>
     <!--foot  -->
     <view class="fixed">
-        <view class="heji">合计：<text>￥{{inform.low_price*num}}</text> </view>
+        <view class="heji">合计：<text>￥{{low_price*num}}</text> </view>
         <form report-submit="true" bindsubmit="formSubmit" class="formSubmit">
             <button class="submit" formType="submit">提交订单</button>
         </form>

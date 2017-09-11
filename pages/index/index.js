@@ -28,7 +28,9 @@ Page({
     cate: 0,
     arr: [],
     attrLen:'', //长度
-    values:[] //型号
+    values:[], //型号
+    figure:'',
+    i :0 
 },
 //轮播图预览
   imgPreview: function () { //图片预览
@@ -205,7 +207,10 @@ addCar: function (e) {
         //inform.attribute
         that.setData({
           addCar: true,
-          inform: inform
+          inform: inform,
+          figure: inform.picture[0],
+          low_price: inform.low_price,
+          high_price: inform.high_price
         })
         wx.hideLoading()
         console.log("inform详情", inform);
@@ -302,7 +307,7 @@ buy:function(e){
   if (attrLen > 0){
     if (arrlen == attrLen){
        wx.navigateTo({
-         url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types
+         url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price
         })
        console.log(attribute);
       }else{
@@ -344,43 +349,96 @@ xuanze: function (e) {
   setTimeout(function(){
     var anids = that.data.anids;//
     var index = that.data.index;
-    // console.log("aaa",index);
+    //console.log("index",index);
     var active2 = e.currentTarget.dataset.active; //状态
     var avid = e.target.dataset.avid;//值
     var value = e.target.dataset.value;//value
-    console.log("值", value);
+    //console.log("值", value);
     var _attribute = that.data.inform.attribute;
     var _inform = that.data.inform;
-    console.log("参数", anids, avid, value);
-    
+    // //////////////
     var attribute_value = _attribute[index].attribute_value;
-    console.log("attribute_value",attribute_value);
+    console.log("attribute_value", attribute_value);
     console.log(attribute_value.length);
     for (var j = 0; j < attribute_value.length; j++) {
       attribute_value[j].active = false;
       if (avid == attribute_value[j].avid) {
-            attribute_value[j].active = true;
-            console.log(attribute_value[j].active);
-            var avid1 = attribute_value[j].avid;
-            console.log(avid1);
-            setTimeout(function () {
-                if (index == 0){
-                  arr[0] = anids + ':' + avid;
-                  values[0] = value;
-                }else if(index == 1){
-                  arr[1] = anids + ':' + avid;
-                  values[1] = value;
-                }else if(index == 2){
-                  arr[2] = anids + ':' + avid;
-                  values[2] = value;
-                }
-            },100)
+        attribute_value[j].active = true;
+        console.log(attribute_value[j].active);
+        var avid1 = attribute_value[j].avid;
+        var figure = attribute_value[j].figure;
+        if (figure != '') {
+          figure = attribute_value[j].figure;
+        } else {
+          figure = that.data.figure;
+        }
+
+
+        console.log('figure:', attribute_value[j].figure);
+        //setTimeout(function () {
+          if (index == 0) {
+            arr[0] = anids + ':' + avid;
+            values[0] = value;
+          } else if (index == 1) {
+            arr[1] = anids + ':' + avid;
+            values[1] = value;
+          } else if (index == 2) {
+            arr[2] = anids + ':' + avid;
+            values[2] = value;
+          }
+       // }, 100)
       }
     }
+
+    console.log('qqqqqqqqqqqq',arr);
+    /////////////////
+    console.log("参数", anids, avid, value);
+    //////////////////////////////////////////////
+        var attribute = "";
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i]) {
+            attribute += arr[i] + ',';
+          }
+        }
     
-    that.setData({
-      inform : _inform
-    })
+        attribute = attribute.substr(0, attribute.length - 1);
+        console.log("111111111111111", attribute);
+        var carid = wx.getStorageSync("carid");
+        var attrLen = that.data.inform.attribute.length;//获取attribute长度
+        var arrlen = that.data.arr.length; //数组长度
+        console.log('获取attribute长度', attrLen);
+        console.log('数组长度', arrlen); //bug 数组长度
+        console.log('low_price:', that.data.inform.low_price);
+        var priceGroup = that.data.inform.priceGroup;
+        var s = 'attr' + attribute;
+        console.log('sssss:',s);
+        for (var i = 0; i < priceGroup.length; i++) {
+          // console.log('|||||||||||', priceGroup[i].key);
+          // console.log('\\\\\\\\\\',s);
+          if (priceGroup[i].key == s){
+            console.log("iiiiii",i);
+            var i = i;
+            that.setData({
+              i: i
+            });
+            var nowPrice = that.data.inform.priceGroup[that.data.i].price;
+            console.log('nowPrice:', nowPrice);
+            that.setData({
+              inform: _inform,
+              figure: figure,
+              low_price: nowPrice,
+              high_price: nowPrice
+            })
+          }
+        }
+        console.log(that.data.low_price + '低;高' + that.data.high_price)
+      ///////////////////////////////////////////////
+      
+    
+        that.setData({
+          inform : _inform,
+          figure: figure
+      })
     ///////////////
     console.log("attribute111:",attribute);
     that.setData({

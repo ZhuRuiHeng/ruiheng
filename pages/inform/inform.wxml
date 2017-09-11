@@ -15,14 +15,15 @@
                 <text>{{inform.good_name}}</text>
             </view>
             <view class="price">
-                <text>￥{{inform.low_price}}~{{inform.high_price}}</text>
+                <view wx:if="{{inform.low_price == inform.high_price}}">￥{{inform.low_price}}</view> 
+                <view wx:else>￥{{inform.low_price}}~{{inform.high_price}}</view>
             </view>
             <view class="yunfei">
                 <view class="">运费：￥{{inform.expenses}}</view>
                 <view class="now">剩余：{{inform.total_stock}}</view>
             </view>
             <!--规格  -->
-            <view class="xuanze" bindtap="addbuy" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
+            <view wx:if="{{all != ''}}" class="xuanze" bindtap="addbuy" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
                 <view class="classname">选择：<text wx:for="{{all}}">{{item}}</text></view>
                 <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
             </view>
@@ -65,11 +66,14 @@
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="{{imgUrls[0]}}"></image>
+                    <image src="{{figure}}"></image>
                 </view>
                 <view class="right">
                     <text class="shuoming">{{inform.good_name}}</text>
-                    <text class="price">￥{{inform.low_price}}~{{inform.high_price}}</text>
+                    <text class="price">
+                        <text wx:if="{{low_price == high_price}}">￥{{low_price}}</text> 
+                        <text wx:else>￥{{low_price}}~{{high_price}}</text>
+                    </text>
                 </view>
                 <view class="del" bindtap="closeCar">
                     <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
@@ -78,10 +82,10 @@
              <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
                 <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
                 <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}" >
-                    <text wx:for="{{item.attribute_value}}" wx:key="{{index}}" data-value="{{attr.attribute_value}}" 
+                    <view wx:for="{{item.attribute_value}}" wx:key="{{index}}" data-value="{{attr.attribute_value}}" 
                           wx:for-item="attr" data-avid="{{attr.avid}}" data-active="{{attr.active}}"
-                          class="white {{attr.active==true ? 'red':''}}" 
-                          bindtap="xuanze" >{{attr.attribute_value}}</text>
+                          class="text white {{attr.active==true ? 'red':''}}" 
+                          bindtap="xuanze" >{{attr.attribute_value}}</view>
                 </view>
             </view>
             <view class="mid">
@@ -107,11 +111,14 @@
         <view class="padding">
             <view class="top">
                 <view class="left">
-                    <image src="{{imgUrls[0]}}"></image>
+                    <image src="{{figure}}"></image>
                 </view>
                 <view class="right">
                     <text class="shuoming">{{inform.good_name}}</text>
-                    <text class="price">￥{{inform.low_price}}~{{inform.high_price}}</text>
+                    <text class="price">
+                        <text wx:if="{{low_price == high_price}}">￥{{low_price}}</text> 
+                        <text wx:else>￥{{low_price}}~{{high_price}}</text>
+                    </text>
                 </view>
                 <view class="del" bindtap="closeCar">
                     <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
@@ -120,10 +127,10 @@
              <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
                 <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
                 <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}">
-                    <text wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
+                    <view wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
                           wx:for-item="attr" data-avid="{{attr.avid}}" data-value="{{attr.attribute_value}}" data-active="{{attr.active}}"
-                          class="white {{attr.active==true ? 'red':''}}" 
-                          bindtap="xuanze" >{{attr.attribute_value}}</text>
+                          class="text white {{attr.active==true ? 'red':''}}" 
+                          bindtap="xuanze" >{{attr.attribute_value}}</view>
                 </view>
             </view>
             <view class="mid">

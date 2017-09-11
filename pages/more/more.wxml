@@ -3,7 +3,7 @@
     <scroll-view scroll-y="true" style="height:600px" bindscrolltolower="lower">
         <view class="boxList">
               <view class="chose-list" >
-                  <navigator wx:for="{{list}}" class="chose-item" url="../inform/inform?gid={{item.gid}}">
+                  <navigator wx:for="{{main_content}}" class="chose-item" url="../inform/inform?gid={{item.gid}}">
                       <view class="chose-img">
                           <image src="{{item.picture}}" mode="scaleToFill"></image>
                       </view>

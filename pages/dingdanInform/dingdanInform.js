@@ -22,8 +22,8 @@ Page(Object.assign({}, Zan.Toast, {
       if (attr == undefined){
         var attr = 0;
         that.setData({
-          attr : attr
-        })
+          attr : attr,
+         })
       }
       console.log("new",that.data.attr);
       //this.nextAddress();
@@ -31,9 +31,11 @@ Page(Object.assign({}, Zan.Toast, {
         gid: options.gid,
         num: options.price,
         types: options.types,
-        detail: options.gid + '-' + attr + '-' + options.price
+        detail: options.gid + '-' + attr + '-' + options.price,
+        low_price: options.low_price
       })
       var gid = that.data.gid;//列表页传来的
+      console.log("列表页传来的gid:", gid)
       var num = that.data.num;
       wx.request({
         url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
@@ -171,15 +173,15 @@ Page(Object.assign({}, Zan.Toast, {
           // complete
         }
       })
-      // 重置属性
-      that.setData({
-        gid: "",
-        attr: "",//属性
-        types: "", //类型
-        userMes: '',//留言信息
-        num: '', //数量
-        detail: ''
-      })
+      // // 重置属性
+      // that.setData({
+      //   gid: "",
+      //   attr: "",//属性
+      //   types: "", //类型
+      //   userMes: '',//留言信息
+      //   num: '', //数量
+      //   detail: ''
+      // })
     }
     
   },

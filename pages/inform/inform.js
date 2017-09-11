@@ -55,8 +55,11 @@ Page({
        
         that.setData({
           inform: inform,
-          imgUrls: picture,
+          figure: inform.picture[0],
+          low_price: inform.low_price,
+          high_price: inform.high_price, 
           informImg: informImg,
+          imgUrls: picture,
           shuxing: inform.attribute
         })
         var shuxing = that.data.shuxing;
@@ -65,13 +68,14 @@ Page({
         for (var i = 0; i < that.data.shuxing.length;i++){
             var news = [];
             var all = that.data.all;
-            news+= shuxing[i].attribute_name;
+            news+= shuxing[i].attribute_name+' ';
             all.push(news); //将多个both对象pushgouwu数组
         }
         that.setData({
           all: all
         })
         console.log("all:", that.data.all);
+        console.log(typeof all);
         wx.hideLoading()
       }
     })
@@ -190,6 +194,47 @@ Page({
       var _attribute = that.data.inform.attribute;
       var _inform = that.data.inform;
       console.log("参数", anids, avid, value);
+      // 新增attribute
+      var attribute = "";
+
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i]) {
+          attribute += arr[i] + ',';
+        }
+      }
+
+      attribute = attribute.substr(0, attribute.length - 1);
+      console.log("111111111111111", attribute);
+      var carid = wx.getStorageSync("carid");
+      var attrLen = that.data.inform.attribute.length;//获取attribute长度
+      var arrlen = that.data.arr.length; //数组长度
+      console.log('获取attribute长度', attrLen);
+      console.log('数组长度', arrlen); //bug 数组长度
+      // console.log('low_price:', that.data.inform.low_price);
+      var priceGroup = that.data.inform.priceGroup;
+      var s = 'attr' + attribute;
+      console.log('sssss:', s);
+      for (var i = 0; i < priceGroup.length; i++) {
+        // console.log('|||||||||||', priceGroup[i].key);
+        // console.log('\\\\\\\\\\',s);
+        if (priceGroup[i].key == s) {
+          console.log("iiiiii", i);
+          var i = i;
+          that.setData({
+            i: i
+          });
+          var nowPrice = that.data.inform.priceGroup[that.data.i].price;
+          console.log('nowPrice:', nowPrice);
+          that.setData({
+            inform: _inform,
+            figure: figure,
+            low_price: nowPrice,
+            high_price: nowPrice
+          })
+        }
+      }
+      console.log(that.data.low_price + '低;高' + that.data.high_price)
+      ////
 
       var attribute_value = _attribute[index].attribute_value;
       console.log("attribute_value", attribute_value);
@@ -200,8 +245,16 @@ Page({
           attribute_value[j].active = true;
           console.log(attribute_value[j].active);
           var avid1 = attribute_value[j].avid;
-          console.log(avid1);
-          setTimeout(function () {
+          var figure = attribute_value[j].figure;
+          if (figure != '') {
+            figure = attribute_value[j].figure;
+          } else {
+            figure = that.data.figure;
+          }
+
+
+          console.log('figure:', attribute_value[j].figure);
+         // setTimeout(function () {
             if (index == 0) {
               arr[0] = anids + ':' + avid;
               values[0] = value;
@@ -212,13 +265,14 @@ Page({
               arr[2] = anids + ':' + avid;
               values[2] = value;
             }
-          }, 100)
+         // }, 100)
         }
       }
-    
+
       that.setData({
         inform: _inform,
-        avid: avid
+        avid: avid,
+        figure: figure
       })
       setTimeout(function(){
         console.log('222', that.data.values);
@@ -230,6 +284,7 @@ Page({
       
       ///////////////
       console.log("attribute111:", attribute);
+      //console.log("all:", all);
       that.setData({
         _num: e.target.dataset.avid,
         attribute: attribute
@@ -357,7 +412,7 @@ Page({
     if (attrLen > 0) {
       if (arrlen == attrLen) {
         wx.navigateTo({
-          url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types
+          url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price
         })
         console.log(attribute);
       } else {
