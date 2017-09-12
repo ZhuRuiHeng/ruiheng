@@ -139,7 +139,7 @@
 	width: 100%;
 	font-size: 24rpx;
     padding-top:20rpx;
-    height: 76rpx;
+    height: 70rpx;
     display: -webkit-box;  
     display: -moz-box;  
     overflow: hidden;  
@@ -418,4 +418,67 @@
 }
 .chakan{
    width: 100%;
+}
+/*new  */
+.sort,.groupon .gpList,.groupon{
+  /* text-align: left; */
+  text-align: center;
+  width: 100%;
+  background: #fff;
+}
+.sort navigator{
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+}
+.sort navigator .image-text{
+  width: 100%;
+  padding:20rpx 0;
+}
+.sort navigator image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.sort navigator text{
+  display: block;
+  font-size: 26rpx;
+}
+.groupon1{
+  margin: 20rpx 0;
+}
+.groupon .gpTitle{
+    text-align: center;
+    font-size: 26rpx;
+    padding: 10rpx;
+}
+.groupon .gpTitle image{
+  width: 50rpx;
+  vertical-align: middle;
+}
+.groupon .gpTitle text{
+  display: inline-block;
+  line-height: 50rpx;
+  position: relative;
+  top:6rpx;
+  left:10rpx;
+}
+.groupon .gpList navigator{
+  display: inline-block;
+  width: 33%;
+  padding:20rpx 0;
+}
+.groupon .gpList navigator image{
+  width: 80%;
+  height: inherit;
+}
+.center{
+  text-align: center;
+  padding: 10rpx 0;
+}
+.center.time{
+  font-size: 26rpx;
+}
+.center.countdown{
+ font-size: 46rpx;
 }

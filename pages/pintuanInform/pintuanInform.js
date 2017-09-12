@@ -7,23 +7,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-      imgUrls: [],
-      indicatorDots: true,
-      autoplay: true,
-      interval: 3000,
-      duration: 1000,
-      addCar : false,//打开购物车
-      addbuy : false,
-      closeCar: false,//关闭购物车
-      price: 1,//购物车数量
-      minusStatus: 'disabled',//数量为1禁用
-      sum: '',//购物车id
-      _num: 1, //类型
-      arr: [],
-      attrLen: '',
-      values: [], //型号
-      shuxing:'',
-      all:[]
+    imgUrls: [],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    duration: 1000,
+    addCar: false,//打开购物车
+    addbuy: false,
+    closeCar: false,//关闭购物车
+    price: 1,//购物车数量
+    minusStatus: 'disabled',//数量为1禁用
+    sum: '',//购物车id
+    _num: 1, //类型
+    arr: [],
+    attrLen: '',
+    values: [], //型号
+    shuxing: '',
+    all: []
   },
   onLoad: function (options) {
     var that = this;
@@ -49,15 +49,15 @@ Page({
         console.log("详情", res);
         var list = [];
         // 获取用户名称及发表时间
-        var  inform = res.data.data.goodsDetail;
+        var inform = res.data.data.goodsDetail;
         var picture = inform.picture;
         var informImg = inform.content;
-       
+
         that.setData({
           inform: inform,
           figure: inform.picture[0],
           low_price: inform.low_price,
-          high_price: inform.high_price, 
+          high_price: inform.high_price,
           informImg: informImg,
           imgUrls: picture,
           shuxing: inform.attribute
@@ -65,11 +65,11 @@ Page({
         var shuxing = that.data.shuxing;
         var all = '';
         console.log('shuxing', that.data.shuxing);
-        for (var i = 0; i < that.data.shuxing.length;i++){
-            var news = [];
-            var all = that.data.all;
-            news+= shuxing[i].attribute_name+' ';
-            all.push(news); //将多个both对象pushgouwu数组
+        for (var i = 0; i < that.data.shuxing.length; i++) {
+          var news = [];
+          var all = that.data.all;
+          news += shuxing[i].attribute_name + ' ';
+          all.push(news); //将多个both对象pushgouwu数组
         }
         that.setData({
           all: all
@@ -82,12 +82,12 @@ Page({
   },
   //轮播图预览
   imgPreview: function () { //图片预览
-      const imgs = this.data.imgUrls;
-      console.log("const");
-      wx.previewImage({
-          current: imgs[this.data.currentIndex], // 当前显示图片的http链接
-          urls: imgs // 需要预览的图片http链接列表
-      })
+    const imgs = this.data.imgUrls;
+    console.log("const");
+    wx.previewImage({
+      current: imgs[this.data.currentIndex], // 当前显示图片的http链接
+      urls: imgs // 需要预览的图片http链接列表
+    })
   },
   //购物车
   addCar: function (e) {
@@ -125,7 +125,7 @@ Page({
       }
     })
   },
-//购买
+  //购买
   addbuy: function (e) {
     wx.showToast({
       title: '加载中',
@@ -160,7 +160,7 @@ Page({
       }
     })
   },
-  tianjia:function(){
+  tianjia: function () {
     wx.switchTab({
       url: '../car/car'
     })
@@ -176,7 +176,7 @@ Page({
     });
     console.log("this.index", this.data.anids);
   },
- 
+
   //选择型号
   xuanze: function (e) {
     // console.log(e.currentTarget.dataset.index);
@@ -196,13 +196,13 @@ Page({
       var _inform = that.data.inform;
       // //////////////
       var attribute_value = _attribute[index].attribute_value;
-     // console.log("attribute_value", attribute_value);
+      // console.log("attribute_value", attribute_value);
       //console.log(attribute_value.length);
       for (var j = 0; j < attribute_value.length; j++) {
         attribute_value[j].active = false;
         if (avid == attribute_value[j].avid) {
           attribute_value[j].active = true;
-         //console.log(attribute_value[j].active);
+          //console.log(attribute_value[j].active);
           var avid1 = attribute_value[j].avid;
           var figure = attribute_value[j].figure;
           if (figure != '') {
@@ -286,48 +286,48 @@ Page({
     })
   },
   closeCar: function (obj) {
-      console.log('closeCar');
-      var id = obj.target.id;
-      console.log(id);
-      var that = this;
-      that.setData({
-        addCar : false,
-        addbuy : false,
-        values: []
-      })
+    console.log('closeCar');
+    var id = obj.target.id;
+    console.log(id);
+    var that = this;
+    that.setData({
+      addCar: false,
+      addbuy: false,
+      values: []
+    })
   },
   /* 点击减号 */
   bindMinus: function () {
-      //console.log('-');
-      var price = this.data.price;
-      // 如果大于1时，才可以减 
-      if (price > 1) {
-          price--;
-      }
-      // 只有大于一件的时候，才能normal状态，否则disable状态 
-      var minusStatus = price <= 1 ? 'disabled' : 'normal';
-      // 将数值与状态写回 
-      this.setData({
-          price: price,
-          minusStatus: minusStatus
-      });
+    //console.log('-');
+    var price = this.data.price;
+    // 如果大于1时，才可以减 
+    if (price > 1) {
+      price--;
+    }
+    // 只有大于一件的时候，才能normal状态，否则disable状态 
+    var minusStatus = price <= 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回 
+    this.setData({
+      price: price,
+      minusStatus: minusStatus
+    });
   },
   /* 点击加号 */
   bindPlus: function () {
-      //console.log('+');
-      var price = this.data.price;
-      // 不作过多考虑自增1 
-      price++;
-      // 只有大于一件的时候，才能normal状态，否则disable状态 
-      var minusStatus = price < 1 ? 'disabled' : 'normal';
-      // 将数值与状态写回 
-      this.setData({
-          price: price,
-          minusStatus: minusStatus
-      });
+    //console.log('+');
+    var price = this.data.price;
+    // 不作过多考虑自增1 
+    price++;
+    // 只有大于一件的时候，才能normal状态，否则disable状态 
+    var minusStatus = price < 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回 
+    this.setData({
+      price: price,
+      minusStatus: minusStatus
+    });
   },
   //加入购物车
-   addCars: function (e) {
+  addCars: function (e) {
     var that = this;
     var gid = that.data.gid;
     var attribute = "";
@@ -374,8 +374,8 @@ Page({
           arr: [],
           addCar: false,
           addbuy: false,
-          price:1,
-          num:1
+          price: 1,
+          num: 1
         })
 
       }
@@ -423,23 +423,23 @@ Page({
       arr: [],
       values: [],
       addbuy: false,
-      price:1
+      price: 1
     })
   },
   // 返回首页
   backHome: function () {
-      common.backHome();
+    common.backHome();
   },
- 
+
   /**
    * 生命周期函数--监听页面加载
    */
- 
+
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

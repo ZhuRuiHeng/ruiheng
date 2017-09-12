@@ -15,8 +15,12 @@
     "pages/help/help",
     "pages/tuijianShare/tuijianShare",
     "pages/shangpinInform/shangpinInform",
-    "pages/dingdanCar/dingdanCar"   
-    
+    "pages/dingdanCar/dingdanCar",
+    "pages/pintuanInform/pintuanInform",
+    "pages/miaoshaInform/miaoshaInform",
+    "pages/miaosha/miaosha",
+    "pages/pintuan/pintuan"
+        
   ],
   "window":{
     "backgroundTextStyle":"light",

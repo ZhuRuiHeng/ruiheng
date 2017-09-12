@@ -1,0 +1,44 @@
+<!--pages/miaosha/miaosha.wxml-->
+<view class="main">
+      <view class="pintuanAll">
+          <scroll-view class="search_world" scroll-x="true">
+            <view class="search_w_box" style="width:{{w_width}}rpx">
+              <view wx:for="{{search_word}}" class="search_item {{item.click_btn}}" bindtap="tapKeyWorld" data-ontap="{{item.ma_desc}}" data-inx="{{index}}">
+                <text>{{item.ma_desc}}</text>
+                <text>已开抢</text>
+              </view>
+            </view>
+          </scroll-view>
+          <view class="xianshi">
+              <view class="left"> | 限时限量 低价疯抢</view>
+              <view class="right">
+                  <image src="../images/time.png" mode="widthFix"></image>  
+                  距活动结束 00：3：2
+              </view>
+          </view>
+          <view class="service-list">
+            <navigator class="service-item" url="../miaoshaInform/miaoshaInform?gid=6">
+                  <view class="service-img">
+                      <image src="https://qncdn.playonwechat.com/shop/goods/441438052661834937.jpg" mode="aspectFill"></image>
+                  </view>
+                  <view class="service-text">
+                      <view class="service-tite service-tite1">恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意</view>
+                      <view class="grounpline">
+                          <view class="common one"></view>
+                          <view class="common two"></view>
+                      </view>
+                      <view class="kucun">
+                          <view class="left">已抢购22件</view>
+                          <view class="right">仅剩22件</view>
+                      </view>
+                      <view class="caozuo">
+                          <view> <text class="service-price">￥11</text> <text class="old service-price">￥11</text></view>
+                          <view class="service-gouwu">立即抢购</view>
+                      </view>
+                      <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view>
+                  </view>
+              </navigator>
+          </view>
+      </view>
+  </view>
+

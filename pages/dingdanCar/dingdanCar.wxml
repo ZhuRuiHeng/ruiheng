@@ -76,7 +76,7 @@
           <view class="left">商品金额</view>
           <view class="right color">￥{{totalPrice}}</view>
       </view>
-      <view class="controllist">
+      <view class="controllist bottom">
           <view class="left">运费</view>
           <view class="right color">免运费</view>
       </view>

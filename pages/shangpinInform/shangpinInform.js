@@ -3,24 +3,73 @@
 const paymentUrl = require('../../config').paymentUrl;
 console.log("paymentUrl:" + paymentUrl);
 var app = getApp();
+var date = new Date();
+console.log('date:',date);
+var total_micro_second = 1800 * 1000;
 console.log("sign:",app.data.sign);
+/* 毫秒级倒计时 */
+function count_down(that) {
+  // 渲染倒计时时钟
+  that.setData({
+    clock: date_format(total_micro_second)
+  });
+
+  if (total_micro_second <= 0) {
+    that.setData({
+      clock: "已经截止"
+    });
+    // timeout则跳出递归
+    return;
+  }
+  setTimeout(function () {
+    // 放在最后--
+    total_micro_second -= 10;
+    count_down(that);
+  }
+, 10)}
+
+// 时间格式化输出，如03:25:19 86。每10ms都会调用一次
+function date_format(micro_second) {
+  // 秒数
+  var second = Math.floor(micro_second / 1000);
+  // 小时位
+  var hr = Math.floor(second / 3600);
+  // 分钟位
+  var min = fill_zero_prefix(Math.floor((second - hr * 3600) / 60));
+  // 秒位
+  var sec = fill_zero_prefix((second - hr * 3600 - min * 60));// equal to => var sec = second % 60;
+  // 毫秒位，保留2位
+  var micro_sec = fill_zero_prefix(Math.floor((micro_second % 1000) / 10));
+
+  return min + ":" + sec + " " + micro_sec;
+}
+
+// 位数不足补零
+function fill_zero_prefix(num) {
+  return num < 10 ? "0" + num : num
+}
+
 Page({
   data: {
     oid: "",
     list:'',
     goods_list:'',
-    status1:''
+    status1:'',
+    clock: ''
   },
   onLoad: function (options) {
     console.log(options);
+    count_down(this);
     var that = this;
     that.setData({
       oid: options.oid,
       status1: options.status1
     })
   },
-
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     var dizhi = wx.getStorageSync("dizhi");
     console.log(dizhi);
@@ -50,7 +99,7 @@ Page({
           list : list,
           goods_list: list.goods_list
         })
-        console.log(goods_list);
+        //console.log(goods_list);
         wx.hideLoading()
       }
     })
@@ -108,36 +157,12 @@ Page({
       }
     })
   },
-  //地址
-  // nextAddress: function () {
-  //   var that = this;
-  //   if (wx.chooseAddress) {
-  //     wx.chooseAddress({
-  //       success: function (res) {
-  //         that.setData({
-  //           dizhi: res
-  //         })
-  //         wx.setStorageSync('dizhi', res);
-  //         console.log(res);
-  //       },
-  //       fail: function (err) {
-  //         console.log(JSON.stringify(err))
-  //       }
-  //     })
-  //   } else {
-  //     wx.showModal({
-  //       title: '提示',
-  //       content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
-  //     })
-  //   }
-  // },
   // switch
   listenerSwitch: function (e) {
     console.log('switch类型开关当前状态-----', e.detail.value);
   },
  
 
- 
   /**
    * 生命周期函数--监听页面隐藏
    */

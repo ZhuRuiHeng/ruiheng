@@ -17,6 +17,40 @@
             </view>
         </view>
     </view> 
+    <!--分类 新增star -->
+    <view class="sort">
+        <navigator wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}"  url="../more/more?cate_id={{item.cate_id}}">
+            <view class="image-text">
+              <image src="{{item.icon}}" mode="scaleToFill"></image>
+              <text>{{item.cate_name}}</text>
+            </view>
+        </navigator>
+    </view>
+    <view class="groupon groupon1">
+        <view class="gpTitle">
+            <image src="../images/zhu.png" mode="widthFix"></image>
+            <text>开团搞一波</text>
+        </view>
+        <view class="gpList">
+            <navigator wx:for="{{fightGroups}}" wx:key="{{item.index}}" class="gpimage" url="../pintuan/pintuan?gid={{item.gid}}" >
+                <image src="{{item.picture}}" mode="widthFix"></image>
+            </navigator>
+        </view>
+    </view>
+    <view class="groupon">
+        <view class="gpTitle">
+            <image src="../images/time.png" mode="widthFix"></image>
+            <text>限时秒杀</text>
+        </view>
+        <view class="gpList">
+            <navigator wx:for="{{seckills}}" wx:key="{{item.index}}" class="gpimage" url="../miaosha/miaosha?gid=item.gid">
+                <image src="{{item.picture}}" mode="widthFix"></image>
+            </navigator>
+        </view>
+        <view class="center time">{{currentSeckillTime}}场结束仅剩</view>
+        <view class="center countdown">{{nextSeckillTime}}{{micro_second}}</view>
+    </view>
+    <!--新增end  -->
     <!--内容  -->
     <!--nav -->
     <view class="main">
@@ -45,7 +79,7 @@
     </view>
     <!--结束  -->
     <!--分类模块开始  -->
-    <view class="modelAll{{index}} modelAlls" style="width:100%" wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}" bindtap="suoyin">
+    <!-- <view class="modelAll{{index}} modelAlls" style="width:100%" wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}" bindtap="suoyin">
         <navigator class="nextUrl" url="../more/more?cate_id={{item.cate_id}}">
             <view class="medit">
                 <view class="center">
@@ -54,11 +88,9 @@
                 </view>
             </view>
         </navigator>
-        <!--轮播图 -->
         <view class="goodImg" style="width:100%">
               <image src="{{item.recommendGoods.icon}}" cata-gid="{{item.recommendGoods.gid}}" style="width:100%" id="{{index}}" catchtap="swipclick" mode="widthFix"/>
         </view>
-        <!--nav  -->
         <view class="nav bc_white">
             <view  wx:for="{{item.sonCategory}}" 
                    wx:key="{{index}}"   data-fid="{{item.cate_id}}" 
@@ -69,7 +101,6 @@
                    data-active="{{tab.active}}"><span>{{tab.cate_name}}</span>
             </view>
         </view>
-        <!--列表  -->
         <view class="modeList">
             <view class="service-list">
                 <navigator class="service-item" wx:for="{{item.typelist}}" wx-item="typelist"  wx:for-item="v" wx:key="{{item.id}}" url="../inform/inform?gid={{v.gid}}">
@@ -87,7 +118,7 @@
                 </navigator>
             </view>
         </view>
-    </view>
+    </view> -->
     <!--查看全部  -->
     <view class="all chakan" bindtap="seeAll">
         查看全部

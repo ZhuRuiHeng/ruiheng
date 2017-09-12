@@ -1,5 +1,6 @@
 //index.js
 var common = require('../../common.js');
+
 //获取应用实例
 main_content: [];//最新最热
 main_content2: [];//列表
@@ -8,6 +9,7 @@ var app = getApp();
 Page({
   data: {
     lunbo : [],
+    fightGroup:[],
     imgUrls: ['../images/1.jpg'
       ,'../images/2.jpg'
       , '../images/3.jpg'
@@ -178,7 +180,6 @@ addCar: function (e) {
         title: '加载中',
         icon: 'loading'
     });
-    
     var that = this;
     // var inform = that.data.inform;    
     var gid = e.currentTarget.dataset.gid;
@@ -482,7 +483,6 @@ bindManual: function (e) {
 },
 // 加载
 onLoad: function () {
- 
 },
 onShow: function () { 
   wx.showLoading({
@@ -500,14 +500,25 @@ onShow: function () {
       },
       method: "GET",
       success: function (res) {
-        var imgUrls1 = res.data.data.carouselGoods;
-        var lunbo = [];
-        // 获取用户名称及发表时间
-        that.setData({
-          lunbo: imgUrls1
-        })
-      }
-    });
+        console.log("图团秒", res);
+        console.log('111', res.data.data.fightGroups)
+        var timestamp = Date.parse(new Date());
+        var time = new Date(parseInt(res.data.data.nextSeckillTime));
+        console.log("timestamp:", parseInt(timestamp/1000));
+        console.log("time:", parseInt(res.data.data.nextSeckillTime));
+        var total_micro_second = parseInt(res.data.data.nextSeckillTime) - parseInt(timestamp / 1000);
+        console.log('total_micro_second:', total_micro_second);
+    var lunbo = [];
+// 获取用户名称及发表时间
+  that.setData({
+    lunbo: res.data.data.carouselGoods,
+    fightGroups: res.data.data.fightGroups,
+    seckills: res.data.data.seckills,
+    currentSeckillTime: res.data.data.currentSeckillTime,
+    nextSeckillTime: res.data.data.nextSeckillTime
+  })
+}
+});
     //最热列表
     wx.request({
       url: "https://shop.playonwechat.com/api/goods-list?sign=" + sign,
