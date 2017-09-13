@@ -19,6 +19,8 @@
 .hidden{display:none;}
 .service-list{
 	padding: 0 20rpx;
+  box-sizing: border-box;
+  width: 100%;
 }
 .service-item{
 	display: flex;
@@ -43,8 +45,8 @@
 	height: 180rpx;
 }
 .service-item image{
-	width: 180rpx;
-	height: 180rpx;
+	width: 160rpx;
+	height: 160rpx;
   margin:12rpx 0 0 0;
 }
 .service-text{
@@ -54,7 +56,7 @@
 }
 .service-text .service-tite{
 	color: #000000;
-	width: 70%;
+	width: 90%;
 	font-size: 24rpx;
     padding-top:20rpx;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; 
 }
@@ -81,7 +83,7 @@
 	color: #666;
 }
 .caozuo{
-  width: 70%;
+  width: 90%;
   display: flex;
   justify-content:space-between;
   height: 63rpx;
@@ -162,4 +164,7 @@
 .search_world .click_btn{
 	color: #0eb691;
 	border-bottom: 1px solid  #0eb691;
+}
+.search_item.red{
+  color:#ff4444;
 }

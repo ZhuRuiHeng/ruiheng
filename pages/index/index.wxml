@@ -19,7 +19,7 @@
     </view> 
     <!--分类 新增star -->
     <view class="sort">
-        <navigator wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}"  url="../more/more?cate_id={{item.cate_id}}">
+        <navigator wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}"  url="../fenlei/fenlei?cate_id={{item.cate_id}}&index={{index}}">
             <view class="image-text">
               <image src="{{item.icon}}" mode="scaleToFill"></image>
               <text>{{item.cate_name}}</text>
@@ -43,12 +43,12 @@
             <text>限时秒杀</text>
         </view>
         <view class="gpList">
-            <navigator wx:for="{{seckills}}" wx:key="{{item.index}}" class="gpimage" url="../miaosha/miaosha?gid=item.gid">
+            <navigator wx:for="{{seckills}}" wx:key="{{item.index}}" class="gpimage" url="../miaosha/miaosha?gid={{item.gid}}">
                 <image src="{{item.picture}}" mode="widthFix"></image>
             </navigator>
         </view>
         <view class="center time">{{currentSeckillTime}}场结束仅剩</view>
-        <view class="center countdown">{{nextSeckillTime}}{{micro_second}}</view>
+        <view class="center countdown" wx:for="{{Countdown}}">{{item.day}}天{{item.hr}}时{{item.min}}分{{item.sec}}秒</view>
     </view>
     <!--新增end  -->
     <!--内容  -->

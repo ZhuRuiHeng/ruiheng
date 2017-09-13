@@ -12,7 +12,8 @@
             <text style="color:#000"  wx:elif="{{list.status == 'finish'}}"> 已完成</text>
             <text style="color:#000"  wx:else="{{list.status == 'close'}}"> 交易关闭</text>
             <text wx:if="{{list.status !='payment'}}">订单编号：{{list.out_trade_no}}</text>
-            <text wx:if="{{list.status == 'payment'}}">请于{{micro_second}}内付款，超时订单将自动关闭</text>
+            <text wx:if="{{list.status == 'payment'}}" wx:for="{{Countdown}}">请于{{item.min}}分{{item.sec}}秒内付款，超时订单将自动关闭</text>
+            <!--wx:for="{{Countdown}}">{{item.day}}天{{item.hr}}时{{item.min}}分{{item.sec}}秒  -->
         </view>
     </view>
     <!--地址 bindtap="nextAddress" -->

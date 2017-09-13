@@ -19,7 +19,8 @@
     "pages/pintuanInform/pintuanInform",
     "pages/miaoshaInform/miaoshaInform",
     "pages/miaosha/miaosha",
-    "pages/pintuan/pintuan"
+    "pages/pintuan/pintuan",
+    "pages/fenlei/fenlei"
         
   ],
   "window":{

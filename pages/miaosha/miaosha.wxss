@@ -19,6 +19,8 @@
 .hidden{display:none;}
 .service-list{
 	padding: 0 20rpx;
+  box-sizing: border-box;
+  width: 100%;
 }
 .service-item{
 	display: flex;
@@ -54,7 +56,7 @@
 }
 .service-text .service-tite{
 	color: #000000;
-	width: 70%;
+	width: 100%;
 	font-size: 24rpx;
     padding-top:20rpx;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; 
 }
@@ -76,7 +78,7 @@
 	color: #666;
 }
 .caozuo{
-  width: 70%;
+  width: 100%;
   display: flex;
   justify-content:space-between;
   height: 63rpx;
@@ -170,7 +172,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 24rpx;
-  width:70%;
+  width:100%;
   padding:20rpx 0;
 }
 .service-text .kucun .right{
@@ -178,7 +180,7 @@
 }
 .grounpline{
   position: relative;
-  width: 70%;
+  width: 100%;
   height: 10rpx;
   margin-top:14rpx;
 }
@@ -194,4 +196,7 @@
   top:0;
   left: 0;
   background: #F6A14C;
+}
+.search_item.red{
+  color:#ff4444;
 }

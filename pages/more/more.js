@@ -1,6 +1,6 @@
 //获取应用实例  
 // pages/inform/inform.js
-var id, url1, url2, list = [], that, data, listadd, limit = 1;
+var list = [], that, data, listadd, limit = 1;
 // var common = require('../../common.js');
 var app = getApp();
 var main_content = []; 

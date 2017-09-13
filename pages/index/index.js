@@ -6,6 +6,7 @@ main_content: [];//最新最热
 main_content2: [];//列表
 modules: [];//模板
 var app = getApp();
+///////////////
 Page({
   data: {
     lunbo : [],
@@ -319,7 +320,7 @@ buy:function(e){
       }
   } else{
       wx.navigateTo({
-        url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price
+        url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price + '&types=' + types + '&low_price=' + that.data.low_price
       })
   }
   that.setData({
@@ -501,23 +502,84 @@ onShow: function () {
       method: "GET",
       success: function (res) {
         console.log("图团秒", res);
-        console.log('111', res.data.data.fightGroups)
-        var timestamp = Date.parse(new Date());
-        var time = new Date(parseInt(res.data.data.nextSeckillTime));
-        console.log("timestamp:", parseInt(timestamp/1000));
-        console.log("time:", parseInt(res.data.data.nextSeckillTime));
-        var total_micro_second = parseInt(res.data.data.nextSeckillTime) - parseInt(timestamp / 1000);
-        console.log('total_micro_second:', total_micro_second);
-    var lunbo = [];
-// 获取用户名称及发表时间
-  that.setData({
-    lunbo: res.data.data.carouselGoods,
-    fightGroups: res.data.data.fightGroups,
-    seckills: res.data.data.seckills,
-    currentSeckillTime: res.data.data.currentSeckillTime,
-    nextSeckillTime: res.data.data.nextSeckillTime
-  })
-}
+
+        var nowTime = (new Date()).getTime();
+        var begin_time = res.data.data.nextSeckillTime;
+        console.log(nowTime + 'sssssssss' + begin_time);
+        var ge_nowTime = common.time(nowTime / 1000, 1);
+        var be_gainTime = common.time(begin_time, 1);
+        var Countdown = begin_time * 1000 - nowTime; //倒计时
+        if (Countdown > 0) {
+          function dateformat(micro_second) {
+            // 秒数
+            var second = Math.floor(micro_second / 1000);
+            // 小时位
+            var day = Math.floor(second / 86400);
+
+            if (day < 10) {
+              day = '0' + day;
+            }
+
+            var hr = Math.floor((second - day * 86400) / 3600);
+            // 分钟位
+            if (hr < 10) {
+              hr = '0' + hr;
+            }
+
+            var min = Math.floor((second - hr * 3600 - day * 86400) / 60);
+            if (min < 10) {
+              min = '0' + min;
+            }
+            // 秒位
+            var sec = (second - hr * 3600 - min * 60 - day * 86400); // equal to => var sec = second % 60;
+            // 毫秒位，保留2位
+            if (sec < 10) {
+              sec = '0' + sec;
+            }
+            var micro_sec = Math.floor((micro_second % 1000) / 10);
+
+            return day + ":" + hr + ":" + min + ":" + sec;
+          }
+
+          setInterval(function () {
+            Countdown -= 1000;
+            var time = dateformat(Countdown);
+            var splitArr = time.split(":");
+           // console.log(splitArr);
+            var _Countdown = [{
+              day: splitArr[0],
+              hr: splitArr[1],
+              min: splitArr[2],
+              sec: splitArr[3],
+            }];
+          // console.log(_Countdown);
+            that.setData({
+              countDown_tatic: true,
+              Countdown: _Countdown
+            })
+          }, 1000)
+
+        } else {
+          countDown_tatic: false
+        }
+
+        begin_time = common.time(begin_time, 1);
+        console.log(begin_time);
+        console.log(that.data.Countdown);
+
+        ////////////////////////////////////////////////////////////////////////////
+
+        var lunbo = [];
+
+    // 获取用户名称及发表时间
+      that.setData({
+        lunbo: res.data.data.carouselGoods,
+        fightGroups: res.data.data.fightGroups,
+        seckills: res.data.data.seckills,
+        currentSeckillTime: res.data.data.currentSeckillTime,
+        nextSeckillTime: that.data.Countdown
+      })
+    }
 });
     //最热列表
     wx.request({

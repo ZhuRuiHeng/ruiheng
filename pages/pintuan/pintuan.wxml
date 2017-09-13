@@ -1,27 +1,25 @@
 <!--pages/pintuan/pintuan.wxml-->
 <view class="main">
+    <scroll-view scroll-y="true" style="height:600px" bindscrolltolower="lower">  
       <view class="pintuanAll">
           <scroll-view class="search_world" scroll-x="true">
             <view class="search_w_box" style="width:{{w_width}}rpx">
-              <view wx:for="{{search_word}}" class="search_item {{item.click_btn}}" bindtap="tapKeyWorld" data-ontap="{{item.ma_desc}}" data-inx="{{index}}">{{item.ma_desc}}</view>
+              <view wx:for="{{search_word}}" class="search_item {{item.active == true?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="{{item.cate_id}}" data-inx="{{index}}">{{item.cate_name}}</view>
             </view>
           </scroll-view>
           <view class="service-list">
-            <navigator class="service-item" url="../pintuanInform/pintuanInform?gid=6">
+            <navigator wx:for="{{main_content}}"  wx:key="{{item.index}}" class="service-item" url="../pintuanInform/pintuanInform?gid={{item.gid}}">
                   <view class="service-img">
-                      <image src="https://qncdn.playonwechat.com/shop/goods/441438052661834937.jpg" mode="aspectFill"></image>
+                      <image src="{{item.picture}}" mode="aspectFill"></image>
                   </view>
                   <view class="service-text">
-                      <view class="service-tite service-tite1">恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意</view>
-                      <view class="service-tite service-tite2">恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意恩特员同意</view>
+                      <view class="service-tite service-tite1">{{item.good_name}}</view>
                       <view class="member">
-                          <image src="https://qncdn.playonwechat.com/shangcheng/car.png" mode="widthFix"></image>
-                          <image src="../images/time.png" mode="widthFix"></image>
-                          <image src="../images/zhu.png" mode="widthFix"></image>
-                          <text>已团2件</text>
+                          <image wx:for="{{item.avatarurl_arr}}" wx:for-item="v" src="{{v.avatarurl}}" mode="widthFix"></image>
+                          <text>已团{{item.on_shelf}}件</text>
                       </view>
                       <view class="caozuo">
-                          <view> <text class="service-price">￥11</text> <text class="old service-price">￥11</text></view>
+                          <view> <text class="service-price">￥{{item.group_price}}</text> <text class="old service-price">￥{{item.price}}</text></view>
                           <view class="service-gouwu">去开团</view>
                       </view>
                       <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view>
@@ -29,4 +27,5 @@
               </navigator>
           </view>
       </view>
+    </scroll-view>
   </view>

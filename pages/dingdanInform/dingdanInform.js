@@ -14,11 +14,10 @@ Page(Object.assign({}, Zan.Toast, {
     detail:''
   },
   onLoad: function (options) {
-      console.log(options);
+    console.log('options:',options);
       var that = this;
      // that.showZanToast('1111111111111');
       var attr = options.attr;
-      console.log(attr);
       if (attr == undefined){
         var attr = 0;
         that.setData({
@@ -35,7 +34,7 @@ Page(Object.assign({}, Zan.Toast, {
         low_price: options.low_price
       })
       var gid = that.data.gid;//列表页传来的
-      console.log("列表页传来的gid:", gid)
+      console.log("列表页传来的gid:", gid + '1' + num + '2' + detail +'low_price')
       var num = that.data.num;
       wx.request({
         url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
