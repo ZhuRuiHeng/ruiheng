@@ -192,7 +192,7 @@
 }
 .grounpline .common.two{
   position: absolute;
-  width: 30%;
+  width: 0;
   top:0;
   left: 0;
   background: #F6A14C;

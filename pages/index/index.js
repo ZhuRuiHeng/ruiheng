@@ -35,6 +35,7 @@ Page({
     figure:'',
     i :0 
 },
+
 //轮播图预览
   imgPreview: function () { //图片预览
       const imgs = this.data.imgUrls;
@@ -286,6 +287,7 @@ addCars:function(e){
     addCar: false
   })
 },
+// 立即购买
 buy:function(e){
   var that = this;
   var attribute = "";
@@ -309,7 +311,7 @@ buy:function(e){
   if (attrLen > 0){
     if (arrlen == attrLen){
        wx.navigateTo({
-         url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price
+         url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price + '&type=0'
         })
        console.log(attribute);
       }else{
@@ -320,7 +322,7 @@ buy:function(e){
       }
   } else{
       wx.navigateTo({
-        url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price + '&types=' + types + '&low_price=' + that.data.low_price
+        url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price + '&types=' + types + '&low_price=' + that.data.low_price + '&type=0'
       })
   }
   that.setData({
@@ -502,7 +504,7 @@ onShow: function () {
       method: "GET",
       success: function (res) {
         console.log("图团秒", res);
-
+        //倒计时
         var nowTime = (new Date()).getTime();
         var begin_time = res.data.data.nextSeckillTime;
         console.log(nowTime + 'sssssssss' + begin_time);

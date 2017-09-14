@@ -6,28 +6,34 @@
               <view class="search_item" style="width:40rpx;" wx:if="{{search_word.yesterday.length >0}}">
                   <text class="time" style="width:40rpx;height:100rpx;">昨天</text>
               </view>
-              <view wx:if="{{search_word.yesterday.length>0}}" wx:for="{{search_word.yesterday}}" class="search_item {{item.active == true?'red':'default'}}" bindtap="tapKeyWorld" data-inx="{{index}}" data-star="{{item.activity_begin}}">
+              <view wx:if="{{search_word.yesterday.length>0}}" wx:for="{{yesterday}}" data-active="{{item.active}}" 
+                    class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
+                    bindtap="tapKeyWorld" data-inx="{{index}}" data-star="{{item.activity_begin}}">
                 <text>{{item.activity_begin_time}}</text>
                 <text>{{item.status}}</text>
               </view>
               <view wx:if="{{search_word.today.length>0}}" class="search_item" style="width:40rpx;" >
                   <text class="time" style="width:40rpx;height:100rpx;">今天</text>
               </view>
-              <view wx:if="{{search_word.today.length>0}}" wx:for="{{search_word.today}}" class="search_item {{item.active == true?'red':'default'}}" bindtap="tapKeyWorld"  data-inx="{{index}}" data-star="{{item.activity_begin}}">
+              <view wx:if="{{search_word.today.length>0}} " wx:for="{{today}}" data-active="{{item.active}}" 
+                    class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
+                    bindtap="tapKeyWorld"  data-inx="{{index}}" data-star="{{item.activity_begin}}">
                 <text>{{item.activity_begin_time}}</text>
                 <text>{{item.status}}</text>
               </view>
               <view wx:if="{{search_word.tomorrow.length>0}}" class="search_item" style="width:40rpx;" >
                   <text class="time" style="width:40rpx;height:100rpx;">明天</text>
               </view>
-              <view wx:if="{{search_word.tomorrow.length>0}}" wx:for="{{search_word.tomorrow}}" class="search_item {{item.active == true?'red':'default'}}" bindtap="tapKeyWorld" data-inx="{{index}}" data-star="{{item.activity_begin}}">
+              <view wx:if="{{search_word.tomorrow.length>0}}" wx:for="{{tomorrow}}" data-active="{{item.active}}" 
+                    class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
+                    bindtap="tapKeyWorld" data-inx="{{index}}" data-star="{{item.activity_begin}}">
                 <text>{{item.activity_begin_time}}</text>
                 <text>{{item.status}}</text>
               </view>
             </view>
           </scroll-view>
           <view class="xianshi">
-              <view class="left">  {{description}}</view>
+              <view class="left">{{description}}</view>
               <view class="right">
                   <image src="../images/time.png" mode="widthFix"></image>  
                   距活动结束{{nextSeckillTime}}

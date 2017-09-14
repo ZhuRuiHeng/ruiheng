@@ -26,15 +26,24 @@ Page(Object.assign({}, Zan.Toast, {
       }
       console.log("new",that.data.attr);
       //this.nextAddress();
+      var _type = options.type;
+      if (_type == undefined){
+        _type = 0;
+      }
+      console.log("_type:", _type);
       that.setData({
         gid: options.gid,
         num: options.price,
         types: options.types,
         detail: options.gid + '-' + attr + '-' + options.price,
-        low_price: options.low_price
+        low_price: options.low_price,
+        type: _type
       })
       var gid = that.data.gid;//列表页传来的
-      console.log("列表页传来的gid:", gid + '1' + num + '2' + detail +'low_price')
+      var num = that.data.num;
+      var detail = that.data.detail;
+      var type = that.data.type;
+      console.log("列表页传来的gid:", gid + '1' + num + '2' + detail +'low_price'+ type)
       var num = that.data.num;
       wx.request({
         url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
@@ -126,7 +135,7 @@ Page(Object.assign({}, Zan.Toast, {
       });
     }else{
       wx.request({
-        url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign,
+        url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign+'&type='+that.data.type,
         data: {
           form_id: e.detail.formId,
           receiver: that.data.dizhi.userName,

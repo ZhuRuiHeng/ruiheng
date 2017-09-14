@@ -4,10 +4,14 @@
       <view class="pintuanAll">
           <scroll-view class="search_world" scroll-x="true">
             <view class="search_w_box" style="width:{{w_width}}rpx">
-              <view wx:for="{{search_word}}" class="search_item {{item.active == true?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="{{item.cate_id}}" data-inx="{{index}}">{{item.cate_name}}</view>
+              <view wx:for="{{search_word}}" 
+              class="search_item {{item.active == true?'red':'default'}} {{ontap == true?'red':'default'}}" 
+              data-cate="{{item.cate_id}}" 
+              bindtap="tapKeyWorld" data-active="{{item.active}}" data-ontap="{{item.cate_id}}"
+              data-inx="{{index}}">{{item.cate_name}}</view>
             </view>
           </scroll-view>
-          <view class="service-list">
+          <view class="service-list" wx:if="{{main_content.length>0}}">
             <navigator wx:for="{{main_content}}"  wx:key="{{item.index}}" class="service-item" url="../pintuanInform/pintuanInform?gid={{item.gid}}">
                   <view class="service-img">
                       <image src="{{item.picture}}" mode="aspectFill"></image>
@@ -25,6 +29,9 @@
                       <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view>
                   </view>
               </navigator>
+          </view>
+          <view class="service-list" wx:else style="text-align:center;font-size:26rpx;padding:20rpx;">
+            此分类暂时没有数据！
           </view>
       </view>
     </scroll-view>

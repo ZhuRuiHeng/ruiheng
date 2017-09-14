@@ -15,7 +15,7 @@
             </view>
             <view class="right">
                 <view class="top">距结束仅剩</view>
-                <view class="btm">33432</view>
+                <view class="btm" wx:for="{{Countdown}}">{{item.day}}天{{item.hr}}时{{item.min}}分{{item.sec}}秒</view>
             </view>
         </view>
     </view>
@@ -27,11 +27,11 @@
         <view class="padding bod">
              <view class="price">
               <view class="left">
-                  <view class="big" wx:if="{{inform.low_price == inform.high_price}}">￥2222{{inform.low_price}}</view> 
-                  <view class="big" wx:else>￥354{{inform.low_price}}~{{inform.high_price}}</view>
+                  <view class="big">￥{{inform.low_group_price}}</view> 
                   <view class="line">
-                      <view class="oldPrice">￥22</view>
-                      <view class="color"><text>2人拼团</text><text>拼团立省￥11</text></view>
+                      <view class="oldPrice" wx:if="{{inform.low_price == inform.high_price}}">￥{{inform.low_price}}</view>
+                      <view class="oldPrice" wx:else>￥{{inform.low_price}}~{{inform.high_price}}</view>
+                      <view class="color"><text>{{inform.activity_name}}</text><text>拼团立省￥{{inform.save_money}}</text></view>
                   </view>
               </view>
               <button class="share" open-type="share">
@@ -40,7 +40,7 @@
               </button>
             </view>
             <view class="title">
-                <text>346547568fh{{inform.good_name}}</text>
+                <text>{{inform.good_name}}</text>
             </view>
             <view class="yunfei">
                 <view class="">运费：￥{{inform.expenses}}</view>
@@ -59,14 +59,14 @@
             </view>
         </view>
         <!--new  -->
-        <view class="mxPintuan">
+        <!-- <view class="mxPintuan">
             <view class="title">拼团</view>
             <view class="xuanze">
                 <view class="classname">支付开团邀请1人参团，人数不足自动退款。</view>
                 仔细规则<view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
             </view>
             <view class="goTrem">
-               <text class="title"> 以下小伙伴正在发起拼团，您可以直接参与：</text>
+                <text class="title"> 以下小伙伴正在发起拼团，您可以直接参与：</text>
                 <view class="Treaminform">
                     <view class="left">
                       <view class="niceImg"><image src="../images/quan.png" mode="widthFix"></image></view>
@@ -81,9 +81,30 @@
                     </view>
                 </view>
             </view>
-        </view>
+        </view> -->
+        <!--finish  -->
+        <!-- <view class="mxPintuan">
+            <view class="xuanze">
+                <view class="classname">已拼团成功32323单，快拉小伙伴去开团吧</view>
+                去开团<view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view>
+            </view>
+            <view class="goTrem">
+                <view class="Treaminform">
+                    <view class="left">
+                      <view class="niceImg"><image src="../images/quan.png" mode="widthFix"></image></view>
+                      <view class="niceName">eret</view>
+                    </view>
+                    <view class="right">
+                        <view class="tream">
+                            22秒前
+                        </view>
+                        <view class="goButton">已拼满</view>
+                    </view>
+                </view>
+            </view>
+        </view> -->
         <!--商品详情图片广告-->
-         <view class="padding shangpin">
+         <view class="padding shangpin" style="margin-top:20rpx">
             <view class="allImg">
                 <view class="title"><text>商品详情</text></view>
                   <view class="imgs">
@@ -105,60 +126,16 @@
             </view>
             <text >找客服</text>
         </view>
-        <view class="buyNow style" bindtap="addbuy" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
-          <text>￥17</text>
+        <view class="buyNow style" bindtap="addCar" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
+          <text>￥{{purchase}}</text>
           <text>单独购买</text>
         </view>
-        <view class="addCars style" bindtap="addCar" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
-          <text>￥10</text>
+        <view class="addCars style" bindtap="addbuy"  id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
+          <text>￥{{inform.low_group_price}}</text>
           <text>2人拼团</text>
         </view>
     </view> 
-    <!--加入购物车  -->
-    <view class="bg {{addCar?'show':'hidden'}}"></view>
-    <view class="carBox {{addCar?'show':'hidden'}}">
-        <view class="padding">
-            <view class="top">
-                <view class="left">
-                    <image src="{{figure}}"></image>
-                </view>
-                <view class="right">
-                    <text class="shuoming">{{inform.good_name}}</text>
-                    <text class="price">
-                        <text wx:if="{{low_price == high_price}}">￥{{low_price}}</text> 
-                        <text wx:else>￥{{low_price}}~{{high_price}}</text>
-                    </text>
-                </view>
-                <view class="del" bindtap="closeCar">
-                    <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
-                </view>
-            </view>
-             <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
-                <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
-                <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}" >
-                    <view wx:for="{{item.attribute_value}}" wx:key="{{index}}" data-value="{{attr.attribute_value}}" 
-                          wx:for-item="attr" data-avid="{{attr.avid}}" data-active="{{attr.active}}"
-                          class="text white {{attr.active==true ? 'red':''}}" 
-                          bindtap="xuanze" >{{attr.attribute_value}}</view>
-                </view>
-            </view>
-            <view class="mid">
-                <view class="buy">
-                    <text>购买数量：{{price}}</text>
-                    <text class="gray">剩余{{inform.total_stock-price}}件</text>
-                </view>
-                <view class="num">
-                    <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
-                    <input type="number"  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
-                    <button class="add normal" bindtap="bindPlus">+</button>
-                </view>
-            </view>
-        </view>
-        <view class="btn" bindtap="addCars">
-            <button class="ok">确定</button>
-        </view>
-    </view>
-    <!--弹窗结束  -->
+    
     <!--立即购买选择型号弹窗  -->
     <view class="bg {{addbuy?'show':'hidden'}}"></view>
     <view class="carBox {{addbuy?'show':'hidden'}}">
@@ -170,8 +147,8 @@
                 <view class="right">
                     <text class="shuoming">{{inform.good_name}}</text>
                     <text class="price">
-                        <text wx:if="{{low_price == high_price}}">￥{{low_price}}</text> 
-                        <text wx:else>￥{{low_price}}~{{high_price}}</text>
+                        <text wx:if="{{low_group_price == high_group_price}}">￥{{low_group_price}}</text> 
+                        <text wx:else>￥{{low_group_price}}~{{high_group_price}}</text>
                     </text>
                 </view>
                 <view class="del" bindtap="closeCar">

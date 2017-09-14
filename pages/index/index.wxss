@@ -470,7 +470,7 @@
 }
 .groupon .gpList navigator image{
   width: 80%;
-  height: inherit;
+  height:198rpx;
 }
 .center{
   text-align: center;

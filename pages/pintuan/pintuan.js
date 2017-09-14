@@ -9,48 +9,6 @@ Page({
    * 页面的初始数据
    */
   data: { 
-    "search_word1": [
-      {
-        "id": "1",
-        "ma_desc": "祛痘"
-      },
-      {
-        "id": "2",
-        "ma_desc": "护肤"
-      },
-      {
-        "id": "3",
-        "ma_desc": "美白"
-      },
-      {
-        "id": "4",
-        "ma_desc": "眼部"
-      },
-      {
-        "id": "5",
-        "ma_desc": "祛皱"
-      },
-      {
-        "id": "6",
-        "ma_desc": "淡斑"
-      },
-      {
-        "id": "7",
-        "ma_desc": "保湿"
-      },
-      {
-        "id": "8",
-        "ma_desc": "防晒"
-      },
-      {
-        "id": "9",
-        "ma_desc": "清洁"
-      },
-      {
-        "id": "10",
-        "ma_desc": "化妆"
-      }
-    ], 
     search_word:[],
     limit: 1
   },
@@ -123,13 +81,24 @@ Page({
       title: '加载中',
     })
     var that = this;
-    var cate_id = e.currentTarget.dataset.ontap;
-    console.log(cate_id);
+    var ontap = e.currentTarget.dataset.ontap;
+    var search_word = that.data.search_word;
     that.setData({
-      cate_id: cate_id
+      cate_id: ontap
     })
     setTimeout(function () {
-
+      
+      for (var i = 0; i < search_word.length; i++) {
+        search_word[i].active = false;
+        if (ontap == search_word[i].cate_id) {
+          search_word[i].active = true;
+          console.log("iiiiiii:", i);
+        }
+        console.log('状态', search_word[i].active);
+      }
+      that.setData({
+        search_word: search_word
+      })
       wx.request({
         url: "https://shop.playonwechat.com/api/fight-group-list?sign=" + app.data.sign,
         data: {

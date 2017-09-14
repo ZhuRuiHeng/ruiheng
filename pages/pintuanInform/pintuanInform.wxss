@@ -1,6 +1,7 @@
 /* pages/inform/inform.wxss */
 .container {
   padding: 0;
+  overflow: hidden;
 }
 /*轮播*/
 .swiper{

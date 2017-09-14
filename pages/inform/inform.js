@@ -405,7 +405,7 @@ Page({
     if (attrLen > 0) {
       if (arrlen == attrLen) {
         wx.navigateTo({
-          url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price
+          url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price + '&type=0'
         })
         console.log(attribute);
       } else {
@@ -416,7 +416,7 @@ Page({
       }
     } else {
       wx.navigateTo({
-        url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price
+        url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&' + 'price=' + that.data.price + '&type=0'
       })
     }
     that.setData({

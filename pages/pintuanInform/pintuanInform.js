@@ -23,7 +23,8 @@ Page({
     attrLen: '',
     values: [], //型号
     shuxing: '',
-    all: []
+    all: [],
+    purchase:''//单独购买
   },
   onLoad: function (options) {
     var that = this;
@@ -34,6 +35,10 @@ Page({
     });
   },
   onShow: function (options) {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    });
     var that = this;
     var gid = that.data.gid;//列表页传来的id
     wx.request({
@@ -56,8 +61,9 @@ Page({
         that.setData({
           inform: inform,
           figure: inform.picture[0],
-          low_price: inform.low_price,
-          high_price: inform.high_price,
+          low_group_price: inform.low_group_price,
+          high_group_price: inform.high_group_price,
+          purchase: inform.low_price,
           informImg: informImg,
           imgUrls: picture,
           shuxing: inform.attribute
@@ -71,11 +77,76 @@ Page({
           news += shuxing[i].attribute_name + ' ';
           all.push(news); //将多个both对象pushgouwu数组
         }
+        ///////////////////////////////////////////////////////////
+        //倒计时
+        var nowTime = (new Date()).getTime();
+        var begin_time = res.data.data.goodsDetail.activity_expire;
+        console.log(nowTime + 'sssssssss' + begin_time);
+        var ge_nowTime = common.time(nowTime / 1000, 1);
+        var be_gainTime = common.time(begin_time, 1);
+        var Countdown = begin_time * 1000 - nowTime; //倒计时
+        if (Countdown > 0) {
+          function dateformat(micro_second) {
+            // 秒数
+            var second = Math.floor(micro_second / 1000);
+            // 小时位
+            var day = Math.floor(second / 86400);
+
+            if (day < 10) {
+              day = '0' + day;
+            }
+
+            var hr = Math.floor((second - day * 86400) / 3600);
+            // 分钟位
+            if (hr < 10) {
+              hr = '0' + hr;
+            }
+
+            var min = Math.floor((second - hr * 3600 - day * 86400) / 60);
+            if (min < 10) {
+              min = '0' + min;
+            }
+            // 秒位
+            var sec = (second - hr * 3600 - min * 60 - day * 86400); // equal to => var sec = second % 60;
+            // 毫秒位，保留2位
+            if (sec < 10) {
+              sec = '0' + sec;
+            }
+            var micro_sec = Math.floor((micro_second % 1000) / 10);
+
+            return day + ":" + hr + ":" + min + ":" + sec;
+          }
+
+          setInterval(function () {
+            Countdown -= 1000;
+            var time = dateformat(Countdown);
+            var splitArr = time.split(":");
+            // console.log(splitArr);
+            var _Countdown = [{
+              day: splitArr[0],
+              hr: splitArr[1],
+              min: splitArr[2],
+              sec: splitArr[3],
+            }];
+           console.log(_Countdown);
+            that.setData({
+              countDown_tatic: true,
+              Countdown: _Countdown
+            })
+          }, 1000)
+
+        } else {
+          countDown_tatic: false
+        }
+
+        begin_time = common.time(begin_time, 1);
+        console.log(begin_time);
+        console.log(that.data.Countdown);
+        ////////////////////////////////////////////////
         that.setData({
-          all: all
+          all: all,
+          activity_expire: that.data.Countdown
         })
-        console.log("all:", that.data.all);
-        console.log(typeof all);
         wx.hideLoading()
       }
     })
@@ -89,7 +160,7 @@ Page({
       urls: imgs // 需要预览的图片http链接列表
     })
   },
-  //购物车
+  //原价购买跳转到详情
   addCar: function (e) {
     wx.showToast({
       title: '加载中',
@@ -97,35 +168,12 @@ Page({
     });
     var that = this;
     var gid = e.currentTarget.dataset.gid
-    console.log("gid", gid);
-    that.setData({
-      gid: gid
+    wx.navigateTo({
+      url: '../inform/inform?gid=' + gid
     })
-    wx.request({
-      url: "https://shop.playonwechat.com/api/goods-detail?sign=" + app.data.sign,
-      data: {
-        gid: that.data.gid
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("详情", res);
-        var list = [];
-        // 获取用户名称及发表时间
-        var inform = res.data.data.goodsDetail;
-        //infoem.attribute
-        that.setData({
-          addCar: true,
-          inform: inform
-        })
-        wx.hideLoading()
-        console.log("inform详情", inform);
-      }
-    })
+    wx.hideLoading()
   },
-  //购买
+  //团购购买
   addbuy: function (e) {
     wx.showToast({
       title: '加载中',
@@ -196,8 +244,6 @@ Page({
       var _inform = that.data.inform;
       // //////////////
       var attribute_value = _attribute[index].attribute_value;
-      // console.log("attribute_value", attribute_value);
-      //console.log(attribute_value.length);
       for (var j = 0; j < attribute_value.length; j++) {
         attribute_value[j].active = false;
         if (avid == attribute_value[j].avid) {
@@ -211,9 +257,6 @@ Page({
             figure = that.data.figure;
           }
 
-
-          //console.log('figure:', attribute_value[j].figure);
-          //setTimeout(function () {
           if (index == 0) {
             arr[0] = anids + ':' + avid;
             values[0] = value;
@@ -224,14 +267,9 @@ Page({
             arr[2] = anids + ':' + avid;
             values[2] = value;
           }
-          // }, 100)
         }
       }
 
-      //console.log('qqqqqqqqqqqq', arr);
-      /////////////////
-      //console.log("参数", anids, avid, value);
-      //////////////////////////////////////////////
       var attribute = "";
       for (var i = 0; i < arr.length; i++) {
         if (arr[i]) {
@@ -246,7 +284,7 @@ Page({
       var arrlen = that.data.arr.length; //数组长度
       // console.log('获取attribute长度', attrLen);
       // console.log('数组长度', arrlen); //bug 数组长度
-      // console.log('low_price:', that.data.inform.low_price);
+      // console.log('low_group_price:', that.data.inform.low_group_price);
       var priceGroup = that.data.inform.priceGroup;
       var s = 'attr' + attribute;
       console.log('sssss:', s);
@@ -259,17 +297,17 @@ Page({
           that.setData({
             i: i
           });
-          var nowPrice = that.data.inform.priceGroup[that.data.i].price;
+          var nowPrice = that.data.inform.priceGroup[that.data.i].group_price;
           console.log('nowPrice:', nowPrice);
           that.setData({
             inform: _inform,
             figure: figure,
-            low_price: nowPrice,
-            high_price: nowPrice
+            low_group_price: nowPrice,
+            high_group_price: nowPrice
           })
         }
       }
-      console.log(that.data.low_price + '低;高' + that.data.high_price)
+      console.log(that.data.low_group_price + '低;高' + that.data.high_group_price)
       ///////////////////////////////////////////////
 
 
@@ -326,61 +364,6 @@ Page({
       minusStatus: minusStatus
     });
   },
-  //加入购物车
-  addCars: function (e) {
-    var that = this;
-    var gid = that.data.gid;
-    var attribute = "";
-    var types = "";
-    var arr = that.data.arr;
-    var values = that.data.values;
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i]) {
-        attribute += arr[i] + ',';
-        types += values[i];
-      }
-    }
-    attribute = attribute.substr(0, attribute.length - 1);
-    console.log("aaaaaa", attribute);
-
-    console.log("attribute", typeof attribute[0]);
-    console.log("gid", gid);
-    var num = that.data.price;
-    console.log('gid', gid + 'num', num + 'attribute', attribute);
-    wx.request({
-      url: "https://shop.playonwechat.com/api/add-carts?sign=" + app.data.sign,
-      method: "POST",
-      data: {
-        gid: that.data.gid,
-        num: that.data.price,
-        attribute: attribute
-      },
-      success: function (res) {
-        console.log("post", res);
-        var status = res.data.status;
-        if (status == 1) {
-          wx.showToast({
-            title: '加入购物车成功',
-            image: '../images/success.png'
-          });
-
-        } else {
-          wx.showToast({
-            title: '加入购物车失败',
-            image: '../images/false.png'
-          });
-        }
-        that.setData({
-          arr: [],
-          addCar: false,
-          addbuy: false,
-          price: 1,
-          num: 1
-        })
-
-      }
-    })
-  },
   //下一步
   buy: function (e) {
     var that = this;
@@ -395,9 +378,9 @@ Page({
       }
     }
     attribute = attribute.substr(0, attribute.length - 1);
-    console.log("aaaaaa", attribute);
-    console.log("types", types);
-    var carid = wx.getStorageSync("carid");
+    console.log("attribute:", attribute);
+    console.log("types:", types);
+    console.log("low_group_price:", that.data.low_group_price)
     var attrLen = that.data.inform.attribute.length;//获取attribute长度
     var arrlen = that.data.arr.length; //数组长度
     console.log('获取attribute长度', attrLen);
@@ -405,7 +388,7 @@ Page({
     if (attrLen > 0) {
       if (arrlen == attrLen) {
         wx.navigateTo({
-          url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price
+          url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_group_price+'&type=1'
         })
         console.log(attribute);
       } else {
@@ -416,7 +399,7 @@ Page({
       }
     } else {
       wx.navigateTo({
-        url: '../dingdanInform/dingdanInform?gid=' + carid + '&' + 'price=' + that.data.price
+        url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&price=' + that.data.price + '&low_price=' + that.data.low_group_price + '&type=1'
       })
     }
     that.setData({

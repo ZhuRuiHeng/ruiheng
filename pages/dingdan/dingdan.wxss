@@ -144,3 +144,6 @@ button::after{
 navigator-hover{
   opacity: 1;
 }
+.service-tite .bg{
+    color:#ff4444;background:#FCC1D4;margin:0 10rpx 0 0;padding:0 6rpx;display: inline-block;
+}

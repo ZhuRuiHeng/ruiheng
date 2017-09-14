@@ -1,0 +1,62 @@
+<!--pages/pintuanxiangqing/pintuanxiangqing.wxml-->
+<!--pages/pintuan/pintuan.wxml-->
+<view class="main">
+    <view class="pintuanAll">
+         <view class="service-list">
+            <navigator class="service-item" >
+                  <view class="service-img">
+                      <image src="{{item.picture}}https://qncdn.playonwechat.com/shop/goods/58228649344159111.jpg" mode="aspectFill"></image>
+                  </view>
+                  <view class="service-text">
+                      <view class="service-tite service-tite1">让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有{{item.good_name}}</view>
+                      <view class="caozuo">
+                          <view> <text class="service-price">￥333{{item.group_price}}</text> <text class="old service-price">￥333{{item.price}}</text></view>
+                      </view>
+                  </view>
+              </navigator>
+              <!--拼团成功  -->
+              <view class="success">
+                  <image src="../images/tuan.png" mode="widthFix"></image>
+              </view>
+              <!--参团  -->
+              <view class="guize">
+                  <view class="top">
+                      <view class="new">还差<text>3</text>位新人，快喊小伙伴一起拼团吧</view>
+                      <view class="shijian">仅剩22222失效</view>
+                  </view>
+                  <view class="btm">
+                      <view class="user">
+                          <image src="../images/quan.png" mode="widthFix"></image>
+                          <text>团长</text>
+                      </view>
+                      <view class="user">
+                          <image src="../images/quan.png" mode="widthFix"></image>
+                      </view>
+                  </view>
+                  <view class="right">规则详情</view>
+              </view>
+              <view class="guize">
+                  <view class="top">
+                      <view class="new">已有<text>3</text>人，拼团成功</view>
+                  </view>
+                  <view class="btm">
+                      <view class="user">
+                          <image src="../images/quan.png" mode="widthFix"></image>
+                          <text>团长</text>
+                      </view>
+                      <view class="user">
+                          <image src="../images/quan.png" mode="widthFix"></image>
+                      </view>
+                  </view>
+                  <view class="right">规则详情</view>
+              </view>
+              <view style="text-align:center;">
+                   <view class="fenxiang">
+                      <image src="../images/quan.png" mode="widthFix"></image>分享给微信好友
+                  </view>
+              </view>
+             <view class="next">查看订单详情</view>
+          </view>
+      </view>
+</view>
+
