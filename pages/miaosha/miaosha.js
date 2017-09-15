@@ -184,9 +184,25 @@ Page({
         console.log("iiiiiiiiii:",i)
       }
     }
+    for (var i = 0; i < that.data.tomorrow.length; i++) {
+      that.data.tomorrow[i].active = false;
+      if (star == that.data.tomorrow[i].activity_begin) {
+        that.data.tomorrow[i].active = true;
+        console.log("iiiiiiiiii:", i)
+      }
+    }
+    for (var i = 0; i < that.data.yesterday.length; i++) {
+      that.data.yesterday[i].active = false;
+      if (star == that.data.yesterday[i].activity_begin) {
+        that.data.yesterday[i].active = true;
+        console.log("iiiiiiiiii:", i)
+      }
+    }
     console.log(star);
     that.setData({
-      today: today
+      today: today,
+      tomorrow: tomorrow,
+      yesterday: yesterday
     })
     setTimeout(function () {
      

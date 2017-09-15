@@ -1,0 +1,22 @@
+/* pages/guize/guize.wxss */
+.container {
+  padding: 0;
+  font-size: 24rpx;
+  width: 100%;
+}
+.container .xiangqing{
+  padding:20rpx;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+.container .xiangqing .title{
+    font-size: 28rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+}
+.container .xiangqing .content{
+    font-size: 22rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+}

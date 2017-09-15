@@ -28,12 +28,15 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
+    console.log(options);
     var gid = options.gid;//列表页传来的id
     console.log("gidqqqqq", gid);
     this.setData({
       gid: gid,
     });
   },
+  
+
   onShow: function (options) {
     wx.showToast({
       title: '加载中',
@@ -128,7 +131,7 @@ Page({
               min: splitArr[2],
               sec: splitArr[3],
             }];
-           console.log(_Countdown);
+          //  console.log(_Countdown);
             that.setData({
               countDown_tatic: true,
               Countdown: _Countdown
@@ -151,7 +154,12 @@ Page({
       }
     })
   },
-  //轮播图预览
+  //跳转购物车
+  gouwuche:function(){
+    wx.switchTab({
+      url: '../car/car'
+    })
+  },
   imgPreview: function () { //图片预览
     const imgs = this.data.imgUrls;
     console.log("const");

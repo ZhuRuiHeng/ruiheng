@@ -1,10 +1,12 @@
 {
   "pages":[
+    
     "pages/index/index",
     "pages/login/login",
     "pages/use/use",
     "pages/car/car",
     "pages/dingdanInform/dingdanInform",
+    "pages/TdingdanInform/TdingdanInform",
     "pages/my/my",
     "pages/inform/inform",
     "pages/search/search",
@@ -18,9 +20,11 @@
     "pages/dingdanCar/dingdanCar",
     "pages/pintuanInform/pintuanInform",
     "pages/miaoshaInform/miaoshaInform",
+    "pages/pintuanxiangqing/pintuanxiangqing",
     "pages/miaosha/miaosha",
     "pages/pintuan/pintuan",
-    "pages/pintuanxiangqing/pintuanxiangqing",
+    
+    "pages/guize/guize",
     "pages/fenlei/fenlei"    
   ],
   "window":{

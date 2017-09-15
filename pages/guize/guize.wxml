@@ -1,0 +1,9 @@
+<!--pages/guize/guize.wxml-->
+<view class="container">
+  <view class="xiangqing">
+      <view class="title">1.拼团有效期</view>
+      <view class="content">
+          拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功拼团成功
+      </view>
+  </view>
+</view>

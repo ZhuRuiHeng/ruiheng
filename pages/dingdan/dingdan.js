@@ -38,11 +38,21 @@ Page({
   
 
 onLoad: function (options) {
-  console.log(options.status);
-  this.setData({
-    status: options.status
+  var that = this;
+  var nowTime = Date.parse(new Date());
+ 
+  var status = options.status;
+  if (status==undefined){
+    status = ""
+  }
+  console.log("status:", status);
+  that.setData({
+    status:status,
+    nowTime: nowTime/1000
   })
+  console.log('nowTime:', that.datanowTime);
 },
+
 // 加载
 
 onShow: function () {
@@ -147,6 +157,22 @@ tapKeyWorld: function (e) {
       }
     })
   })
+},
+pintuan: function (event) {
+  console.log(event);
+    var that = this;
+    var gbid = event.currentTarget.dataset.gbid;
+    var gid = event.currentTarget.dataset.gid;
+    
+    console.log(gbid);
+    console.log('222',gid);
+    that.setData({
+      gbid: event.currentTarget.dataset.gbid,
+      gid: event.currentTarget.dataset.gid
+    })
+    wx.navigateTo({
+      url: '../pintuanxiangqing/pintuanxiangqing?gbid=' + that.data.gbid + '&gid=' + that.data.gid
+    })   
 },
   //取消订单
 shouhuo: function (event) {

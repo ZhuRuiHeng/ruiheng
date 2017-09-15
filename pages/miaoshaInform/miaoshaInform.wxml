@@ -19,7 +19,7 @@
             </view>
         </view>
     </view>
-    <view class="gouwuche">
+    <view class="gouwuche" catchtap="gouwuche">
         <image src="../images/gouwuche.png" mode="widthFix"></image>
     </view>
     <!--简介  -->

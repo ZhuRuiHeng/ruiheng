@@ -151,6 +151,12 @@ Page({
       }
     })
   },
+  //跳转购物车
+  gouwuche: function () {
+    wx.switchTab({
+      url: '../car/car'
+    })
+  },
   //轮播图预览
   imgPreview: function () { //图片预览
     const imgs = this.data.imgUrls;

@@ -132,12 +132,16 @@ word-break:break-all;
   top:0;
   right:0;
   width: 60rpx;
-  background: #f7982a;
+  background: #FED584;
+  border-bottom-right-radius:30rpx;
+  border-bottom-left-radius:30rpx;
+  padding-bottom:10rpx
 }
 .btm{
     display: flex;
     justify-content: center;
     text-align: center;
+    padding:30rpx 0;
 }
 .btm .user{
   width: 60rpx;
@@ -161,7 +165,7 @@ word-break:break-all;
 }
 .fenxiang{
   text-align: center;
-  background: #44B549;
+  background: #1aad19;
   color:#fff;
   font-size:26rpx;
   border-radius: 50rpx;
@@ -183,11 +187,32 @@ word-break:break-all;
 .top .new{
   font-size: 30rpx;
   padding:6rpx;
+   height: 56rpx;
+    line-height: 56rpx;
 }
 .guize{
-  background: #FCC1D4;
+  background: #FFE7E7;
   margin: 20rpx;
 }
 .next{
-   margin: 20rpx;
+   margin: 40rpx;
+}
+button.flex{
+  position:relative;
+  display:block;
+  margin: 0;
+  padding:0;
+  box-sizing:border-box;
+  font-size:24rpx;
+  text-align:center;
+  text-decoration:none;
+  line-height:2.55555556;
+  border-radius:0px;
+  -webkit-tap-highlight-color:transparent;
+  overflow:hidden;
+  color:#ffffff;
+  background: none;
+}
+button.flex::after{
+  content: none;
 }

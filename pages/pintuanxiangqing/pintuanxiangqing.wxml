@@ -1,61 +1,86 @@
 <!--pages/pintuanxiangqing/pintuanxiangqing.wxml-->
-<!--pages/pintuan/pintuan.wxml-->
 <view class="main">
     <view class="pintuanAll">
          <view class="service-list">
             <navigator class="service-item" >
                   <view class="service-img">
-                      <image src="{{item.picture}}https://qncdn.playonwechat.com/shop/goods/58228649344159111.jpg" mode="aspectFill"></image>
+                      <image src="{{groupDetail.picture}}" mode="aspectFill"></image>
                   </view>
                   <view class="service-text">
-                      <view class="service-tite service-tite1">让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有让他让他有{{item.good_name}}</view>
+                      <view class="service-tite service-tite1">{{groupDetail.good_name}}</view>
                       <view class="caozuo">
-                          <view> <text class="service-price">￥333{{item.group_price}}</text> <text class="old service-price">￥333{{item.price}}</text></view>
+                          <view> <text class="service-price">{{groupDetail.group_price}}</text> 
+                          <text class="old service-price">{{groupDetail.price}}</text></view>
                       </view>
                   </view>
               </navigator>
-              <!--拼团成功  -->
-              <view class="success">
-                  <image src="../images/tuan.png" mode="widthFix"></image>
-              </view>
-              <!--参团  -->
-              <view class="guize">
-                  <view class="top">
-                      <view class="new">还差<text>3</text>位新人，快喊小伙伴一起拼团吧</view>
-                      <view class="shijian">仅剩22222失效</view>
-                  </view>
-                  <view class="btm">
-                      <view class="user">
-                          <image src="../images/quan.png" mode="widthFix"></image>
-                          <text>团长</text>
+              <!--22  -->
+              <view class=""  wx:if="{{groupDetail.success_time==0}}">
+                  <view class="" wx:if="{{groupDetail.group_expire < nowTime}}">
+                      <view class="guize">
+                          <view class="top">
+                              <view class="new">还差<text>{{groupDetail.need_number}}</text>位新人，快喊小伙伴一起拼团吧</view>
+                              <view class="shijian">仅剩22222失效{{mid}}{{midNew}}{{item.group_expire}}</view>
+                          </view>
+                          <view class="btm" wx:for="{{groupDetail.avatarurl_arr}}">
+                              <view class="user" data-index="{{index}}">
+                                  <image src="{{item.avatarurl}}" mode="widthFix"></image>
+                                  <text wx:if="{{index ==0}}">团长</text>
+                              </view>
+                          </view>
+                          <view class="right" bindtap="guize">规则详情</view>
                       </view>
-                      <view class="user">
-                          <image src="../images/quan.png" mode="widthFix"></image>
-                      </view>
-                  </view>
-                  <view class="right">规则详情</view>
-              </view>
-              <view class="guize">
-                  <view class="top">
-                      <view class="new">已有<text>3</text>人，拼团成功</view>
-                  </view>
-                  <view class="btm">
-                      <view class="user">
-                          <image src="../images/quan.png" mode="widthFix"></image>
-                          <text>团长</text>
-                      </view>
-                      <view class="user">
-                          <image src="../images/quan.png" mode="widthFix"></image>
+                      <view style="text-align:center;padding:40rpx 0;background:#fff;">
+                          <view class="fenxiang" wx:if="{{mid==midNew}}">
+                            <button class="flex" open-type="share">
+                              <image src="../images/wei.png" mode="widthFix"></image>分享给微信好友
+                            </button>
+                          </view>
+                          <!--wx:if="{{mid!=midNew}}"  -->
+                          <view class="fenxiang" >
+                            <button class="flex"  bindtap="buy">
+                                一键参团
+                            </button>
+                          </view>
                       </view>
                   </view>
-                  <view class="right">规则详情</view>
-              </view>
-              <view style="text-align:center;">
-                   <view class="fenxiang">
-                      <image src="../images/quan.png" mode="widthFix"></image>分享给微信好友
+                  <view class="classname" wx:else>
+                      <view class="guize">
+                          <view class="top">
+                              <view class="new">超过有效时间，拼团失败</view>
+                          </view>
+                          <view class="btm" wx:for="{{groupDetail.avatarurl_arr}}">
+                              <view class="user" data-index="{{index}}">
+                                  <image src="{{item.avatarurl}}" mode="widthFix"></image>
+                                  <text wx:if="{{index ==0}}">团长</text>
+                              </view>
+                          </view>
+                          <view class="right" bindtap="guize">规则详情</view>
+                      </view>
+                      <view class="next" bindtap="backHome">返回首页</view> 
+                      <view class="success">
+                          <image  src="../images/flse.png" mode="widthFix"></image>
+                      </view>
                   </view>
               </view>
-             <view class="next">查看订单详情</view>
+              <view class=""  wx:if="{{groupDetail.success_time!=0}}">
+                  <view class="success">
+                      <image src="../images/tuan.png" mode="widthFix"></image>
+                  </view>
+                  <view class="guize">
+                      <view class="top">
+                          <view class="new">已有<text>{{groupDetail.group_number}}</text>人参团，拼团成功</view>
+                      </view>
+                      <view class="btm" wx:for="{{groupDetail.avatarurl_arr}}">
+                          <view class="user" data-index="{{index}}">
+                              <image src="{{item.avatarurl}}" mode="widthFix"></image>
+                              <text wx:if="{{index ==0}}">团长</text>
+                          </view>
+                      </view>
+                      <view class="right" bindtap="guize">规则详情</view>
+                  </view> 
+                  <view class="next" bindtap="chakan">查看订单详情</view> 
+              </view>
           </view>
       </view>
 </view>
