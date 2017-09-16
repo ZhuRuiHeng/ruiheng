@@ -1,13 +1,13 @@
 //获取应用实例  
 // pages/inform/inform.js
-var list = [], that, data, listadd, limit = 1;
+var list = [], that, data, listadd;
 // var common = require('../../common.js');
 var app = getApp();
 var main_content = []; 
 Page({
     data: {
       cate_id:'',
-      limit: 1
+      page: 1
     },
     onLoad: function (options) {
       console.log(options);
@@ -46,6 +46,7 @@ Page({
     },
     // 下拉分页
     onReachBottom: function () {
+      console.log("下拉分页")
       wx.showToast({
         title: '加载中',
         icon: 'loading'
@@ -54,12 +55,12 @@ Page({
       var oldGoodsList= that.data.main_content;
       console.log("oldGoodsList:" + oldGoodsList);
       var goodsList = [];
-      var oldPage = that.data.limit;
+      var oldPage = that.data.page;
       var reqPage = oldPage + 1;
       wx.request({
         url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
         data: {
-          limit: reqPage,
+          page: reqPage,
           cate_id: that.data.cate_id
         },
         header: {
@@ -71,15 +72,11 @@ Page({
           var goodsList = res.data.data.goodsList;
           if (res.data.data.length == 0) return;
           var page = oldPage + 1;
-          // 获取用户名称及发表时间
-          that.setData({
-            limit: limit
-          });
-          // var contentTip = res.data.data.goodsList;
           var newContent = oldGoodsList.concat(goodsList);
           
           that.setData({
-            "main_content": newContent
+            main_content: newContent,
+            page: reqPage
           });
           wx.hideLoading()
           console.log("newContent:" + that.data.newContent)

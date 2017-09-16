@@ -60,11 +60,85 @@ Page({
         console.log("拼团详情数据", res);
         // 此处清空全局的数据
         var groupDetail = "";
+        var need_number = res.data.data.groupDetail.need_number;
+        var arr = [];
+        for(var i = 0;i<need_number;i++){
+          arr.push("https://qncdn.playonwechat.com/shangcheng/bg.png") 
+        };
+        console.log("111111111111111", arr);
+
         that.setData({
+          arr: arr,
           res: res,
           groupDetail: res.data.data.groupDetail,
           mid: res.data.data.groupDetail.mid
         })
+        //倒计时
+        var nowTime = (new Date()).getTime();
+        var begin_time = res.data.data.groupDetail.group_expire;
+        console.log(nowTime + 'sssssssss' + begin_time);
+        var ge_nowTime = common.time(nowTime / 1000, 1);
+        var be_gainTime = common.time(begin_time, 1);
+        var Countdown = begin_time * 1000 - nowTime; //倒计时
+        if (Countdown > 0) {
+          function dateformat(micro_second) {
+            // 秒数
+            var second = Math.floor(micro_second / 1000);
+            // 小时位
+            var day = Math.floor(second / 86400);
+
+            if (day < 10) {
+              day = '0' + day;
+            }
+
+            var hr = Math.floor((second - day * 86400) / 3600);
+            // 分钟位
+            if (hr < 10) {
+              hr = '0' + hr;
+            }
+
+            var min = Math.floor((second - hr * 3600 - day * 86400) / 60);
+            if (min < 10) {
+              min = '0' + min;
+            }
+            // 秒位
+            var sec = (second - hr * 3600 - min * 60 - day * 86400); // equal to => var sec = second % 60;
+            // 毫秒位，保留2位
+            if (sec < 10) {
+              sec = '0' + sec;
+            }
+            var micro_sec = Math.floor((micro_second % 1000) / 10);
+
+            return day + ":" + hr + ":" + min + ":" + sec;
+          }
+
+          setInterval(function () {
+            Countdown -= 1000;
+            var time = dateformat(Countdown);
+            var splitArr = time.split(":");
+            // console.log(splitArr);
+            var _Countdown = [{
+              day: splitArr[0],
+              hr: splitArr[1],
+              min: splitArr[2],
+              sec: splitArr[3],
+            }];
+            // console.log(_Countdown);
+            that.setData({
+              countDown_tatic: true,
+              Countdown: _Countdown
+            })
+          }, 1000)
+
+        } else {
+          countDown_tatic: false
+        }
+
+        begin_time = common.time(begin_time, 1);
+        console.log(begin_time);
+        console.log(that.data.Countdown);
+
+
         wx.hideLoading()
       }
     })

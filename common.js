@@ -15,9 +15,11 @@ function getSign(cb){
         },
         success(res){
           var sign = res.data.data.sign;
+          var mid = res.data.data.mid;
           //缓存
           wx.setStorageSync('sharecode', res.data.data.sharecode);
           wx.setStorageSync('sign', sign);
+          wx.setStorageSync('mid', mid);
           //console.log(sign);
           typeof cb == "function"&& cb();
         }

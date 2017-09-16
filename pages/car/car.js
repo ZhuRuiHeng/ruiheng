@@ -303,7 +303,7 @@ Page({
 
       var carts = this.data.carts;
       var change_carts = this.data.change_carts;
-      //console.log(carts.length);
+      console.log(carts.length);
       for (var i = 0; i < carts.length; i++) {
         console.log(carts[i].str);
         if (carts[i].str != undefined){

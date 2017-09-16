@@ -52,6 +52,7 @@ Page({
       },
       method: "GET",
       success: function (res) {
+        console.log('res:',res);
         var list = res.data.data.orderDetail;
         console.log("list", list);
         // 获取用户名称及发表时间
@@ -59,11 +60,15 @@ Page({
         var begin_time = list.order_time;
         
         //倒计时
-        var nowTime = (new Date(list.order_time)).getTime() / 1000;
-        var begin_time = nowTime + 1800;
-        console.log('11111', (new Date(list.order_time)).getTime() / 1000);
-        var ge_nowTime = common.time(nowTime / 1000, 1);
-        var be_gainTime = common.time(begin_time, 1);
+        var xiaTime = (new Date(list.order_time)).getTime() / 1000;//下单时间
+        var begin_time = xiaTime + 1800; //超时时间
+        var nowTime = Date.parse(new Date()); //现在时间
+        // console.log('nowTime1:', nowTime1 / 1000);
+
+        console.log('11111', nowTime, +'||' + begin_time);
+        var ge_nowTime = common.time(nowTime / 1000, 1); // 下单时间
+        var be_gainTime = common.time(begin_time, 1);  //超时时间
+        console.log('22222', ge_nowTime, +'||' + be_gainTime);
         var Countdown = begin_time * 1000 - nowTime; //倒计时
         if (Countdown > 0) {
           function dateformat(micro_second) {

@@ -16,16 +16,19 @@
               </navigator>
               <!--22  -->
               <view class=""  wx:if="{{groupDetail.success_time==0}}">
-                  <view class="" wx:if="{{groupDetail.group_expire < nowTime}}">
+                  <view class="" wx:if="{{groupDetail.group_expire > nowTime}}">
                       <view class="guize">
                           <view class="top">
                               <view class="new">还差<text>{{groupDetail.need_number}}</text>位新人，快喊小伙伴一起拼团吧</view>
-                              <view class="shijian">仅剩22222失效{{mid}}{{midNew}}{{item.group_expire}}</view>
+                              <view class="shijian"  wx:for="{{Countdown}}">仅剩{{item.day}}天{{item.hr}}时{{item.min}}分{{item.sec}}秒失效</view>
                           </view>
-                          <view class="btm" wx:for="{{groupDetail.avatarurl_arr}}">
-                              <view class="user" data-index="{{index}}">
+                          <view class="btm">
+                              <view class="user" wx:for="{{groupDetail.avatarurl_arr}}" data-index="{{index}}">
                                   <image src="{{item.avatarurl}}" mode="widthFix"></image>
                                   <text wx:if="{{index ==0}}">团长</text>
+                              </view>
+                              <view class="user"  wx:for="{{arr}}" data-index="{{index}}">
+                                  <image src="{{item}}" mode="widthFix"></image> 
                               </view>
                           </view>
                           <view class="right" bindtap="guize">规则详情</view>
@@ -36,8 +39,7 @@
                               <image src="../images/wei.png" mode="widthFix"></image>分享给微信好友
                             </button>
                           </view>
-                          <!--wx:if="{{mid!=midNew}}"  -->
-                          <view class="fenxiang" >
+                          <view class="fenxiang"  wx:if="{{mid!=midNew}}">
                             <button class="flex"  bindtap="buy">
                                 一键参团
                             </button>
@@ -49,10 +51,13 @@
                           <view class="top">
                               <view class="new">超过有效时间，拼团失败</view>
                           </view>
-                          <view class="btm" wx:for="{{groupDetail.avatarurl_arr}}">
-                              <view class="user" data-index="{{index}}">
+                          <view class="btm">
+                              <view class="user" wx:for="{{groupDetail.avatarurl_arr}}" data-index="{{index}}">
                                   <image src="{{item.avatarurl}}" mode="widthFix"></image>
                                   <text wx:if="{{index ==0}}">团长</text>
+                              </view>
+                              <view class="user"  wx:for="{{arr}}" data-index="{{index}}">
+                                  <image src="{{item}}" mode="widthFix"></image> 
                               </view>
                           </view>
                           <view class="right" bindtap="guize">规则详情</view>
@@ -69,13 +74,16 @@
                   </view>
                   <view class="guize">
                       <view class="top">
-                          <view class="new">已有<text>{{groupDetail.group_number}}</text>人参团，拼团成功</view>
+                          <view class="new">已有<text>{{groupDetail.join_group_number}}</text>人参团，拼团成功</view>
                       </view>
-                      <view class="btm" wx:for="{{groupDetail.avatarurl_arr}}">
-                          <view class="user" data-index="{{index}}">
-                              <image src="{{item.avatarurl}}" mode="widthFix"></image>
-                              <text wx:if="{{index ==0}}">团长</text>
-                          </view>
+                      <view class="btm" >
+                          <view class="user" wx:for="{{groupDetail.avatarurl_arr}}" data-index="{{index}}">
+                                  <image src="{{item.avatarurl}}" mode="widthFix"></image>
+                                  <text wx:if="{{index ==0}}">团长</text>
+                              </view>
+                              <view class="user"  wx:for="{{arr}}" data-index="{{index}}">
+                                  <image src="{{item}}" mode="widthFix"></image> 
+                              </view>
                       </view>
                       <view class="right" bindtap="guize">规则详情</view>
                   </view> 

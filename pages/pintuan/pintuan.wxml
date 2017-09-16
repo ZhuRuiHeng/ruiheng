@@ -18,15 +18,20 @@
                   </view>
                   <view class="service-text">
                       <view class="service-tite service-tite1">{{item.good_name}}</view>
-                      <view class="member">
-                          <image wx:for="{{item.avatarurl_arr}}" wx:for-item="v" src="{{v.avatarurl}}" mode="widthFix"></image>
+                      <view class="member" >
+                        <view style="display:inline-block" wx:for="{{item.avatarurl_arr}}" wx:for-item="v" >
+                          <image wx:if="{{v.avatarurl == null}}" src="https://qncdn.playonwechat.com/shangcheng/bg.png" mode="widthFix">
+                          </image>
+                          <image  wx:else="{{v.avatarurl != null}}" src="{{v.avatarurl}}" mode="widthFix">
+                          </image>
+                        </view>
                           <text>已团{{item.on_shelf}}件</text>
                       </view>
                       <view class="caozuo">
                           <view> <text class="service-price">￥{{item.group_price}}</text> <text class="old service-price">￥{{item.price}}</text></view>
                           <view class="service-gouwu">去开团</view>
                       </view>
-                      <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view>
+                      <!-- <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view> -->
                   </view>
               </navigator>
           </view>

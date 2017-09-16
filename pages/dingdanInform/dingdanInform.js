@@ -150,15 +150,6 @@ Page(Object.assign({}, Zan.Toast, {
         // header: {}, // 设置请求的 header
         success: function (res) {
           // success
-          that.showZanToast('toast的内容');
-          // 支付成功跳转,先固定写死一个gbid
-          var mold = that.data.type;
-          console.log(mold);
-          if(mold == 1){
-            wx.redirectTo ({
-              url: '../pintuanxiangqing/pintuanxiangqing?gbid=11&gid=9'
-            })
-          }
           console.log(res);
           var status = res.data.status;
           if (status == 1) {
@@ -171,9 +162,9 @@ Page(Object.assign({}, Zan.Toast, {
               paySign: res.data.data.paySign
             })
             // 支付成功跳转
-            // wx.navigateTo({
-            //   url: '../pintuanxiangqing/pintuanxiangqing?gbid='
-            // })
+            wx.redirectTo({
+              url: '../dingdan/dingdan?status='
+            })
 
           } else {
             that.showZanToast('创建订单失败');

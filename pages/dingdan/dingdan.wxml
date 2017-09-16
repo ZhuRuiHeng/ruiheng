@@ -4,9 +4,9 @@
             <view wx:for="{{navList}}"  class="selected {{status == item.status?'red':'default'}}" data-status="{{item.status}}" bindtap="tapKeyWorld"><span>{{item.word}}</span></view>
         </view>
         <!--全部  -->
-        <scroll-view scroll-y="true" style="height:600px" bindscrolltolower="lower">
-            <view style="padding:30rpx;font-size:24rpx;text-align:center;" wx:if="{{len == 0}}">暂时没有订单哦！</view>
-            <view class="service-list" wx:else>
+        <!-- <scroll-view scroll-y="true" style="height:600px" bindscrolltolower="lower"> -->
+            <view style="padding:30rpx;font-size:24rpx;text-align:center;margin-top:100rpx;" wx:if="{{len == 0}}">暂时没有订单哦！</view>
+            <view class="service-list" wx:else style="margin-top:92rpx;">
               <navigator class=""  wx:for="{{main_content}}" 
               url="../shangpinInform/shangpinInform?oid={{item.order_id}}&status1={{item.status}}&gbid={{item.gbid}}">
                     <view class="diangdanNum">
@@ -14,9 +14,21 @@
                             <view class="shop">店铺：{{item.store_name}}</view>
                             <view class="bianhao">订单编号：<text>{{item.out_trade_no}}</text></view>
                         </view>
-                        <view class="right"  wx:if="{{item.status == ''}}"> 全部</view>
+                        <view class="right"  wx:if="{{item.status == ''}}"> 全部{{len}}</view>
                         <view class="right"  wx:elif="{{item.status == 'payment'}}"> 待付款</view>
-                        <view class="right"  wx:elif="{{item.status == 'deliver'}}"> 待发货</view>
+                        <view class="right"  wx:elif="{{item.status == 'deliver'}}"> 
+                            <view wx:if="{{item.order_status == 'ok'}}">
+                                <view wx:if="{{item.type == 1}}"> 
+                                    <view class="" wx:if="{{item.success_time == 0 && item.group_expire > nowTime}}">
+                                        <view  id="{{item.order_id}}">
+                                            拼团中
+                                        </view>
+                                    </view>
+                                    <view class="" wx:else id="{{item.order_id}}">待发货</view>
+                                </view>
+                            </view> 
+                            <view wx:if="{{item.type != 1}}">待发货</view> 
+                        </view>
                         <view class="right"  wx:elif="{{item.status == 'receipt'}}"> 待收货</view>
                         <view class="right"  wx:elif="{{item.status == 'finish'}}"> 已完成</view>
                         <view class="right"  wx:else="{{item.status == 'close'}}"> 交易关闭</view>
@@ -58,15 +70,12 @@
                     </view>
                     <view wx:if="{{item.order_status == 'ok'}}">
                         <view wx:if="{{item.type == 1}}"> 
-                            <view class="button" wx:if="{{item.success_time == 0}}">
-                                <view wx:if="{{item.group_expire < nowTime}}"  id="{{item.order_id}}">
-                                    <button  data-gbid="{{item.gbid}}" data-gid="{{item.order_id}}" id="{{item.order_id}}" catchtap="pintuan">邀请参团</button>
-                                </view>
-                                <view wx:else id="{{item.order_id}}">
-                                    <button class="" data-gbid="{{item.gbid}}" data-gid="{{item.order_id}}" id="{{item.order_id}}" catchtap="pintuan">拼团详情</button>
+                            <view class="button" wx:if="{{item.success_time == 0 && item.group_expire > nowTime}}">
+                                <view id="{{item.order_id}}">
+                                    <button style="background:#ff4444;color:#fff;"  data-gbid="{{item.gbid}}" data-gid="{{item.order_id}}" id="{{item.order_id}}" catchtap="pintuan">邀请参团</button>
                                 </view>
                             </view>
-                            <view wx:if="{{item.success_time != 0}}" id="{{item.order_id}}">
+                            <view class="button" wx:else id="{{item.order_id}}">
                                 <button class="" data-gbid="{{item.gbid}}" data-gid="{{item.order_id}}" id="{{item.order_id}}" catchtap="pintuan">拼团详情</button>
                             </view>
                         </view>
@@ -74,5 +83,5 @@
                     <view class="button" wx:else></view>
                 </navigator>
             </view>
-        </scroll-view>
+        <!-- </scroll-view> -->
     </view>

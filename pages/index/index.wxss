@@ -426,9 +426,13 @@
   width: 100%;
   background: #fff;
 }
+.sort{
+  display: flex;
+  justify-content: space-around;
+}
 .sort navigator{
   display: inline-block;
-  width: 20%;
+  /* width: 20%; */
   text-align: center;
 }
 .sort navigator .image-text{
@@ -436,8 +440,8 @@
   padding:20rpx 0;
 }
 .sort navigator image{
-  width: 80rpx;
-  height: 80rpx;
+  width: 120rpx;
+  height: 120rpx;
   border-radius: 50%;
 }
 .sort navigator text{

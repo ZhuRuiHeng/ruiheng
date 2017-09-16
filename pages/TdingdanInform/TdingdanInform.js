@@ -129,9 +129,13 @@ Page(Object.assign({}, Zan.Toast, {
               paySign: res.data.data.paySign
             })
             // 支付成功跳转
-            // wx.navigateTo({
-            //   url: '../pintuanxiangqing/pintuanxiangqing?gbid='
-            // })
+           
+            setTimeout(function () {
+              // 支付成功跳转
+              wx.navigateTo({
+                url: '../dingdan/dingdan?status='
+              })
+            }, 300)
 
           } else {
             that.showZanToast('创建订单失败');

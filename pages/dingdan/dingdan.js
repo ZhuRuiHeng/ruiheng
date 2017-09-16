@@ -32,7 +32,7 @@ Page({
           status: "finish"
         }
       ],
-      limit: 1,  //分页
+      page: 1,  //分页
       oid : ''
  },
   
@@ -42,10 +42,7 @@ onLoad: function (options) {
   var nowTime = Date.parse(new Date());
  
   var status = options.status;
-  if (status==undefined){
-    status = ""
-  }
-  console.log("status:", status);
+  console.log(status);
   that.setData({
     status:status,
     nowTime: nowTime/1000
@@ -88,16 +85,18 @@ onShow: function () {
 }, 
 // 下拉分页
 onReachBottom: function () {
+  console.log('下拉分页');
   var that = this;
   var oldOrderList = that.data.main_content;
   console.log("oldOrderList:" + oldOrderList);
   var orderList = [];
-  var oldPage = that.data.limit;
+  var oldPage = that.data.page;
   var reqPage = oldPage + 1;
+  console.log('reqPage:', reqPage);
   wx.request({
     url: "https://shop.playonwechat.com/api/order-list?sign=" + app.data.sign,
     data: {
-      limit: reqPage,
+      page: reqPage,
       status: that.data.status
     },
     header: {
@@ -108,15 +107,10 @@ onReachBottom: function () {
       console.log('新res', res);
       var orderList = res.data.data.orderList;
       if (res.data.data.length == 0) return;
-      var limit = oldPage + 1;
-      // 获取用户名称及发表时间
-      that.setData({
-        limit: limit
-      });
-      // var contentTip = res.data.data.orderList;
       var newContent = oldOrderList.concat(orderList);
       that.setData({
-        main_content: newContent
+        main_content: newContent,
+        page: reqPage
       });
       console.log("newContent:" + that.data.main_content)
     },
@@ -131,6 +125,7 @@ tapKeyWorld: function (e) {
   var that = this;
   var word = e.currentTarget.dataset.status;
   console.log(word);
+  
   this.setData({
     status: word
   })
