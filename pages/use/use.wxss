@@ -153,3 +153,6 @@ button{
   border-top: 1px #d9d9d9 solid;
   padding: 20rpx;
 }
+.weui-cells.weui-cells_after-title{
+  flex: 1;
+}
