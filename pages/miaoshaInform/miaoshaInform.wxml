@@ -81,7 +81,11 @@
             </view>
             <text >找客服</text>
         </view>
-        <view class="addCars buyNow style" style="line-height:82rpx;" bindtap="addbuy" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
+        
+        <view wx:if="{{sta=='即将开抢'}}" class="addCars buyNow style" style="line-height:82rpx;" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
+          抢购未开始
+        </view>
+        <view wx:else class="addCars buyNow style" style="line-height:82rpx;" bindtap="addbuy" id="gouwu{{inform.gid}}" data-gid="{{inform.gid}}">
           立即抢购
         </view>
     </view> 

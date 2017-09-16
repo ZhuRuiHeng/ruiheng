@@ -112,7 +112,7 @@ onReachBottom: function () {
         main_content: newContent,
         page: reqPage
       });
-      console.log("newContent:" + that.data.main_content)
+      //console.log("newContent:" + that.data.main_content)
     },
   });
 },
@@ -124,7 +124,7 @@ tapKeyWorld: function (e) {
 
   var that = this;
   var word = e.currentTarget.dataset.status;
-  console.log(word);
+  //console.log(word);
   
   this.setData({
     status: word
@@ -141,7 +141,7 @@ tapKeyWorld: function (e) {
       method: "GET",
       success: function (res) {
         // 此处清空全局的数据
-        console.log("数据", res);
+       // console.log("数据", res);
         var main_content = [];
         var orderList = res.data.data.orderList;
         that.setData({
@@ -154,13 +154,13 @@ tapKeyWorld: function (e) {
   })
 },
 pintuan: function (event) {
-  console.log(event);
+  //console.log(event);
     var that = this;
     var gbid = event.currentTarget.dataset.gbid;
     var gid = event.currentTarget.dataset.gid;
     
-    console.log(gbid);
-    console.log('222',gid);
+    //console.log(gbid);
+   // console.log('222',gid);
     that.setData({
       gbid: event.currentTarget.dataset.gbid,
       gid: event.currentTarget.dataset.gid
@@ -172,9 +172,7 @@ pintuan: function (event) {
   //取消订单
 shouhuo: function (event) {
     var that = this;
-    console.log(event);
     var id = event.currentTarget.id;
-    console.log("oid", id);
     that.setData({
       id: event.target.id
     })
@@ -184,7 +182,7 @@ shouhuo: function (event) {
         cancelText:'取消', 
         confirmText: '确认收货',
         success: function (res) {
-          console.log(res);
+          //console.log(res);
             if (res.confirm) {
                 wx.request({
                   url: "https://shop.playonwechat.com/api/user-confirm-receipt?sign=" + app.data.sign,
@@ -197,7 +195,6 @@ shouhuo: function (event) {
                   method: "GET",
                   success: function (res) {
                     // 此处清空全局的数据
-                    console.log("数据", res);
                     var status = res.data.data.res;
                     if (status == 1){
                       wx.showToast({
@@ -213,7 +210,6 @@ shouhuo: function (event) {
                   }
                 })
           } else if (res.cancel) {
-              console.log('您取消了确认收货');
               wx.showToast({
                 title: '您取消了确认收货',
                   icon: 'loading',

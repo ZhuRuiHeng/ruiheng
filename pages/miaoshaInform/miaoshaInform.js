@@ -28,9 +28,10 @@ Page({
   onLoad: function (options) {
     var that = this;
     var gid = options.gid;//列表页传来的id
-    console.log("gidqqqqq", gid);
+    console.log("options：", options);
     this.setData({
       gid: gid,
+      sta: options.sta
     });
   },
   onShow: function (options) {

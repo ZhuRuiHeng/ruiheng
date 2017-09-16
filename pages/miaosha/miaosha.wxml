@@ -8,7 +8,7 @@
               </view>
               <view wx:if="{{search_word.yesterday.length>0}}" wx:for="{{yesterday}}" data-active="{{item.active}}" 
                     class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
-                    bindtap="tapKeyWorld" data-inx="{{index}}" data-star="{{item.activity_begin}}">
+                    bindtap="tapKeyWorld" data-sta="{{item.status}}" data-inx="{{index}}" data-star="{{item.activity_begin}}">
                 <text>{{item.activity_begin_time}}</text>
                 <text>{{item.status}}</text>
               </view>
@@ -17,7 +17,7 @@
               </view>
               <view wx:if="{{search_word.today.length>0}} " wx:for="{{today}}" data-active="{{item.active}}" 
                     class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
-                    bindtap="tapKeyWorld"  data-inx="{{index}}" data-star="{{item.activity_begin}}">
+                    bindtap="tapKeyWorld" data-sta="{{item.status}}"  data-inx="{{index}}" data-star="{{item.activity_begin}}">
                 <text>{{item.activity_begin_time}}</text>
                 <text>{{item.status}}</text>
               </view>
@@ -26,7 +26,7 @@
               </view>
               <view wx:if="{{search_word.tomorrow.length>0}}" wx:for="{{tomorrow}}" data-active="{{item.active}}" 
                     class="search_item {{item.active == true?'red':'default'}} {{star == true?'red':'default'}}" 
-                    bindtap="tapKeyWorld" data-inx="{{index}}" data-star="{{item.activity_begin}}">
+                    bindtap="tapKeyWorld" data-sta="{{item.status}}" data-inx="{{index}}" data-star="{{item.activity_begin}}">
                 <text>{{item.activity_begin_time}}</text>
                 <text>{{item.status}}</text>
               </view>
@@ -40,7 +40,7 @@
               </view>
           </view>
           <view class="service-list">
-            <navigator wx:for="{{main_content}}" data-index="{{index}}"  wx:key="{{index}}" class="service-item" url="../miaoshaInform/miaoshaInform?gid={{item.gid}}">
+            <navigator wx:for="{{main_content}}" data-index="{{index}}"  wx:key="{{index}}" class="service-item" url="../miaoshaInform/miaoshaInform?gid={{item.gid}}&sta={{sta}}">
                   <view class="service-img">
                       <image src="{{item.picture}}" mode="aspectFill"></image>
                   </view>
@@ -56,9 +56,11 @@
                       </view>
                       <view class="caozuo">
                           <view> <text class="service-price">￥{{item.seckill_price}}</text> <text class="old service-price">￥{{item.price}}</text></view>
-                          <view class="service-gouwu">立即抢购</view>
+                          <view wx:if="{{sta=='即将开抢'}}" class="service-gouwu">未开始</view>
+                          <view wx:else class="service-gouwu">立即抢购</view>
                       </view>
-                      <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view>
+                      <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" wx:if="{{sta=='即将开抢'}}" catchtap="addCar"></view>
+                      <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" wx:else></view>
                   </view>
               </navigator>
           </view>

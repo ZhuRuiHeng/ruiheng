@@ -20,8 +20,6 @@ Page({
       cate_id: options.gid
     })
   },
-
-
   onReady: function () {
 
   },
@@ -170,12 +168,14 @@ Page({
     })
     var that = this;
     var star = e.currentTarget.dataset.star;
+    var sta = e.currentTarget.dataset.sta;
     var today = that.data.today;
     var tomorrow = that.data.tomorrow;
     var yesterday = that.data.yesterday;
     console.log("star:", star);
     that.setData({
-      activity_begin: star
+      activity_begin: star,
+      sta: sta
     })
     for (var i = 0; i < that.data.today.length;i++){
       that.data.today[i].active = false;

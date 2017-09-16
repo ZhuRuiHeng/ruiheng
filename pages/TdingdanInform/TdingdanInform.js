@@ -126,17 +126,18 @@ Page(Object.assign({}, Zan.Toast, {
               nonceStr: res.data.data.nonceStr,
               package: res.data.data.package,
               signType: res.data.data.signType,
-              paySign: res.data.data.paySign
+              paySign: res.data.data.paySign,
+              'success': function (res) {
+                setTimeout(function () {
+                  // 支付成功跳转
+                  wx.navigateTo({
+                    url: '../dingdan/dingdan?status='
+                  })
+                }, 300)
+              },
+              'fail': function (res) {
+              }
             })
-            // 支付成功跳转
-           
-            setTimeout(function () {
-              // 支付成功跳转
-              wx.navigateTo({
-                url: '../dingdan/dingdan?status='
-              })
-            }, 300)
-
           } else {
             that.showZanToast('创建订单失败');
             wx.showToast({

@@ -147,7 +147,17 @@ Page({
               nonceStr: res.data.data.nonceStr,
               package: res.data.data.package,
               signType: res.data.data.signType,
-              paySign: res.data.data.paySign
+              paySign: res.data.data.paySign,
+              'success': function (res) {
+                setTimeout(function () {
+                  // 支付成功跳转
+                  wx.navigateTo({
+                    url: '../dingdan/dingdan?status='
+                  })
+                }, 300)
+              },
+              'fail': function (res) {
+              }
             })
             // 重置属性
             that.setData({

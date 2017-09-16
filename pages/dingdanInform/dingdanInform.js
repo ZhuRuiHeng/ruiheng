@@ -159,13 +159,18 @@ Page(Object.assign({}, Zan.Toast, {
               nonceStr: res.data.data.nonceStr,
               package: res.data.data.package,
               signType: res.data.data.signType,
-              paySign: res.data.data.paySign
+              paySign: res.data.data.paySign,
+              'success': function (res) {
+                setTimeout(function () {
+                  // 支付成功跳转
+                  wx.navigateTo({
+                    url: '../dingdan/dingdan?status='
+                  })
+                }, 300)
+              },
+              'fail': function (res) {
+              }
             })
-            // 支付成功跳转
-            wx.redirectTo({
-              url: '../dingdan/dingdan?status='
-            })
-
           } else {
             that.showZanToast('创建订单失败');
             wx.showToast({
@@ -179,18 +184,9 @@ Page(Object.assign({}, Zan.Toast, {
           console.log(res)
         },
         complete: function () {
-          // complete
+          
         }
       })
-      // // 重置属性
-      // that.setData({
-      //   gid: "",
-      //   attr: "",//属性
-      //   types: "", //类型
-      //   userMes: '',//留言信息
-      //   num: '', //数量
-      //   detail: ''
-      // })
     }
     
   },
