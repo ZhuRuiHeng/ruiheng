@@ -139,7 +139,7 @@ word-break:break-all;
   vertical-align: middle;
   border-radius: 50%;
   margin-top: 0;
-  margin-left:-10rpx;
+  margin-right:-10rpx;
   background: #fff;
 }
 .member text{

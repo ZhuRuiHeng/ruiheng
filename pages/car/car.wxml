@@ -1,4 +1,5 @@
 <!--pages/car/car.wxml-->
+<import src="../../dist/toast/index.wxml" />
 <view class="container">
     <!--店铺  -->
     <view class="shop">
@@ -63,3 +64,5 @@
         删除
     </view>
 </view>
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>

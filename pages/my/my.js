@@ -118,12 +118,13 @@ Page({
           console.log("mine",res);
           if(res.data.status){
             var mine = res.data.data;
-            var list = that.data.list;
+            var list = that.data.list; //my各订单展示数目
             list[0].num = mine.countPayment;
             list[1].num = mine.countDeliver;
             list[2].num = mine.countReceipt;
             list[3].num = mine.countFinish;
             console.log(mine.coupon_info);
+            //console.log(list);
             wx.setStorageSync("coupon_info", mine.coupon_info);
             that.setData({
               list: list,

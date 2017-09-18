@@ -509,3 +509,4 @@ contact-button{
   position:relative;
   top:6rpx;
 }
+switch{transform:scale(.8)}

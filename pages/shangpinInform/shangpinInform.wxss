@@ -458,3 +458,4 @@
   line-height:42rpx;
   color:#626262;
 }
+switch{transform:scale(.8)}

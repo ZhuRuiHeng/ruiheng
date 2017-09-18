@@ -12,15 +12,43 @@ Page({
     values: [0, 0, 0],
     condition: false
   },
-
+  // input
+  telNumber: function (e) {
+    var that = this;
+    that.setData({
+      telNumber: e.detail.value
+    })
+    console.log(that.data.telNumber);
+  },
+  userName: function (e) {
+    var that = this;
+    that.setData({
+      userName: e.detail.value
+    })
+    console.log(that.data.userName);
+  },
+  detailInfo: function (e) {
+    var that = this;
+    that.setData({
+      detailInfo: e.detail.value
+    })
+    console.log(that.data.detailInfo);
+  },
+  youbian: function (e) {
+    var that = this;
+    that.setData({
+      youbian: e.detail.value
+    })
+    console.log(that.data.youbian);
+  },
+  //地址
   bindChange: function (e) {
-    //console.log(e);
+    console.log(e);
     var val = e.detail.value
     var t = this.data.values;
     var cityData = this.data.cityData;
 
     if (val[0] != t[0]) {
-      console.log('province no ');
       const citys = [];
       const countys = [];
 
@@ -40,7 +68,10 @@ Page({
         values: val,
         value: [val[0], 0, 0]
       })
-
+      console.log(this.data.province);
+      console.log(this.data.city);
+      console.log(this.data.county);
+      
       return;
     }
     if (val[1] != t[1]) {
@@ -68,9 +99,7 @@ Page({
       })
       return;
     }
-
-
-  },
+},
   open: function () {
     this.setData({
       condition: !this.data.condition
@@ -100,7 +129,6 @@ Page({
     for (let i = 0; i < cityData[0].sub[0].sub.length; i++) {
       countys.push(cityData[0].sub[0].sub[i].name)
     }
-
     that.setData({
       'provinces': provinces,
       'citys': citys,
@@ -114,7 +142,20 @@ Page({
 
   },
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    console.log('form发生了submit事件，携带数据为：', e.detail.value);
+    var dizhi = [];
+    dizhi.userName = this.data.userName;
+    dizhi.telNumber = this.data.telNumber;
+    dizhi.detailInfo = this.data.detailInfo;
+    dizhi.youbian = this.data.youbian;
+    dizhi.province = this.data.province;
+    dizhi.city = this.data.city;
+    dizhi.county = this.data.county;
+    console.log(dizhi);
+    wx.showLoading({
+      title: '地址数据提交中',
+    });
+    wx.setStorageSync('dizhi', dizhi);
   },
   formReset: function (e) {
     console.log('form发生了reset事件，携带数据为：', e.detail.value)

@@ -2,7 +2,6 @@
 //支付
 var common = require('../../common.js');
 const paymentUrl = require('../../config').paymentUrl;
-console.log("paymentUrl:" + paymentUrl);
 var app = getApp();
 
 Page({

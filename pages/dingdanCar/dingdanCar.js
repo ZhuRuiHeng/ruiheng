@@ -1,7 +1,6 @@
 // pages/dingdanInform/dingdanInform.js
 //支付
 const paymentUrl = require('../../config').paymentUrl;
-console.log("paymentUrl:" + paymentUrl);
 var app = getApp();
 Page({
   data: {
@@ -45,10 +44,7 @@ Page({
       console.log('new:',that.data.gouwu.length);
        var gouwu = that.data.gouwu;
       for (var i = 0; i < gouwu.length; i++) {
-       // var detail = that.data.gouwu[i].detail;
         var bute = gouwu[i].detail;
-        //var attributeAll += gouwu[i].detail;
-          //console.log(detail);
           detailall += gouwu[i].gid + '-' + gouwu[i].detail + '-' + gouwu[i].number + ';';
       }
       // 截取最后一位字符
@@ -113,8 +109,6 @@ Page({
   formSubmit: function (e) {
     var that = this;
     var dizhi = that.data.dizhi;
-    console.log("dizhi:", dizhi);
-    console.log(dizhi.length);
 
     if (dizhi.length == 0) {
       wx.showToast({

@@ -1,7 +1,6 @@
 // pages/dingdan/dingdan.js
 //支付
 const paymentUrl = require('../../config').paymentUrl;
-console.log("paymentUrl:" + paymentUrl);
 var app = getApp();
 var main_content = []; 
 Page({

@@ -1,13 +1,13 @@
 //index.js
 var common = require('../../common.js');
-
 //获取应用实例
 main_content: [];//最新最热
 main_content2: [];//列表
 modules: [];//模板
 var app = getApp();
 ///////////////
-Page({
+var Zan = require('../../dist/index');
+Page(Object.assign({}, Zan.Toast, {
   data: {
     lunbo : [],
     fightGroup:[],
@@ -171,22 +171,19 @@ bindViewTap: function() {
     })
 },
 //查看全部
-  seeAll:function(){
-    wx.navigateTo({
-      url: '../more/more?cate_id=0'
-    })
-  },
+seeAll:function(){
+  wx.navigateTo({
+    url: '../more/more?cate_id=0'
+  })
+},
 //购物车选择商品
 addCar: function (e) {
     wx.showToast({
         title: '加载中',
         icon: 'loading'
     });
-    var that = this;
-    // var inform = that.data.inform;    
+    var that = this; 
     var gid = e.currentTarget.dataset.gid;
-
-    // inform[gid]
     wx.setStorageSync("carid", gid);
     wx.setStorageSync("length", gid);
     console.log("carid",gid);
@@ -246,12 +243,8 @@ addCars:function(e){
   }
   // 截取最后一位字符
   attribute = attribute.substr(0, attribute.length-1);
-  console.log("aaaaaa", attribute);
-  
-  console.log("attribute", typeof attribute[0]);
-  console.log("gid", gid);
   var num = that.data.price;
-  console.log('gid', gid + 'num', num + 'attribute',attribute);
+  //console.log('gid', gid + 'num', num + 'attribute',attribute);
   wx.request({
     url: "https://shop.playonwechat.com/api/add-carts?sign=" + app.data.sign,
     method: "POST",
@@ -261,19 +254,12 @@ addCars:function(e){
       attribute: attribute
     },
     success: function (res) {
-      console.log("post", res);
+      //console.log("post", res);
       var status = res.data.status;
       if (status == 1){
-        wx.showToast({
-          title: '加入购物车成功',
-          image: '../images/success.png'
-        });
-        
+        that.showZanToast('加入购物车成功');
       }else{
-        wx.showToast({
-          title: '加入购物车失败',
-          image: '../images/false.png'
-        });
+        that.showZanToast('请选择属性');
       }
       that.setData({
         arr: [],
@@ -301,24 +287,16 @@ buy:function(e){
     }
   }
   attribute = attribute.substr(0, attribute.length - 1);
-  console.log("aaaaaa", attribute);
-  console.log("types", types);
   var carid = wx.getStorageSync("carid");
   var attrLen = that.data.inform.attribute.length;//获取attribute长度
   var arrlen = that.data.arr.length; //数组长度
-  console.log('获取attribute长度', attrLen);
-  console.log('数组长度', arrlen); //bug 数组长度
   if (attrLen > 0){
     if (arrlen == attrLen){
        wx.navigateTo({
          url: '../dingdanInform/dingdanInform?gid=' + carid + '&price=' + that.data.price + '&attr=' + attribute + '&types=' + types + '&low_price=' + that.data.low_price + '&type=0'
         })
-       console.log(attribute);
       }else{
-        wx.showToast({
-          title: '请选择属性',
-          image: '../images/false.png'
-        });
+      that.showZanToast('请选择属性');
       }
   } else{
       wx.navigateTo({
@@ -333,19 +311,15 @@ buy:function(e){
   })
  },
 leibieall:function(e){
-  console.log(e.currentTarget.dataset.index);
   var index = e.currentTarget.dataset.index;
-  console.log("e", e)
   var anids = e.currentTarget.dataset.anid;
   this.setData({
     anids: anids,
     index: index
   });
-  console.log("this.index", this.data.anids);
 },
  //选择型号
 xuanze: function (e) {
-  // console.log(e.currentTarget.dataset.index);
   var that = this;
   var arr = that.data.arr;
   var values = that.data.values;;
@@ -357,18 +331,17 @@ xuanze: function (e) {
     var active2 = e.currentTarget.dataset.active; //状态
     var avid = e.target.dataset.avid;//值
     var value = e.target.dataset.value;//value
-    //console.log("值", value);
     var _attribute = that.data.inform.attribute;
     var _inform = that.data.inform;
     // //////////////
     var attribute_value = _attribute[index].attribute_value;
-    console.log("attribute_value", attribute_value);
-    console.log(attribute_value.length);
+    // console.log("attribute_value", attribute_value);
+    // console.log(attribute_value.length);
     for (var j = 0; j < attribute_value.length; j++) {
       attribute_value[j].active = false;
       if (avid == attribute_value[j].avid) {
         attribute_value[j].active = true;
-        console.log(attribute_value[j].active);
+        // console.log(attribute_value[j].active);
         var avid1 = attribute_value[j].avid;
         var figure = attribute_value[j].figure;
         if (figure != '') {
@@ -378,7 +351,7 @@ xuanze: function (e) {
         }
 
 
-        console.log('figure:', attribute_value[j].figure);
+        // console.log('figure:', attribute_value[j].figure);
         //setTimeout(function () {
           if (index == 0) {
             arr[0] = anids + ':' + avid;
@@ -394,9 +367,6 @@ xuanze: function (e) {
       }
     }
 
-    console.log('qqqqqqqqqqqq',arr);
-    /////////////////
-    console.log("参数", anids, avid, value);
     //////////////////////////////////////////////
         var attribute = "";
         for (var i = 0; i < arr.length; i++) {
@@ -406,27 +376,23 @@ xuanze: function (e) {
         }
     
         attribute = attribute.substr(0, attribute.length - 1);
-        console.log("111111111111111", attribute);
         var carid = wx.getStorageSync("carid");
         var attrLen = that.data.inform.attribute.length;//获取attribute长度
         var arrlen = that.data.arr.length; //数组长度
-        console.log('获取attribute长度', attrLen);
-        console.log('数组长度', arrlen); //bug 数组长度
-        console.log('low_price:', that.data.inform.low_price);
+        // console.log('low_price:', that.data.inform.low_price);
         var priceGroup = that.data.inform.priceGroup;
         var s = 'attr' + attribute;
-        console.log('sssss:',s);
         for (var i = 0; i < priceGroup.length; i++) {
           // console.log('|||||||||||', priceGroup[i].key);
           // console.log('\\\\\\\\\\',s);
           if (priceGroup[i].key == s){
-            console.log("iiiiii",i);
+           // console.log("iiiiii",i);
             var i = i;
             that.setData({
               i: i
             });
             var nowPrice = that.data.inform.priceGroup[that.data.i].price;
-            console.log('nowPrice:', nowPrice);
+            //console.log('nowPrice:', nowPrice);
             that.setData({
               inform: _inform,
               figure: figure,
@@ -435,7 +401,7 @@ xuanze: function (e) {
             })
           }
         }
-        console.log(that.data.low_price + '低;高' + that.data.high_price)
+        //console.log(that.data.low_price + '低;高' + that.data.high_price)
       ///////////////////////////////////////////////
       
     
@@ -444,7 +410,6 @@ xuanze: function (e) {
           figure: figure
       })
     ///////////////
-    console.log("attribute111:",attribute);
     that.setData({
       _num: e.target.dataset.avid,
       attribute: attribute
@@ -503,11 +468,11 @@ onShow: function () {
       },
       method: "GET",
       success: function (res) {
-        console.log("图团秒", res);
+        //console.log("图团秒", res);
         //倒计时
         var nowTime = (new Date()).getTime();
         var begin_time = res.data.data.nextSeckillTime;
-        console.log(nowTime + 'sssssssss' + begin_time);
+       // console.log(nowTime + 'sssssssss' + begin_time);
         var ge_nowTime = common.time(nowTime / 1000, 1);
         var be_gainTime = common.time(begin_time, 1);
         var Countdown = begin_time * 1000 - nowTime; //倒计时
@@ -566,8 +531,8 @@ onShow: function () {
         }
 
         begin_time = common.time(begin_time, 1);
-        console.log(begin_time);
-        console.log(that.data.Countdown);
+        // console.log(begin_time);
+        // console.log(that.data.Countdown);
 
         ////////////////////////////////////////////////////////////////////////////
 
@@ -672,4 +637,4 @@ onShow: function () {
   onShareAppMessage: function () {
 
   }
-})
+}))

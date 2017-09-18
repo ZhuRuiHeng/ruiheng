@@ -10,6 +10,7 @@
             <text style="color:#000"  wx:elif="{{list.status == 'deliver'}}"> 等待卖家发货</text>
             <text style="color:#000"  wx:elif="{{list.status == 'receipt'}}"> 等待买家收货</text>
             <text style="color:#000"  wx:elif="{{list.status == 'finish'}}"> 已完成</text>
+            <text style="color:#000"  wx:elif="{{list.status == 'group'}}"> 拼团中</text>
             <text style="color:#000"  wx:else="{{list.status == 'close'}}"> 交易关闭</text>
             <text wx:if="{{list.status !='payment'}}">订单编号：{{list.out_trade_no}}</text>
             <text wx:if="{{list.status == 'payment'}}" wx:for="{{Countdown}}">请于{{item.min}}分{{item.sec}}秒内付款，超时订单将自动关闭</text>

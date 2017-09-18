@@ -1,7 +1,6 @@
 // pages/pintuan/pintuan.js
 var list = [], that, data, listadd, limit = 1;
 var common = require('../../common.js');
-// var common = require('../../common.js');
 var app = getApp();
 var main_content = [];
 Page({
@@ -144,7 +143,6 @@ Page({
         var yesterday = search_word.yesterday;
         console.log("导航列表", search_word);
         var len = today.length + tomorrow.length + yesterday.length+2;
-        console.log("wwwww", len);
         var width = 130 * len;
         console.log("width", width);
         search_word1.push(search_word2);
@@ -172,7 +170,6 @@ Page({
     var today = that.data.today;
     var tomorrow = that.data.tomorrow;
     var yesterday = that.data.yesterday;
-    console.log("star:", star);
     that.setData({
       activity_begin: star,
       sta: sta
@@ -188,14 +185,14 @@ Page({
       that.data.tomorrow[i].active = false;
       if (star == that.data.tomorrow[i].activity_begin) {
         that.data.tomorrow[i].active = true;
-        console.log("iiiiiiiiii:", i)
+        //console.log("iiiiiiiiii:", i)
       }
     }
     for (var i = 0; i < that.data.yesterday.length; i++) {
       that.data.yesterday[i].active = false;
       if (star == that.data.yesterday[i].activity_begin) {
         that.data.yesterday[i].active = true;
-        console.log("iiiiiiiiii:", i)
+       // console.log("iiiiiiiiii:", i)
       }
     }
     console.log(star);

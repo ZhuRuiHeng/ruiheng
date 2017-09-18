@@ -92,9 +92,7 @@ Page({
         search_word[i].active = false;
         if (ontap == search_word[i].cate_id) {
           search_word[i].active = true;
-          console.log("iiiiiii:", i);
         }
-        console.log('状态', search_word[i].active);
       }
       that.setData({
         search_word: search_word
@@ -130,7 +128,6 @@ Page({
     })
     var that = this;
     var oldGoodsList = that.data.main_content;
-    console.log("oldGoodsList:" + oldGoodsList);
     var goodsList = [];
     var oldPage = that.data.limit;
     var reqPage = oldPage + 1;
@@ -159,8 +156,7 @@ Page({
         that.setData({
           main_content: newContent
         });
-        wx.hideLoading()
-        console.log("newContent:" + that.data.newContent)
+        wx.hideLoading();
       },
     });
   },

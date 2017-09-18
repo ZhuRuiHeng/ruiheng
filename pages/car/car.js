@@ -1,7 +1,8 @@
 // pages/car/car.js
 var common = require('../../common.js');
 var app = getApp();
-Page({
+var Zan = require('../../dist/index');
+Page(Object.assign({}, Zan.Toast, {
   /**
    * 页面的初始数据
    */
@@ -132,6 +133,7 @@ Page({
   //删除商品
   delItem: function (e) {
     var that = this;
+    
     wx.showModal({
       title: '提示',
       content: '是否删除？',
@@ -284,7 +286,7 @@ Page({
 
   //seting编辑
   seting: function (e) {
-    console.log(e.target.id);
+    var that = this;
     var ids = e.target.id;
     if (ids == 1) {
       this.setData({
@@ -305,35 +307,32 @@ Page({
       var change_carts = this.data.change_carts;
       console.log(carts.length);
       for (var i = 0; i < carts.length; i++) {
-        console.log(carts[i].str);
+        //console.log(carts[i].str);
         if (carts[i].str != undefined){
           change_carts += carts[i].str + ";"; //拼接字符
         }
       }
       change_carts = change_carts.substr(0, change_carts.length - 1); // 截取最后一位字符
       console.log("change_carts:", change_carts);
-      wx.request({
-        url: "https://shop.playonwechat.com/api/carts-manage?sign=" + app.data.sign,
-        method: "POST",
-        data: {
-          change_carts: change_carts
-        },
-        success: function (res) {
-          //console.log("post", res);
-          var status = res.data.status;
-          if (status == 1) {
-            wx.showToast({
-              title: '编辑商品成功',
-              image: '../images/success.png'
-            });
-          } else {
-            wx.showToast({
-              title: '编辑商品失败',
-              image: '../images/false.png'
-            });
+      if (change_carts.length != 0){
+        wx.request({
+          url: "https://shop.playonwechat.com/api/carts-manage?sign=" + app.data.sign,
+          method: "POST",
+          data: {
+            change_carts: change_carts
+          },
+          success: function (res) {
+            //console.log("post", res);
+            var status = res.data.status;
+            if (status == 1) {
+              that.showZanToast('编辑商品成功');
+            } else {
+              that.showZanToast('编辑商品失败');
+            }
           }
-        }
-      })
+        })
+      }
+      
       this.setData({
         change_carts:''
       })
@@ -361,4 +360,4 @@ Page({
       common.backHome();
   }
   
-})
+}))

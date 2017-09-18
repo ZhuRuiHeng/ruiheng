@@ -23,6 +23,7 @@ form input{
   justify-content: flex-start;
   background: #fff;
   border-bottom:1px solid #e5e5e5;
+  padding:6rpx;
 }
 .weui-cells:after,.weui-cells:before{
   content: none;
@@ -113,6 +114,7 @@ button{
   padding: 0;
   box-sizing: border-box;
   background-color: #f8f8f8;
+  font-size:24rpx;
 } 
 
 .citypickers{
@@ -155,4 +157,10 @@ button{
 }
 .weui-cells.weui-cells_after-title{
   flex: 1;
+}
+picker-view-column{
+  text-align:center;
+}
+.btn-area{
+  margin:60rpx 0 0 0;
 }

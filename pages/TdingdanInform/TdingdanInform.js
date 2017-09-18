@@ -1,7 +1,6 @@
 // pages/dingdanInform/dingdanInform.js
 //支付
 const paymentUrl = require('../../config').paymentUrl;
-console.log("paymentUrl:" + paymentUrl);
 var Zan = require('../../dist/index');
 var app = getApp();
 Page(Object.assign({}, Zan.Toast, {
@@ -18,8 +17,6 @@ Page(Object.assign({}, Zan.Toast, {
       title: '加载中',
     });
     var groupDetail = wx.getStorageSync("groupDetail");
-    console.log('options:', options);
-    console.log("groupDetail:", groupDetail)
     var that = this;
     var inform = options.goodsDetail;
     that.setData({
@@ -35,16 +32,13 @@ Page(Object.assign({}, Zan.Toast, {
     var that = this;
     //that.showZanToast('222222222222');
     var dizhi = wx.getStorageSync("dizhi");
-    console.log(dizhi);
+    //console.log(dizhi);
     if (dizhi != undefined) {
-      console.log(dizhi);
-
       that.setData({
         dizhi: dizhi
       })
     }
     else {
-      console.log(2222);
     }
   },
   //地址
@@ -57,7 +51,6 @@ Page(Object.assign({}, Zan.Toast, {
             dizhi: res
           })
           wx.setStorageSync('dizhi', res);
-          console.log(res);
         },
         fail: function (err) {
           console.log(JSON.stringify(err))
@@ -89,8 +82,6 @@ Page(Object.assign({}, Zan.Toast, {
   formSubmit: function (e) {
     var that = this;
     var dizhi = that.data.dizhi;
-    console.log("dizhi:", dizhi);
-    console.log(dizhi.length);
 
     if (dizhi.length == 0) {
       wx.showToast({

@@ -2,7 +2,8 @@
 var common = require('../../common.js');
 var app = getApp();
 
-Page({
+var Zan = require('../../dist/index');
+Page(Object.assign({}, Zan.Toast, {
   /**
    * 页面的初始数据
    */
@@ -63,6 +64,7 @@ Page({
           shuxing: inform.attribute
         })
         var shuxing = that.data.shuxing;
+        console.log(shuxing);
         var all = '';
         console.log('shuxing', that.data.shuxing);
         for (var i = 0; i < that.data.shuxing.length;i++){
@@ -227,11 +229,6 @@ Page({
           // }, 100)
         }
       }
-
-      //console.log('qqqqqqqqqqqq', arr);
-      /////////////////
-      //console.log("参数", anids, avid, value);
-      //////////////////////////////////////////////
       var attribute = "";
       for (var i = 0; i < arr.length; i++) {
         if (arr[i]) {
@@ -262,6 +259,7 @@ Page({
           var nowPrice = that.data.inform.priceGroup[that.data.i].price;
           console.log('nowPrice:', nowPrice);
           that.setData({
+            all: values,
             inform: _inform,
             figure: figure,
             low_price: nowPrice,
@@ -359,16 +357,18 @@ Page({
         console.log("post", res);
         var status = res.data.status;
         if (status == 1) {
-          wx.showToast({
-            title: '加入购物车成功',
-            image: '../images/success.png'
-          });
+          // wx.showToast({
+          //   title: '加入购物车成功',
+          //   image: '../images/success.png'
+          // });
+          that.showZanToast('加入购物车成功');
 
         } else {
-          wx.showToast({
-            title: '加入购物车失败',
-            image: '../images/false.png'
-          });
+          // wx.showToast({
+          //   title: '加入购物车失败',
+          //   image: '../images/false.png'
+          // });
+          that.showZanToast('请选择属性');
         }
         that.setData({
           arr: [],
@@ -409,14 +409,15 @@ Page({
         })
         console.log(attribute);
       } else {
-        wx.showToast({
-          title: '请选择属性',
-          image: '../images/false.png'
-        });
+        // wx.showToast({
+        //   title: '请选择属性',
+        //   image: '../images/false.png'
+        // });
+        that.showZanToast('请选择属性');
       }
     } else {
       wx.navigateTo({
-        url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&' + 'price=' + that.data.price + '&type=0'
+        url: '../dingdanInform/dingdanInform?gid=' + that.data.gid + '&' + 'price=' + that.data.price + '&low_price=' + that.data.low_price + '&type=0'
       })
     }
     that.setData({
@@ -442,4 +443,4 @@ Page({
   onShareAppMessage: function () {
   
   }
-})
+}))

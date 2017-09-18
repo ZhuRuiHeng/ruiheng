@@ -7,7 +7,7 @@
                 <view class="weui-cells weui-cells_after-title">
                   <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__bd">
-                      <input class="weui-input" type="text" name="name" placeholder="名字" />
+                      <input class="weui-input" bindinput="userName" type="text" name="userName" placeholder="名字" />
                     </view>
                   </view>
                 </view>
@@ -17,7 +17,7 @@
                 <view class="weui-cells weui-cells_after-title">
                   <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__bd">
-                      <input class="weui-input" type="number" name="phone" placeholder="手机或固定电话" />
+                      <input class="weui-input" type="number"  bindinput="telNumber" name="telNumber" placeholder="手机或固定电话" />
                     </view>
                   </view>
                 </view>
@@ -37,7 +37,7 @@
                 <view class="weui-cells weui-cells_after-title">
                   <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__bd">
-                      <input class="weui-input" type="text" name="addres" placeholder="街道门牌地址" />
+                      <input class="weui-input" type="text" bindinput="detailInfo" name="detailInfo" placeholder="街道门牌地址" />
                     </view>
                   </view>
                 </view>
@@ -47,7 +47,7 @@
                 <view class="weui-cells weui-cells_after-title">
                   <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__bd">
-                      <input class="weui-input" type="number" name="bianma" placeholder="邮政编码（选填）" />
+                      <input class="weui-input" type="number"  bindinput="youbian" name="youbian" placeholder="邮政编码（选填）" />
                     </view>
                   </view>
                 </view>

@@ -1,7 +1,6 @@
 // pages/dingdanInform/dingdanInform.js
 //支付
 const paymentUrl = require('../../config').paymentUrl;
-console.log("paymentUrl:" + paymentUrl);
 var Zan = require('../../dist/index');
 var app = getApp();
 Page(Object.assign({}, Zan.Toast, {
@@ -11,10 +10,11 @@ Page(Object.assign({}, Zan.Toast, {
     types:"", //类型
     userMes: '',//留言信息
     num:'', //数量
-    detail:''
+    detail:'',
+    addCar:false,
+    amount:""
   },
   onLoad: function (options) {
-    console.log('options:',options);
       var that = this;
      // that.showZanToast('1111111111111');
       var attr = options.attr;
@@ -24,7 +24,6 @@ Page(Object.assign({}, Zan.Toast, {
           attr : attr,
          })
       }
-      console.log("new",that.data.attr);
       //this.nextAddress();
       var _type = options.type;
       if (_type == undefined){
@@ -71,10 +70,7 @@ Page(Object.assign({}, Zan.Toast, {
     var that = this;
     //that.showZanToast('222222222222');
     var dizhi = wx.getStorageSync("dizhi");
-    console.log(dizhi);
     if (dizhi != undefined){
-      console.log(dizhi);
-      
       that.setData({
         dizhi: dizhi
       })
@@ -82,6 +78,30 @@ Page(Object.assign({}, Zan.Toast, {
     else{
       console.log(2222);
     }
+    //优惠券
+    wx.request({
+      url: 'https://shop.playonwechat.com/api/useable-coupon?sign=' + app.data.sign,
+      data:{
+        amount: that.data.low_price //商品价格
+      },
+      success: function (res) {
+        console.log("优惠券", res.data.data.useableCoupons);
+        that.setData({
+          useableCoupons: res.data.data.useableCoupons
+        })
+      }
+    })
+  },
+  radioChange: function (e) {
+    var value = e.detail.value;
+    if (value == 0){
+      this.setData({
+        amound: ''
+      });
+    }
+    this.setData({
+      rid: e.detail.value
+    });
   },
   //地址
   nextAddress:function(){
@@ -93,10 +113,13 @@ Page(Object.assign({}, Zan.Toast, {
               dizhi:res
           })
           wx.setStorageSync('dizhi', res);
-          console.log(res);
       },
         fail: function (err) {
-          console.log(JSON.stringify(err))
+          console.log("用户不允许",err);
+          wx.navigateTo({
+            url: '../use/use'
+          })
+          wx.setStorageSync('dizhi', res);
         }
       })
     } else {
@@ -120,14 +143,44 @@ Page(Object.assign({}, Zan.Toast, {
     })
    // console.log(userMes);
   },
-  
+  // 显示优惠券
+  coupon: function () {
+    var that = this;
+    that.setData({
+      addCar: true
+    })
+  },
+  close:function(){
+    var that = this;
+    that.setData({
+      addCar: false
+    })
+  },
+  queren:function(){
+    var that = this;
+    var rid = that.data.rid;
+    that.setData({
+      addCar: false,
+      rid: rid
+    })
+  },
+  chage:function(e){
+    var that = this;
+    var amount = e.currentTarget.dataset.amount;
+    that.setData({
+      amount: amount
+    })
+  },
 //提交订单
   formSubmit: function (e) {
     var that = this;
     var dizhi = that.data.dizhi;
-    console.log("dizhi:", dizhi);
-    console.log(dizhi.length);
-    
+    var rid = that.data.rid;
+    if (rid == undefined){
+      that.setData({
+        rid: 0
+      })
+    }
     if (dizhi.length == 0){
       wx.showToast({
         title: '请选择收货地址',
@@ -135,7 +188,7 @@ Page(Object.assign({}, Zan.Toast, {
       });
     }else{
       wx.request({
-        url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign+'&type='+that.data.type,
+        url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign + '&type=' + that.data.type + '&rid=' + that.data.rid,
         data: {
           form_id: e.detail.formId,
           receiver: that.data.dizhi.userName,
@@ -150,7 +203,7 @@ Page(Object.assign({}, Zan.Toast, {
         // header: {}, // 设置请求的 header
         success: function (res) {
           // success
-          console.log(res);
+         // console.log(res);
           var status = res.data.status;
           if (status == 1) {
             // 调用支付
@@ -181,7 +234,6 @@ Page(Object.assign({}, Zan.Toast, {
         },
         fail: function (res) {
           // fail
-          console.log(res)
         },
         complete: function () {
           
