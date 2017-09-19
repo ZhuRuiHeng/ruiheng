@@ -35,7 +35,12 @@ Page(Object.assign({}, Zan.Toast, {
     figure:'',
     i :0 
 },
-
+//图片加载失败
+  // errorFunction: function () {
+  //   this.setData({
+  //     avatar: '../images/share.png'
+  //   })
+  // },
 //轮播图预览
   imgPreview: function () { //图片预览
       const imgs = this.data.imgUrls;

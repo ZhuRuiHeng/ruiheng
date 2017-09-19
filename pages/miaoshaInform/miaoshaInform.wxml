@@ -1,4 +1,7 @@
 <!--pages/miaoshaInform/miaoshaInform.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
 <view class="container">
     <!--轮播图 -->
     <view class="dingwei">

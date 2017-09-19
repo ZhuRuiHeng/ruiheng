@@ -1,4 +1,7 @@
 <!--pages/dingdan/dingdan.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
 <view class="main">
         <view class="nav bc_white" >
             <view wx:for="{{navList}}"  class="selected {{status == item.status?'red':'default'}}" data-status="{{item.status}}" bindtap="tapKeyWorld"><span>{{item.word}}</span></view>

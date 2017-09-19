@@ -3,7 +3,8 @@
 const paymentUrl = require('../../config').paymentUrl;
 var app = getApp();
 var main_content = []; 
-Page({
+var Zan = require('../../dist/index');
+Page(Object.assign({}, Zan.Toast, {
   /**
    * 页面的初始数据
    */
@@ -196,29 +197,16 @@ shouhuo: function (event) {
                     // 此处清空全局的数据
                     var status = res.data.data.res;
                     if (status == 1){
-                      wx.showToast({
-                        title: '确认收货成功',
-                        image: '../images/success.png'
-                      });
+                      that.showZanToast('确认收货成功');
                     }else{
-                      wx.showToast({
-                        title: '确认收货失败',
-                        image: '../images/false.png'
-                      });
+                      that.showZanToast('确认收货失败');
                     }
                   }
                 })
           } else if (res.cancel) {
-              wx.showToast({
-                title: '您取消了确认收货',
-                  icon: 'loading',
-                  duration: 2000
-              })
+              that.showZanToast('您取消了确认收货');
           }
         }
     })
   },
-
- 
-
-})
+}))

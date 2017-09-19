@@ -69,6 +69,10 @@ Page({
       // wx.showShareMenu({
       //   withShareTicket: true
       // })
+      wx.showToast({
+        title: '加载中',
+        icon: 'loading'
+      })
       var that = this;
       var signData = wx.getStorageSync("loginData");
       
@@ -133,6 +137,7 @@ Page({
               coupon_info: mine.coupon_info
             })
           }
+          wx.hideLoading()
         }
       })
     },

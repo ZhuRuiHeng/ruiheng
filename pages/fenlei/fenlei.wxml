@@ -1,4 +1,7 @@
 <!--pages/fenlei/fenlei.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
 <view class="container">
     <view class="modelAll{{index}} modelAlls" style="width:100%" bindtap="suoyin">
         <navigator class="nextUrl" url="../more/more?cate_id={{cate_id}}">

@@ -503,4 +503,7 @@
   border-radius: 4px;
   z-index: 100;
 }
-
+.navigator-hover {
+  background-color:#fff;
+  opacity:1;
+}

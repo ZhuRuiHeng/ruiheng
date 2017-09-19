@@ -24,7 +24,7 @@
     <view class="sort">
         <navigator wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}"  url="../fenlei/fenlei?cate_id={{item.cate_id}}&index={{index}}">
             <view class="image-text">
-              <image src="{{item.icon}}" mode="scaleToFill"></image>
+              <image src="{{item.icon}}" mode="scaleToFill"  binderror="errorFunction"></image>
               <text>{{item.cate_name}}</text>
             </view>
         </navigator>
@@ -36,7 +36,7 @@
         </view>
         <view class="gpList">
             <navigator wx:for="{{fightGroups}}" wx:key="{{item.index}}" class="gpimage" url="../pintuan/pintuan?gid={{item.gid}}" >
-                <image src="{{item.picture}}" mode="aspectFill" ></image>
+                <image src="{{item.picture}}" mode="aspectFill" binderror="errorFunction"></image>
             </navigator>
         </view>
     </view>

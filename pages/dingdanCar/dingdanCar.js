@@ -2,7 +2,8 @@
 //支付
 const paymentUrl = require('../../config').paymentUrl;
 var app = getApp();
-Page({
+var Zan = require('../../dist/index');
+Page(Object.assign({}, Zan.Toast, {
   data: {
     
   },
@@ -111,10 +112,11 @@ Page({
     var dizhi = that.data.dizhi;
 
     if (dizhi.length == 0) {
-      wx.showToast({
-        title: '请选择收货地址',
-        image: '../images/false.png'
-      });
+      // wx.showToast({
+      //   title: '请选择收货地址',
+      //   image: '../images/false.png'
+      // });
+      that.showZanToast('请选择收货地址');
     } else {
       wx.request({
         url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign,
@@ -164,10 +166,11 @@ Page({
             })
 
           } else {
-            wx.showToast({
-              title: '创建订单失败',
-              image: '../images/false.png'
-            });
+            // wx.showToast({
+            //   title: '创建订单失败',
+            //   image: '../images/false.png'
+            // });
+            that.showZanToast('创建订单失败');
           }
         },
         fail: function (res) {
@@ -183,7 +186,7 @@ Page({
   //支付
   requestPayment: function () {
     var self = this
-
+    
     self.setData({
       loading: true
     })
@@ -205,7 +208,17 @@ Page({
               nonceStr: payargs.nonceStr,
               package: payargs.package,
               signType: payargs.signType,
-              paySign: payargs.paySign
+              paySign: payargs.paySign,
+              'success': function (res) {
+                setTimeout(function () {
+                  // 支付成功跳转
+                  wx.navigateTo({
+                    url: '../dingdan/dingdan?status='
+                  })
+                }, 300)
+              },
+              'fail': function (res) {
+              }
             })
 
             self.setData({
@@ -255,4 +268,4 @@ Page({
   onShareAppMessage: function () {
   
   }
-})
+}))

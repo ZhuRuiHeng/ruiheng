@@ -318,6 +318,20 @@
     text-align: center;
     border-top:1px solid #e5e5e5;
 }
+.fixed:after{
+  content:" ";
+  display: inline-block;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing:border-box;
+}
 .fixed .shouye .imgLogo{
     width: 50rpx;
     height: 50rpx;
@@ -510,3 +524,20 @@ contact-button{
   top:6rpx;
 }
 switch{transform:scale(.8)}
+.zan-toast {
+  position: fixed;
+  top: 35%;
+  left: 20%;
+  transform: translateZ(0) translateY(-100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  width: 60%;
+  line-height: 1.5em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 100;
+}

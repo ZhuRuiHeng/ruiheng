@@ -40,7 +40,12 @@ radio{
 }
 .radio icon{
     position: relative;
-    top:13rpx;
+    top:14rpx;
+}
+.quanxuan{
+  position: relative;
+  top:4rpx;
+  left: 10rpx;
 }
 .checkbox .radio radio{
     width: 30rpx;
@@ -219,7 +224,7 @@ radio{
   width: 100%;
 }
 .foot{
-  border-top:1px solid #e5e5e5;
+  /* border-top:1px solid #e5e5e5; */
   background: #fff;
   width: 100%;
   position: fixed;

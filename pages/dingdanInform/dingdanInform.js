@@ -16,7 +16,6 @@ Page(Object.assign({}, Zan.Toast, {
   },
   onLoad: function (options) {
       var that = this;
-     // that.showZanToast('1111111111111');
       var attr = options.attr;
       if (attr == undefined){
         var attr = 0;
@@ -68,8 +67,11 @@ Page(Object.assign({}, Zan.Toast, {
   
   onShow: function () {
     var that = this;
-    //that.showZanToast('222222222222');
     var dizhi = wx.getStorageSync("dizhi");
+    that.setData({
+      dizhi: dizhi
+    })
+    console.log("dizhi:", that.data.dizhi);
     if (dizhi != undefined){
       that.setData({
         dizhi: dizhi
@@ -77,6 +79,9 @@ Page(Object.assign({}, Zan.Toast, {
     }
     else{
       console.log(2222);
+      // wx.navigateTo({
+      //   url: '../use/use'
+      // })
     }
     //优惠券
     wx.request({
@@ -105,6 +110,7 @@ Page(Object.assign({}, Zan.Toast, {
   },
   //地址
   nextAddress:function(){
+    console.log("nextAddress");
     var that = this;
     if (wx.chooseAddress) {
       wx.chooseAddress({
@@ -115,11 +121,24 @@ Page(Object.assign({}, Zan.Toast, {
           wx.setStorageSync('dizhi', res);
       },
         fail: function (err) {
-          console.log("用户不允许",err);
-          wx.navigateTo({
-            url: '../use/use'
+          console.log("用户不允许");
+          // wx.redirectTo ({
+          //   url: '../use/use'
+          // })
+          wx.showModal({
+            title: '警告',
+            content: '您点击了拒绝授权，将无法正常使用收货地址。请10分钟后再次点击授权，或者删除小程序重新进入。',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
+            }
           })
-          wx.setStorageSync('dizhi', res);
+          wx.openSetting({
+            success: (res) => {
+              console.log(res);
+            }
+          })
         }
       })
     } else {
@@ -182,10 +201,8 @@ Page(Object.assign({}, Zan.Toast, {
       })
     }
     if (dizhi.length == 0){
-      wx.showToast({
-        title: '请选择收货地址',
-        image: '../images/false.png'
-      });
+     
+      that.showZanToast('请选择收货地址');
     }else{
       wx.request({
         url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign + '&type=' + that.data.type + '&rid=' + that.data.rid,
@@ -226,10 +243,6 @@ Page(Object.assign({}, Zan.Toast, {
             })
           } else {
             that.showZanToast('创建订单失败');
-            wx.showToast({
-              title: '创建订单失败',
-              image: '../images/false.png'
-            });
           }
         },
         fail: function (res) {

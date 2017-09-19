@@ -74,7 +74,7 @@
                   </view>
                   <view class="guize">
                       <view class="top">
-                          <view class="new">已有<text>{{groupDetail.join_group_number}}</text>人参团，拼团成功</view>
+                          <view class="new">已有<text>{{groupDetail.group_number}}</text>人参团，拼团成功</view>
                       </view>
                       <view class="btm" >
                           <view class="user" wx:for="{{groupDetail.avatarurl_arr}}" data-index="{{index}}">

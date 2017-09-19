@@ -22,8 +22,10 @@
     "pages/miaoshaInform/miaoshaInform",
     "pages/pintuanxiangqing/pintuanxiangqing",
     "pages/miaosha/miaosha",
+    "pages/address/address",
     "pages/pintuan/pintuan",
     "pages/guize/guize",
+    
     "pages/fenlei/fenlei"    
   ],
   "window":{

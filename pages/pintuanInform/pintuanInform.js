@@ -1,8 +1,8 @@
 // pages/inform/inform.js
 var common = require('../../common.js');
 var app = getApp();
-
-Page({
+var Zan = require('../../dist/index');
+Page(Object.assign({}, Zan.Toast, {
   /**
    * 页面的初始数据
    */
@@ -400,10 +400,11 @@ Page({
         })
         console.log(attribute);
       } else {
-        wx.showToast({
-          title: '请选择属性',
-          image: '../images/false.png'
-        });
+        // wx.showToast({
+        //   title: '请选择属性',
+        //   image: '../images/false.png'
+        // });
+        that.showZanToast('请选择属性');
       }
     } else {
       wx.navigateTo({
@@ -433,4 +434,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

@@ -394,3 +394,16 @@
   border-radius: 4px;
   z-index: 100;
 }
+.fixed:after{
+  content:" ";
+  display: inline-block;
+  position:absolute;
+  top:0;
+  left:0;
+  border:1px solid #F7F7F7;
+  -webkit-transform:scaleY(0.5);
+  transform:scaleY(0.5);
+  -webkit-transform-origin:0 0;
+  transform-origin:0 0;
+  box-sizing:border-box;
+}

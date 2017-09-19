@@ -1,4 +1,7 @@
 <!--pages/dingdanInform/dingdanInform.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
 <view class="container">
     <!--地址  -->
     <view class="address" bindtap="nextAddress">

@@ -33,10 +33,10 @@ Page(Object.assign({}, Zan.Toast, {
         url: 'https://shop.playonwechat.com/api/get-carts?sign=' + app.data.sign,
         method: "GET",
         success: function (res) {
-          console.log('购物车：',res);
+          //console.log('购物车：',res);
           var carts = res.data.data.carts;
           var count = res.data.data.count;
-          console.log("count", count);
+          //console.log("count", count);
           // setTimeout(() => {
             _this.setData({
               hasList: true,
@@ -61,7 +61,7 @@ Page(Object.assign({}, Zan.Toast, {
       selectAllStatus: false,   //状态改变去掉全选样式
       selected: selected
     });
-    console.log("选中的carts：", carts)
+    //console.log("选中的carts：", carts)
     this.getTotalPrice();                           // 重新获取总价
   },
   //全选
@@ -101,14 +101,14 @@ Page(Object.assign({}, Zan.Toast, {
     let number = parseInt(carts[index].number);
     let key = carts[index].key;
     number = number + 1;
-    console.log('key',carts[index].key);
+    //console.log('key',carts[index].key);
     carts[index].number = number;
     var str = key + '|' + number;
     carts[index].str = str;
     this.setData({
       carts : carts,      
     });
-    console.log(carts);
+    //console.log(carts);
     this.getTotalPrice();
   },
   // 减少数量
@@ -127,7 +127,7 @@ Page(Object.assign({}, Zan.Toast, {
     this.setData({
       carts: carts,
     });
-    console.log(carts);
+    //console.log(carts);
     this.getTotalPrice();
   },
   //删除商品
@@ -144,8 +144,7 @@ Page(Object.assign({}, Zan.Toast, {
           var index = e.target.dataset.index;
           var carts = that.data.carts;
           var keys  =  carts[index].key;
-          console.log(keys);
-          console.log(selected);
+          
           //移除列表中下标为index的项  
            wx.request({
              url: "https://shop.playonwechat.com/api/remove-cart-by-key?sign=" + app.data.sign,
@@ -157,18 +156,12 @@ Page(Object.assign({}, Zan.Toast, {
                 keys: carts[index].key
               },
               success: function (res) {
-                console.log("post", res);
+                //console.log("post", res);
                 var status = res.data.status;
                 if (status == 1) {
-                  wx.showToast({
-                    title: '删除商品成功',
-                    image: '../images/success.png'
-                  });
+                  that.showZanToast('删除商品成功');
                 } else {
-                  wx.showToast({
-                    title: '删除商品失败',
-                    image: '../images/false.png'
-                  });
+                  that.showZanToast('删除商品失败');
                 }
 
               }
@@ -199,7 +192,7 @@ Page(Object.assign({}, Zan.Toast, {
           var carts = that.data.carts;
           var allKey = "";
          // var delLen = [];
-          console.log(that.data.carts);
+          //console.log(that.data.carts);
           for(var i = 0;i < carts.length; i++){
             if (carts[i].selected) { 
               var key = carts[i].key;
@@ -211,7 +204,7 @@ Page(Object.assign({}, Zan.Toast, {
           }
           //var long = delLen.length;
           allKey = allKey.substr(0, allKey.length - 1); // 截取最后一位字符
-          console.log("allKey:", allKey);
+          //console.log("allKey:", allKey);
           wx.request({
             url: "https://shop.playonwechat.com/api/remove-cart-by-key?sign=" + app.data.sign,
             header: {
@@ -222,18 +215,12 @@ Page(Object.assign({}, Zan.Toast, {
               keys: allKey
             },
             success: function (res) {
-              console.log("post", res);
+              //console.log("post", res);
               var status = res.data.status;
               if (status == 1) {
-                wx.showToast({
-                  title: '删除商品成功',
-                  image: '../images/success.png'
-                });
+                that.showZanToast('删除商品成功');
               } else {
-                wx.showToast({
-                  title: '删除商品失败',
-                  image: '../images/false.png'
-                });
+                that.showZanToast('删除商品失败');
               }
 
             }
@@ -256,8 +243,8 @@ Page(Object.assign({}, Zan.Toast, {
     let carts = this.data.carts; 
     let len = this.data.len; 
     let total = 0;
-    console.log("carts", carts);
-    console.log("len",len);
+    // console.log("carts", carts);
+    // console.log("len",len);
     var gouwu = [];
     for (let i = 0; i < len; i++) {     // 循环列表得到每个数据
       if (carts[i].selected) { 
@@ -305,15 +292,13 @@ Page(Object.assign({}, Zan.Toast, {
 
       var carts = this.data.carts;
       var change_carts = this.data.change_carts;
-      console.log(carts.length);
       for (var i = 0; i < carts.length; i++) {
-        //console.log(carts[i].str);
         if (carts[i].str != undefined){
           change_carts += carts[i].str + ";"; //拼接字符
         }
       }
       change_carts = change_carts.substr(0, change_carts.length - 1); // 截取最后一位字符
-      console.log("change_carts:", change_carts);
+      //console.log("change_carts:", change_carts);
       if (change_carts.length != 0){
         wx.request({
           url: "https://shop.playonwechat.com/api/carts-manage?sign=" + app.data.sign,

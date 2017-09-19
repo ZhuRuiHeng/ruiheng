@@ -18,7 +18,8 @@ Page({
     var that = this;
     var gbid = options.gbid;
     that.setData({
-        _gbid: gbid
+        _gbid: gbid,
+        oid: options.gid
     })
   },
 
@@ -153,10 +154,11 @@ Page({
   },
    // url: '../shangpinInform/shangpinInform?oid='+order_id+'&status1='+status+'&gbid='+gbid
   chakan: function () {
+    var that = this;
     var url = getCurrentPages();
     console.log(url);
     wx.navigateTo({
-      url: '../shangpinInform/shangpinInform'
+      url: '../shangpinInform/shangpinInform?oid='+that.data.oid
     })
   },
   //分享用户购买

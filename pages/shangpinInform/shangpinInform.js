@@ -3,8 +3,8 @@
 var common = require('../../common.js');
 const paymentUrl = require('../../config').paymentUrl;
 var app = getApp();
-
-Page({
+var Zan = require('../../dist/index');
+Page(Object.assign({}, Zan.Toast, {
   data: {
     oid: "",
     list:'',
@@ -64,10 +64,10 @@ Page({
         var nowTime = Date.parse(new Date()); //现在时间
         // console.log('nowTime1:', nowTime1 / 1000);
 
-        console.log('11111', nowTime, +'||' + begin_time);
+        // console.log('11111', nowTime, +'||' + begin_time);
         var ge_nowTime = common.time(nowTime / 1000, 1); // 下单时间
         var be_gainTime = common.time(begin_time, 1);  //超时时间
-        console.log('22222', ge_nowTime, +'||' + be_gainTime);
+        // console.log('22222', ge_nowTime, +'||' + be_gainTime);
         var Countdown = begin_time * 1000 - nowTime; //倒计时
         if (Countdown > 0) {
           function dateformat(micro_second) {
@@ -174,10 +174,11 @@ Page({
           })
 
         } else {
-          wx.showToast({
-            title: '创建订单失败',
-            image: '../images/false.png'
-          });
+          // wx.showToast({
+          //   title: '创建订单失败',
+          //   image: '../images/false.png'
+          // });
+          that.showZanToast('创建订单失败');
         }
       },
       fail: function (res) {
@@ -229,4 +230,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+}))

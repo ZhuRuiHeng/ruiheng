@@ -1,5 +1,7 @@
 <!--pages/car/car.wxml-->
 <import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
 <view class="container">
     <!--店铺  -->
     <view class="shop">
@@ -15,7 +17,8 @@
     </view>
     <!--商品  -->
     <view class="spAll">
-        <view class="service-list">
+        <view class="service-list" wx:if="{{carts.length == 0}}" style="text-align:center;padding:30rpx 0;font-size:24rpx;">您的购物车空空如也~~~</view>
+        <view class="service-list" wx:else>
             <view class="service-item" wx:for="{{carts}}" wx:key="{{item.id}}" data-detail="{{item.attribute}}" data-gid="{{item.gid}}">
                 <view class="radio-group">
                      <icon wx:if="{{item.selected}}" type="success" size="20" color="#ff4444" bindtap="selectList" data-index="{{index}}" />
@@ -50,8 +53,8 @@
         <label class="radio">
             <text bindtap="selectAreaOk" areaId="all" id="all">{{area.name}}</text> 
             <icon wx:if="{{selectAllStatus}}" type="success" size="20" color="#ff4444" bindtap="selectAll"/>
-            <icon wx:else type="circle" bindtap="selectAll" size="20"/>
-        </label>全选
+            <icon wx:else type="circle" bindtap="selectAll" size="20"/>  <text class="quanxuan">全选</text>
+        </label>
     </view>
     <view class="two flex {{set1?'show':'hidden'}}" >
         <view class="top">合计：￥{{totalPrice}}</view>
@@ -64,5 +67,4 @@
         删除
     </view>
 </view>
-<!--引入模板  -->
-<template is="zan-toast" data="{{ zanToast }}"></template>
+

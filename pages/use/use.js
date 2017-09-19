@@ -138,9 +138,7 @@ Page({
       'county': cityData[0].sub[0].sub[0].name
     })
     console.log('初始化完成');
-
-
-  },
+ },
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value);
     var dizhi = [];
@@ -152,11 +150,17 @@ Page({
     dizhi.city = this.data.city;
     dizhi.county = this.data.county;
     console.log(dizhi);
+    
     wx.showLoading({
       title: '地址数据提交中',
     });
-    wx.setStorageSync('dizhi', dizhi);
+    
+    // 跳转收货地址管理
+    wx.navigateTo({
+      url: '../address/address'
+    })
   },
+  
   formReset: function (e) {
     console.log('form发生了reset事件，携带数据为：', e.detail.value)
     this.setData({

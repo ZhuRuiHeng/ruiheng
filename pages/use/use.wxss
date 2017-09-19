@@ -1,6 +1,8 @@
 /* pages/use/use.wxss */
 @import "../../utils/lib/weui.wxss";
-
+.container{
+  overflow: hidden;
+}
 label {
   display: inline-block;
   min-width: 270rpx;

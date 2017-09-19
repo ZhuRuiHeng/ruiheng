@@ -600,3 +600,31 @@ icon {
 }
 radio{transform:scale(.8) }
 switch{transform:scale(.8)}
+.address.kong{
+  flex-direction:row;
+  justify-content: flex-start;
+  line-height:46rpx;
+  margin-top:20rpx;
+}
+.address.kong image{
+    width: 40rpx;
+    vertical-align: middle;
+    margin-right:10rpx;
+}
+.zan-toast {
+  position: fixed;
+  top: 35%;
+  left: 20%;
+  transform: translateZ(0) translateY(-100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  width: 60%;
+  line-height: 1.5em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 100;
+}

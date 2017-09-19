@@ -1,8 +1,8 @@
 // pages/dingdanInform/dingdanInform.js
 //支付
 const paymentUrl = require('../../config').paymentUrl;
-var Zan = require('../../dist/index');
 var app = getApp();
+var Zan = require('../../dist/index');
 Page(Object.assign({}, Zan.Toast, {
   data: {
     gid: "",
@@ -84,10 +84,7 @@ Page(Object.assign({}, Zan.Toast, {
     var dizhi = that.data.dizhi;
 
     if (dizhi.length == 0) {
-      wx.showToast({
-        title: '请选择收货地址',
-        image: '../images/false.png'
-      });
+      that.showZanToast('请选择收货地址');
     } else {
       wx.request({
         url: 'https://shop.playonwechat.com/api/create-order?sign=' + app.data.sign + '&type=' + that.data.type + '&gbid=' + that.data.inform.gbid,
@@ -105,7 +102,7 @@ Page(Object.assign({}, Zan.Toast, {
         // header: {}, // 设置请求的 header
         success: function (res) {
           // success
-          that.showZanToast('toast的内容');
+          // that.showZanToast('创建订单成功');
           // 支付成功跳转,先固定写死一个gbid
           
           console.log(res);
@@ -131,10 +128,6 @@ Page(Object.assign({}, Zan.Toast, {
             })
           } else {
             that.showZanToast('创建订单失败');
-            wx.showToast({
-              title: '创建订单失败',
-              image: '../images/false.png'
-            });
           }
         },
         fail: function (res) {

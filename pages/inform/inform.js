@@ -357,17 +357,9 @@ Page(Object.assign({}, Zan.Toast, {
         console.log("post", res);
         var status = res.data.status;
         if (status == 1) {
-          // wx.showToast({
-          //   title: '加入购物车成功',
-          //   image: '../images/success.png'
-          // });
           that.showZanToast('加入购物车成功');
 
         } else {
-          // wx.showToast({
-          //   title: '加入购物车失败',
-          //   image: '../images/false.png'
-          // });
           that.showZanToast('请选择属性');
         }
         that.setData({
@@ -409,10 +401,6 @@ Page(Object.assign({}, Zan.Toast, {
         })
         console.log(attribute);
       } else {
-        // wx.showToast({
-        //   title: '请选择属性',
-        //   image: '../images/false.png'
-        // });
         that.showZanToast('请选择属性');
       }
     } else {
