@@ -473,7 +473,7 @@ onShow: function () {
       },
       method: "GET",
       success: function (res) {
-        //console.log("图团秒", res);
+        console.log("团秒", res);
         //倒计时
         var nowTime = (new Date()).getTime();
         var begin_time = res.data.data.nextSeckillTime;

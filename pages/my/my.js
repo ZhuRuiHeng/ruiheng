@@ -153,10 +153,10 @@ Page({
           url: "../dingdan/dingdan?status="
         })
     },
-    payCar:function(){
-        console.log('car');
+    shoucang:function(){
+      console.log('shoucang');
         wx.switchTab({
-            url: '../car/car'
+          url: '../shoucang/shoucang'
         })
     },
     // 生成二维码

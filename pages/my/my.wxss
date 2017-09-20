@@ -232,3 +232,8 @@ button.flex::after{
     z-index: 99;
     overflow: hidden;
 }
+.allXuan .xuanze image{
+  width: 40rpx;
+  vertical-align: middle;
+  margin-right: 6rpx;
+}

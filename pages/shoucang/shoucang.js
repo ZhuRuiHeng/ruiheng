@@ -52,7 +52,7 @@ Page(Object.assign({}, Zan.Toast, {
           sonCategory[j].active = true;
         }
       }
-     // sonCategory = sonCategory;
+      // sonCategory = sonCategory;
       that.setData({
         modules: modules
       })
@@ -66,7 +66,7 @@ Page(Object.assign({}, Zan.Toast, {
         },
         method: "GET",
         success: function (res) {
-          console.log("allll",res)
+          console.log("allll", res)
           that.setData({
             sonCategory: res.data.data.goodsList
           })
@@ -374,7 +374,7 @@ Page(Object.assign({}, Zan.Toast, {
     var that = this;
     var cate_id = options.cate_id;
     var index = options.index;
-    console.log("传：",cate_id+'/////////'+index);
+    console.log("传：", cate_id + '/////////' + index);
     that.setData({
       cate_id: options.cate_id,
       index: options.index
@@ -386,57 +386,57 @@ Page(Object.assign({}, Zan.Toast, {
     });
     var that = this;
     //获取所有分类
-      wx.request({
-        url: 'https://shop.playonwechat.com/api/get-category?sign=' + app.data.sign,
-        method: "GET",
-        success: function (res) {
-          console.log("获取所有分类", res);
-          var alldata = res.data;
-          var fenlei = res.data.categorys;
-          console.log("fenlei:", fenlei);
-          that.setData({
-            modules: fenlei,
-          })
-         
-          var cate_id = that.data.cate_id;
-          var index = that.data.index;
-          var contentTip = that.data.modules[index];
-          var sonCategory = that.data.modules[index].sonCategory;
-          var Len = sonCategory.length + 2;
-          var width = 130 * Len;
-          that.setData({
-            modules: contentTip,
-            w_width: width
-          })
-          console.log("modules:", that.data.modules)
-          wx.hideLoading();
-          // // 默认渲染列表
-          // 默认渲染列表
-          setTimeout(function () {
-              var modules = that.data.modules;
-              var cate_id = modules.sonCategory[0].cate_id;
-              wx.request({
-                url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
-                data: {
-                  cate_id: cate_id
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                method: "GET",
-                success: function (res) {
-                  that.setData({
-                    sonCategory: res.data.data.goodsList
-                  })
-                  wx.hideLoading()
-                }
+    wx.request({
+      url: 'https://shop.playonwechat.com/api/get-category?sign=' + app.data.sign,
+      method: "GET",
+      success: function (res) {
+        console.log("获取所有分类", res);
+        var alldata = res.data;
+        var fenlei = res.data.categorys;
+        console.log("fenlei:", fenlei);
+        that.setData({
+          modules: fenlei,
+        })
+
+        var cate_id = that.data.cate_id;
+        var index = that.data.index;
+        var contentTip = that.data.modules[index];
+        var sonCategory = that.data.modules[index].sonCategory;
+        var Len = sonCategory.length + 2;
+        var width = 130 * Len;
+        that.setData({
+          modules: contentTip,
+          w_width: width
+        })
+        console.log("modules:", that.data.modules)
+        wx.hideLoading();
+        // // 默认渲染列表
+        // 默认渲染列表
+        setTimeout(function () {
+          var modules = that.data.modules;
+          var cate_id = modules.sonCategory[0].cate_id;
+          wx.request({
+            url: "https://shop.playonwechat.com/api/goods-list?sign=" + app.data.sign,
+            data: {
+              cate_id: cate_id
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "GET",
+            success: function (res) {
+              that.setData({
+                sonCategory: res.data.data.goodsList
               })
-           
-          }, 300)
-       },
+              wx.hideLoading()
+            }
+          })
+
+        }, 300)
+      },
     });
 
-},
+  },
 
   //设置分享
   onShareAppMessage: function () {

@@ -50,7 +50,8 @@
                 <image src="{{item.picture}}" mode="aspectFill"></image>
             </navigator>
         </view>
-        <view class="center time">{{currentSeckillTime}}场结束仅剩</view>
+        <view class="center time" wx:if="{{currentSeckillTime == null}}">暂时没有秒杀场次</view>
+         <view class="center time" wx:else>{{currentSeckillTime}}场结束仅剩</view>
         <view class="center countdown" wx:for="{{Countdown}}">{{item.day}}天{{item.hr}}时{{item.min}}分{{item.sec}}秒</view>
     </view>
     <!--新增end  -->

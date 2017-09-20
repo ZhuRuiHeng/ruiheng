@@ -31,21 +31,19 @@
 </view>
 <view class="allXuan">
     <view class="xuanze" bindtap="coupon">
-        <view class="classname">优惠卡卷</view>
+        <view class="classname"><image style="margin-right:-1rpx;" src="../images/ka.png" mode="widthFix"></image> 优惠卡券</view>
         <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
     </view>
     <view class="xuanze" bindtap="tuijian">
-        <view class="classname">推荐有奖</view>
+        <view class="classname"><image src="../images/jiang.png" mode="widthFix"></image>推荐有奖</view>
         <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
     </view>
-    <view class="xuanze" bindtap="payCar">
-        <view class="classname">购物车</view>
-        <view class="carNum">
-            <text wx:if="{{countCarts != 0}}">{{countCarts}}</text>
-        </view>
+    <view class="xuanze" bindtap="shoucang">
+        <view class="classname"><image src="../images/like.png" mode="widthFix"></image>我的收藏</view>
+        <view class="nextImg"><image src="https://qncdn.playonwechat.com/shangcheng/next.png" mode="widthFix"/></view> 
     </view>
     <view class="xuanze bottom page-body-line" data-phone="{{service}}" bindtap='makePhone'>
-        <view class="kefu">联系客服</view>  
+          <view class="kefu"><image src="../images/kefu.png" mode="widthFix"></image>联系客服</view>  
          <contact-button size="20" session-from="weapp"></contact-button> 
     </view>
 </view>

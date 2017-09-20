@@ -11,12 +11,11 @@
   text-align: left;
 }
 .container .xiangqing .title{
-    font-size: 28rpx;
-    height: 56rpx;
-    line-height: 56rpx;
+    font-size: 30rpx;
+    height: 66rpx;
+    line-height: 66rpx;
 }
 .container .xiangqing .content{
-    font-size: 22rpx;
-    height: 36rpx;
-    line-height: 36rpx;
+    font-size: 24rpx;
+    line-height: 46rpx;
 }

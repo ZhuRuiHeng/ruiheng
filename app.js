@@ -1,5 +1,6 @@
 
 //app.js
+
 App({
   data: {
     loginData: null,
@@ -13,6 +14,7 @@ App({
     authSuccess: false
   },
   onLaunch: function () {
+   
     wx.showShareMenu({
       withShareTicket: true
     })

@@ -9,11 +9,12 @@ function getSign(cb){
     success(res){
       console.log(res);
       wx.request({
-        url: 'https://shop.playonwechat.com/api/auth?code=${res.code}',
+        url: 'https://shop.playonwechat.com/api/auth-by-three?code=${res.code}',
         data: {
           code: res.code
         },
         success(res){
+          console.log(res);
           var sign = res.data.data.sign;
           var mid = res.data.data.mid;
           //缓存

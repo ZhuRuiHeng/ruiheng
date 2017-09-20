@@ -33,7 +33,8 @@ Page({
     for (var i = 0; i < that.data.search_word.length; i++) {
       search_word.push(that.data.search_word[i]);
     }
-    var width = 130 * that.data.search_word.length;
+    var width = 130 * that.data.search_word.length+2;
+    console.log('width:',width)
     wx.request({
       url: 'https://shop.playonwechat.com/api/fight-group-list?sign=' + app.data.sign,
       header: {
@@ -64,7 +65,7 @@ Page({
         console.log("导航列表", res);
         var search_word =res.data.categorys;
         console.log("search_word:", search_word);
-        var len = search_word.length;
+        var len = search_word.length+2;
         var width = 130 * len;
         console.log("width", width);
         that.setData({
